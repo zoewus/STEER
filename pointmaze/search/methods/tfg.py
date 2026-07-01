@@ -38,7 +38,7 @@ class TFGGuidance(BaseGuidance):
 
         _grad = torch.autograd.grad(avg_logprobs.sum(), x0)[0]
         _grad = rescale_grad(_grad, clip_scale=self.args.clip_scale, **kwargs)
-        if self.args.replica_exchange and score_scaling:
+        if score_scaling:
             lam_ladder = _lam_ladder(self.args.lam_start, self.args.lam_end, self.args.n_particles, _grad)
             _grad *= lam_ladder
         return _grad
