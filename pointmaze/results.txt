@@ -1,0 +1,11 @@
+Untempered
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange False | Lam 1.00 to 1.00 with 4 | Method: bon | Compute: 128.0 | Success Rate: 37.5
+
+Temporal Score Rescaling
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange False | Lam 0.55 to 1.45 with 4 | Method: bon | Compute: 128.0 | Success Rate: 52.5
+
+STEER - swap whole samples
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.55 to 1.45 with 4 | Method: bon | Compute: 128.0 | Success Rate: 47.5
+
+STEER - swap all samples, until t = 50
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.55 to 1.45 with 4 | Method: bon | Compute: 128.0 | Success Rate: 55.0

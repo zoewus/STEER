@@ -4,7 +4,7 @@ import numpy as np
 from .schedule import betas, alphas, alpha_bars, ts_desc
 from .config_toy import DEVICE, CKPT_DIR
 
-from ...acceptance import swap, _score_constant
+from .acceptance import swap, _score_constant
 
 torch.manual_seed(42)
 np.random.seed(42)
