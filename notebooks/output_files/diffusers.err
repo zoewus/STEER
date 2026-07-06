@@ -1,0 +1,20 @@
+Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]Loading pipeline components...:  11%|█         | 1/9 [00:00<00:02,  3.00it/s]Loading pipeline components...:  22%|██▏       | 2/9 [00:01<00:06,  1.00it/s]Loading pipeline components...:  33%|███▎      | 3/9 [00:02<00:03,  1.53it/s]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
+Loading weights:  74%|███████▍  | 146/197 [00:00<00:00, 1410.29it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 1399.90it/s]
+Loading pipeline components...:  44%|████▍     | 4/9 [00:02<00:02,  1.85it/s]Loading pipeline components...:  56%|█████▌    | 5/9 [00:02<00:01,  2.56it/s]
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
+Loading weights:   4%|▍         | 9/219 [00:00<00:06, 34.35it/s][A
+Loading weights:  21%|██        | 45/219 [00:00<00:01, 101.69it/s][A
+Loading weights:  37%|███▋      | 81/219 [00:00<00:01, 127.07it/s][A
+Loading weights:  53%|█████▎    | 117/219 [00:00<00:00, 131.63it/s][A
+Loading weights:  70%|██████▉   | 153/219 [00:01<00:00, 125.33it/s][A
+Loading weights:  82%|████████▏ | 180/219 [00:01<00:00, 146.15it/s][A
+Loading weights:  90%|████████▉ | 197/219 [00:01<00:00, 122.56it/s][A
+Loading weights:  96%|█████████▋| 211/219 [00:01<00:00, 118.59it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 124.53it/s]
+Loading pipeline components...:  67%|██████▋   | 6/9 [00:04<00:02,  1.10it/s]Loading pipeline components...:  89%|████████▉ | 8/9 [00:04<00:00,  2.02it/s]
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
+Loading weights:  20%|█▉        | 101/517 [00:00<00:00, 957.71it/s][A
+Loading weights:  38%|███▊      | 199/517 [00:00<00:00, 936.75it/s][A
+Loading weights:  60%|█████▉    | 309/517 [00:00<00:00, 1002.03it/s][A
+Loading weights:  82%|████████▏ | 422/517 [00:00<00:00, 1047.62it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 1036.38it/s]
+Loading pipeline components...: 100%|██████████| 9/9 [00:05<00:00,  1.91it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:05<00:00,  1.74it/s]

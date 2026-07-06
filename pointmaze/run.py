@@ -58,4 +58,4 @@ if __name__ == "__main__":
                         )
     cli_args = parser.parse_args()
 
-    main(dataset=cli_args.dataset, method=cli_args.method, device=cli_args.device, replica_exchange=cli_args.replica_exchange, lam_start=cli_args.lam_start, lam_end=cli_args.lam_end)
+    main(dataset=cli_args.dataset, method=cli_args.method, device=cli_args.device, replica_exchange=cli_args.replica_exchange, lam_start=cli_args.lam_start, lam_end=cli_args.lam_end, n_particles=cli_args.n_particles)
