@@ -1,2 +1,5 @@
 notebooks/logs
 notebooks/images
+__pycache__/
+*.pyc
+.env
