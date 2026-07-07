@@ -90,7 +90,7 @@ import torch
 
 @torch.no_grad()
 def _score_constant(a_bar, tsr_lam):
-    output = 1 / (a_bar * tsr_lam + (1 - a_bar))
+    output = 1 / (a_bar * tsr_lam + 1 - a_bar)
     return output
 
 @torch.no_grad()
@@ -134,7 +134,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, compute_eps, i=
         score_ladder = (x_ladder - (1 - sigma_t) * x0_hat_ladder) / sigma_t
     else:
         # non-flow models predict eps directly
-        score_ladder = v_ladder / (1-a_bar)**0.5
+        score_ladder = - v_ladder / (1-a_bar)**0.5
 
     v_out = v_ladder.clone()
 

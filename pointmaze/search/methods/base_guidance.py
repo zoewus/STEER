@@ -171,4 +171,3 @@ class BaseGuidance:
         #     pred_x0 = torch.clamp(pred_x0, -self.args.clip_sample_range, self.args.clip_sample_range)
         
         return eps
-
