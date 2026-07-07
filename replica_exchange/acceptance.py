@@ -106,6 +106,7 @@ def scale(grad, a_bar, lam_start, lam_end, n_replicas):
     return grad * lam_ladder_t
 
 def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, compute_eps, i=None, flow=None):
+    x_out = x_ladder.clone()
 
     if i is not None:
         offset = i % 2
@@ -135,7 +136,6 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, compute_eps, i=
         # non-flow models predict eps directly
         score_ladder = v_ladder / (1-a_bar)**0.5
 
-    x_out = x_ladder.clone()
     v_out = v_ladder.clone()
 
     for i_pair, (index_t, index_s) in enumerate(pairs):
