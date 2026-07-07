@@ -109,8 +109,16 @@ class TFGGuidance(BaseGuidance):
                 with torch.enable_grad():
                     x_g = x.clone().detach().requires_grad_()
                     unet_output = unet(x_g, cond, batched_t)
-                    unet_output = scale(unet_output, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)  
-                    x0 = self._predict_x0(x_g, unet_output, alpha_prod_t, **kwargs)
+                    new_epsilon = (
+                        (x_g - alpha_prod_t ** (0.5) * unet_output) / (1 - alpha_prod_t) ** (0.5)
+                    )
+                    new_epsilon = scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
+
+                    # invert x_t = sqrt(a_bar)*x0 + sqrt(1-a_bar)*eps  =>  x0 = (x_t - sqrt(1-a_bar)*eps) / sqrt(a_bar)
+                    x0_tempered = (
+                        (x_g - (1 - alpha_prod_t) ** (0.5) * new_epsilon) / alpha_prod_t ** (0.5)
+                    )
+                    x0 = self._predict_x0(x_g, x0_tempered, alpha_prod_t, **kwargs)
                     x0 = apply_conditioning(x0, cond, 2) ## debug
                     logprobs = self.tilde_get_guidance(
                         x0, mc_eps, return_logp=True, **kwargs)
