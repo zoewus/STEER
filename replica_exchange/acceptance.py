@@ -61,7 +61,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         eps_s   = eps_ladder[index * index_s : index * (index_s + 1)]
 
         tsr_diff = _score_constant(a_bar, lam_ladder[index_t]) - _score_constant(a_bar, lam_ladder[index_s])
-        integral = (score_s   + score_tau) * (x_s - x_tau) * tsr_diff / 6
+        integral = (score_s   + score_tau) * (x_tau - x_s) * tsr_diff / 6
 
         log_acceptance = torch.clamp(integral.sum(), max=0)
         u = torch.rand_like(log_acceptance)

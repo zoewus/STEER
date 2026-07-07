@@ -112,10 +112,7 @@ class TFGGuidance(BaseGuidance):
                     new_epsilon = (
                         (x_g - alpha_prod_t ** (0.5) * unet_output) / (1 - alpha_prod_t) ** (0.5)
                     )
-                    if self.args.replica_exchange:
-                        x , new_epsilon = swap(x_g, t, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, new_epsilon, i=i, flow=None)
-                    else:
-                        x = x_g.clone()
+                    x = x_g.clone()
                     new_epsilon = scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
                     
                     # invert x_t = sqrt(a_bar)*x0 + sqrt(1-a_bar)*eps  =>  x0 = (x_t - sqrt(1-a_bar)*eps) / sqrt(a_bar)
@@ -152,4 +149,6 @@ class TFGGuidance(BaseGuidance):
             x_prev = apply_conditioning(x_prev, cond, 2)
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
             x = apply_conditioning(x, cond, 2)
+        if self.args.replica_exchange:
+            x_prev , _ = swap(x_prev, t, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, new_epsilon, i=i, flow=None)
         return x_prev, {"x0": x0, "logprobs": logprobs}
