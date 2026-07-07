@@ -5,6 +5,12 @@ from diffuser.models.helpers import apply_conditioning
 from search.maze_verifier import MazeVerifier
 from search.utils import rescale_grad
 
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
+from functools import partial
+from replica_exchange.acceptance import swap, scale
+
+
 class BaseGuidance:
 
     def __init__(self, args: Arguments, noise_fn: None=None):
@@ -90,7 +96,7 @@ class BaseGuidance:
         '''
             This function first compute (updated) eps from x_0, and then predicts x_{t-1} using Equation (12) in DDIM paper.
         '''
-        
+
         new_epsilon = (
             (xt - alpha_prod_t ** (0.5) * x0) / (1 - alpha_prod_t) ** (0.5)
         )
@@ -118,6 +124,7 @@ class BaseGuidance:
         ) ** (0.5)
 
         pred_sample_direction = (1 - alpha_prod_t_prev - sigma**2) ** (0.5) * eps
+
         pred_x0_direction = (xt - (1 - alpha_prod_t) ** (0.5) * eps) / (alpha_prod_t ** (0.5))
 
         # Equation (12) in DDIM sampling
@@ -164,5 +171,4 @@ class BaseGuidance:
         #     pred_x0 = torch.clamp(pred_x0, -self.args.clip_sample_range, self.args.clip_sample_range)
         
         return eps
-
 

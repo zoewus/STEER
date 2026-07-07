@@ -1,9 +1,3 @@
-#acceptance
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
-from replica_exchange.acceptance import swap, scale
-
-
 from search.methods.base_guidance import BaseGuidance
 from diffusers.utils.torch_utils import randn_tensor
 from diffuser.models.helpers import apply_conditioning
@@ -14,31 +8,17 @@ from functools import partial
 
 from search.utils import rescale_grad
 
-
+#acceptance
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
+from functools import partial
+from replica_exchange.acceptance import swap, scale
 
 class TFGGuidance(BaseGuidance):
 
     def __init__(self, args, **kwargs):
         super(TFGGuidance, self).__init__(args, **kwargs)
 
-    def _compute_eps(self, x_t, t_val, cond, unet, alpha_prod_t, std, rho, **kwargs):
-        with torch.enable_grad():
-            x_g = x_t.clone().detach().requires_grad_()
-
-            mc_eps = self.get_noise(std, x_g.shape, self.args.eps_bsz, **kwargs)
-            batched_t = t_val.repeat(x_g.shape[0])
-            K = x_g.shape[0]  # wherever your new interpolation dim landed
-            v = cond[next(iter(cond))]
-            pad_len = K - v.shape[0]
-            cond = {key: torch.cat([v, v[0:1].repeat(pad_len, *([1] * (v.dim() - 1)))], dim=0) for key, v in cond.items()}
-            x0 = self._predict_x0(x_g, unet(x_g, cond, batched_t), alpha_prod_t, **kwargs)
-            x0 = apply_conditioning(x0, cond, 2) ## debug
-            logprobs = self.tilde_get_guidance(
-                x0, mc_eps, return_logp=True, **kwargs)
-            Delta_t = grad(logprobs.sum(), x_g)[0]
-        Delta_t = rescale_grad(Delta_t, clip_scale=self.args.clip_scale, **kwargs)
-        Delta_t = Delta_t * rho
-        return Delta_t
 
     @torch.enable_grad()
     def tilde_get_guidance(self, x0, mc_eps, return_logp=False, **kwargs):
@@ -129,15 +109,17 @@ class TFGGuidance(BaseGuidance):
             if self.args.rho != 0.0:
                 with torch.enable_grad():
                     x_g = x.clone().detach().requires_grad_()
-                    x0 = self._predict_x0(x_g, unet(x_g, cond, batched_t), alpha_prod_t, **kwargs)
+                    eps = unet(x_g, cond, batched_t)
+                    eps = scale(eps, alpha_prod_t_prev, self.args.lam_start, self.args.lam_end, self.args.n_particles)  
+
+                    x0 = self._predict_x0(x_g, eps, alpha_prod_t, **kwargs)
+
                     x0 = apply_conditioning(x0, cond, 2) ## debug
                     logprobs = self.tilde_get_guidance(
                         x0, mc_eps, return_logp=True, **kwargs)
                     Delta_t = grad(logprobs.sum(), x_g)[0]
                     Delta_t = rescale_grad(Delta_t, clip_scale=self.args.clip_scale, **kwargs)
                     Delta_t = Delta_t * rho
-
-                    Delta_t = scale(Delta_t, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
                     
             else:
                 Delta_t = torch.zeros_like(x)
@@ -154,26 +136,13 @@ class TFGGuidance(BaseGuidance):
             
             # predict x_{t-1} using S(zt, hat_epsilon, t), this is also DDIM sampling
             alpha_t = alpha_prod_t / alpha_prod_t_prev
+            
             x_prev = self._predict_x_prev_from_zero(
                 x, x0, alpha_prod_t, alpha_prod_t_prev, eta, t, **kwargs)
             if t > 0 or recur_step < self.args.recur_steps - 1:
                 x_prev += Delta_t / alpha_t ** 0.5 + Delta_0 * alpha_prod_t_prev ** 0.5
-            
-            if self.args.replica_exchange:
-                
-                compute_eps_fn = partial(
-                    self._compute_eps,
-                    unet=unet, alpha_prod_t=alpha_prod_t, std=std, rho=rho, **kwargs
-                )
-
-                x_prev, _ = swap(x_prev, t, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, compute_eps_fn)
-            
             x_prev = apply_conditioning(x_prev, cond, 2)
-            
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
             x = apply_conditioning(x, cond, 2)
-            
         return x_prev, {"x0": x0, "logprobs": logprobs}
-
-
 

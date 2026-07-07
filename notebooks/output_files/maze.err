@@ -1,0 +1,201 @@
+
+EnvironmentLocationNotFound: Not a conda environment: /n/netscratch/kempner_undergrads/Everyone/zwu/environments/maze
+
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/pointmaze/run.py", line 1, in <module>
+    from search.configs import Arguments
+  File "/n/home00/zoewu/STEER/pointmaze/search/__init__.py", line 2, in <module>
+    from search.search_policy import SearchPolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/search_policy.py", line 2, in <module>
+    from search.base_policy import BasePolicy
+  File "/n/home00/zoewu/STEER/pointmaze/search/base_policy.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: holygpu8a13102: task 0: Exited with exit code 1
