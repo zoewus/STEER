@@ -28,6 +28,15 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
     pairs = [(i_tau, i_tau + 1) for i_tau in range(offset, n_replicas - 1, 2)]
     index = x_ladder.shape[0] // n_replicas
 
+    # interps = []
+    # for i_pair, (index_t, index_s) in enumerate(pairs):
+    #     x_tau = x_ladder[index * index_t : index * (index_t + 1)]
+    #     x_s   = x_ladder[index * index_s : index * (index_s + 1)]
+    #     interps.append((x_tau + x_s) / 2)
+    
+    # x_interps = torch.cat(interps, dim=0)
+    #eps_interps = compute_eps(x_interps, t_val)
+
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=x_ladder.device, dtype=x_ladder.dtype)
 
     if flow:
@@ -37,7 +46,8 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         score_ladder = (x_ladder - (1 - sigma_t) * x0_hat_ladder) / sigma_t
     else:
         # non-flow models predict eps directly
-        score_ladder = eps_ladder / (1 - a_bar) ** 0.5
+        score_ladder = - eps_ladder / (1 - a_bar) ** 0.5
+        # score_interps = - eps_interps / (1 - a_bar) ** 0.5
 
     for i_pair, (index_t, index_s) in enumerate(pairs):
         x_tau = x_ladder[index * index_t : index * (index_t + 1)]
@@ -45,13 +55,13 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
 
         score_tau = score_ladder[index * index_t : index * (index_t + 1)]
         score_s   = score_ladder[index * index_s : index * (index_s + 1)]
-        # score_interp = score_ladder[index * i_pair + n_replicas * index : index * (i_pair + 1) + n_replicas * index]
+        # score_interp = score_interps[index * i_pair : index * (i_pair + 1)]
 
         eps_tau = eps_ladder[index * index_t : index * (index_t + 1)]
         eps_s   = eps_ladder[index * index_s : index * (index_s + 1)]
 
         tsr_diff = _score_constant(a_bar, lam_ladder[index_t]) - _score_constant(a_bar, lam_ladder[index_s])
-        integral = (score_s  + score_tau) * (x_tau - x_s) * tsr_diff / 2
+        integral = (score_s   + score_tau) * (x_s - x_tau) * tsr_diff / 6
 
         log_acceptance = torch.clamp(integral.sum(), max=0)
         u = torch.rand_like(log_acceptance)
