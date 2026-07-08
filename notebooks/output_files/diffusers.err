@@ -1,164 +1,34 @@
-Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]Loading pipeline components...:  11%|█         | 1/9 [00:00<00:02,  3.00it/s]Loading pipeline components...:  22%|██▏       | 2/9 [00:01<00:06,  1.00it/s]Loading pipeline components...:  33%|███▎      | 3/9 [00:02<00:03,  1.53it/s]
+Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]Loading pipeline components...:  11%|█         | 1/9 [00:00<00:02,  3.06it/s]Loading pipeline components...:  22%|██▏       | 2/9 [00:00<00:01,  4.66it/s]
 Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
-Loading weights:  74%|███████▍  | 146/197 [00:00<00:00, 1410.29it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 1399.90it/s]
-Loading pipeline components...:  44%|████▍     | 4/9 [00:02<00:02,  1.85it/s]Loading pipeline components...:  56%|█████▌    | 5/9 [00:02<00:01,  2.56it/s]
+Loading weights:  32%|███▏      | 64/197 [00:00<00:00, 548.86it/s][A
+Loading weights:  63%|██████▎   | 124/197 [00:00<00:00, 564.14it/s][A
+Loading weights:  96%|█████████▌| 189/197 [00:00<00:00, 601.19it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 613.05it/s]
+Loading pipeline components...:  33%|███▎      | 3/9 [00:00<00:01,  3.13it/s]Loading pipeline components...:  44%|████▍     | 4/9 [00:01<00:01,  3.94it/s]
 Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
-Loading weights:   4%|▍         | 9/219 [00:00<00:06, 34.35it/s][A
-Loading weights:  21%|██        | 45/219 [00:00<00:01, 101.69it/s][A
-Loading weights:  37%|███▋      | 81/219 [00:00<00:01, 127.07it/s][A
-Loading weights:  53%|█████▎    | 117/219 [00:00<00:00, 131.63it/s][A
-Loading weights:  70%|██████▉   | 153/219 [00:01<00:00, 125.33it/s][A
-Loading weights:  82%|████████▏ | 180/219 [00:01<00:00, 146.15it/s][A
-Loading weights:  90%|████████▉ | 197/219 [00:01<00:00, 122.56it/s][A
-Loading weights:  96%|█████████▋| 211/219 [00:01<00:00, 118.59it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 124.53it/s]
-Loading pipeline components...:  67%|██████▋   | 6/9 [00:04<00:02,  1.10it/s]Loading pipeline components...:  89%|████████▉ | 8/9 [00:04<00:00,  2.02it/s]
+Loading weights:   8%|▊         | 18/219 [00:00<00:02, 84.06it/s][A
+Loading weights:  25%|██▍       | 54/219 [00:00<00:01, 130.40it/s][A
+Loading weights:  37%|███▋      | 81/219 [00:00<00:00, 168.14it/s][A
+Loading weights:  46%|████▌     | 101/219 [00:00<00:00, 148.43it/s][A
+Loading weights:  58%|█████▊    | 126/219 [00:00<00:00, 149.43it/s][A
+Loading weights:  66%|██████▌   | 144/219 [00:00<00:00, 151.22it/s][A
+Loading weights:  74%|███████▍  | 162/219 [00:01<00:00, 150.61it/s][A
+Loading weights:  82%|████████▏ | 180/219 [00:01<00:00, 136.44it/s][A
+Loading weights:  95%|█████████▍| 207/219 [00:01<00:00, 148.26it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 149.23it/s]
+Loading pipeline components...:  56%|█████▌    | 5/9 [00:02<00:03,  1.26it/s]Loading pipeline components...:  67%|██████▋   | 6/9 [00:04<00:02,  1.05it/s]Loading pipeline components...:  78%|███████▊  | 7/9 [00:04<00:01,  1.48it/s]
 Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
-Loading weights:  20%|█▉        | 101/517 [00:00<00:00, 957.71it/s][A
-Loading weights:  38%|███▊      | 199/517 [00:00<00:00, 936.75it/s][A
-Loading weights:  60%|█████▉    | 309/517 [00:00<00:00, 1002.03it/s][A
-Loading weights:  82%|████████▏ | 422/517 [00:00<00:00, 1047.62it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 1036.38it/s]
-Loading pipeline components...: 100%|██████████| 9/9 [00:05<00:00,  1.91it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:05<00:00,  1.74it/s]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['volunteer department greenwood sugar creek fort wayne plans to have refighters with advanced sale category spmfaaorg']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', front left ), watches longingly from afar. shot in paris at the centre historique des archives nationales, h']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['b ><unk>/ font > <unk> font ><unk> b > set <unk>/ b ><unk>/ font > english afternoon tea <unk> font ><unk> b > cup']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['ol overdose. pictured in 1 9 9 6']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['6 / # calgary # fun']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['best - seller every year!']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['7 7 € ( vg : 3 2 9 €)']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['nia on jan. 1 4, 2 0 1 3. <unk> span class = meta >( giulio marcocchi &#']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["- streamed from outside of ireland. the match will be broadcast on liberty insurance's"]
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['0 / 9 0 0 / 1 8 0 0 / 1 9 0 0 mhz sip & h. 3 2 3 gateway']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['dirt heat outback gps aussie camper range westernaustralia fuel gravel centralroa']
-[2026-07-07T02:25:57.796] error: *** JOB 28880673 ON holygpu8a11402 CANCELLED AT 2026-07-07T02:25:57 DUE TO TIME LIMIT ***
-[2026-07-07T02:25:57.806] error: *** STEP 28880673.0 ON holygpu8a11402 CANCELLED AT 2026-07-07T02:25:57 DUE TO TIME LIMIT ***
-srun: got SIGCONT
-srun: forcing job termination
+Loading weights:  22%|██▏       | 113/517 [00:00<00:00, 1114.97it/s][A
+Loading weights:  44%|████▎     | 225/517 [00:00<00:00, 946.53it/s] [A
+Loading weights:  62%|██████▏   | 322/517 [00:00<00:00, 921.45it/s][A
+Loading weights:  80%|████████  | 415/517 [00:00<00:00, 869.56it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 930.33it/s]
+Loading pipeline components...:  89%|████████▉ | 8/9 [00:04<00:00,  1.47it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:04<00:00,  1.83it/s]
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/diffusers/exchange_scripts/generate_samples.py", line 74, in <module>
+    images = pipe(
+  File "/n/netscratch/kempner_undergrads/Everyone/zwu/environments/stable_diff/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/n/home00/zoewu/STEER/diffusers/src/diffusers/pipelines/stable_diffusion_3/pipeline_stable_diffusion_3.py", line 882, in __call__
+    latents, noise_pred = swap(latents, t, a_bar,  lam_start, lam_end, n_particles, compute_eps_fn, i, flow=True)
+  File "/n/home00/zoewu/STEER/replica_exchange/acceptance.py", line 22, in swap
+    eps_out = eps_ladder.clone()
+AttributeError: 'functools.partial' object has no attribute 'clone'
+srun: error: holygpu8a11501: task 0: Exited with exit code 1

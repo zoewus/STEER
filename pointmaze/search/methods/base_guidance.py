@@ -8,7 +8,7 @@ from search.utils import rescale_grad
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
 from functools import partial
-from replica_exchange.acceptance import swap, scale
+from replica_exchange.acceptance import swap, scale, _score_constant
 
 
 class BaseGuidance:
@@ -20,8 +20,11 @@ class BaseGuidance:
         self.generator = torch.manual_seed(self.args.seed)
         self.device = torch.device(self.args.device)
         if noise_fn is None:
-            def noise_fn (x, sigma, **kwargs):
+            def noise_fn (x, sigma, alpha_prod_t, **kwargs):
                 noise =  randn_tensor(x.shape, generator=self.generator, device=self.device, dtype=x.dtype)
+                lam_ladder_inv = torch.linspace(self.args.lam_start, self.args.lam_end, self.args.n_particles, device=x.device, dtype=x.dtype)
+                lam_ladder_t = 1/ torch.sqrt(_score_constant(alpha_prod_t, lam_ladder_inv))
+                lam_ladder_t = lam_ladder_t.view(-1, *[1] * (noise.dim() - 1))
                 return sigma * noise + x
             self.noise_fn = noise_fn
         else:
@@ -131,7 +134,7 @@ class BaseGuidance:
         prev_sample = alpha_prod_t_prev ** (0.5) * pred_x0_direction + pred_sample_direction
 
         if eta > 0 and t.item() > 0:
-            prev_sample = self.noise_fn(prev_sample, sigma, **kwargs)
+            prev_sample = self.noise_fn(prev_sample, sigma, alpha_prod_t, **kwargs)
             # variance_noise = randn_tensor(
             #     xt.shape, generator=self.generator, device=self.args.device, dtype=xt.dtype
             # )
@@ -152,7 +155,7 @@ class BaseGuidance:
         
         xt_mean = (alpha_prod_t / alpha_prod_t_prev) ** (0.5) * x_prev
 
-        return self.noise_fn(xt_mean, (1 - alpha_prod_t / alpha_prod_t_prev) ** (0.5), **kwargs)
+        return self.noise_fn(xt_mean, (1 - alpha_prod_t / alpha_prod_t_prev) ** (0.5),alpha_prod_t, **kwargs)
 
         noise = randn_tensor(
             x_prev.shape, generator=self.generator, device=self.args.device, dtype=x_prev.dtype

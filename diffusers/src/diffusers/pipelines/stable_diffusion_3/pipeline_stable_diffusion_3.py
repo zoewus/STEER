@@ -924,10 +924,15 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 		if output_type == "latent":
 			image = latents
 		else:
-			latent = latents[0:1].clone()
-			latent = (latent / self.vae.config.scaling_factor) + self.vae.config.shift_factor
-			decoded = self.vae.decode(latent, return_dict=False)[0]
-			image = self.image_processor.postprocess(decoded, output_type=output_type)
+			images = []
+			for i in range(latents.shape[0]):
+				latent = latents[i:i+1].clone()
+				latent = (latent / self.vae.config.scaling_factor) + self.vae.config.shift_factor
+				decoded = self.vae.decode(latent, return_dict=False)[0]
+				image = self.image_processor.postprocess(decoded, output_type=output_type)
+				images.append(image[0] if isinstance(image, list) else image)
+
+			image = images
 
 		# Offload all models
 		self.maybe_free_model_hooks()

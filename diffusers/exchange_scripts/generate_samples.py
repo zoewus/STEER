@@ -24,7 +24,7 @@ TSR_DIR    = args.tsr_path
 STEER_DIR = args.steer_path
 INDEX_UNTIL = args.index_until
 
-LAM_VALUES = [round(v, 3) for v in torch.linspace(lam_start, lam_end, N_PARTICLES).tolist()]
+LAM_VALUES = [0.85, 0.95, 1.05, 1.15]
 
 REAL_DIR    = "/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/images/laion_5k_real"
 PROMPTS_FILE = Path("/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/data_files/laion_5k_prompts.csv")
@@ -51,7 +51,7 @@ torch.cuda.empty_cache()
 prompts = pd.read_csv(PROMPTS_FILE, usecols=["text"], nrows=INDEX_UNTIL)["text"].tolist()
 print(f"Loaded {len(prompts)} prompts")
 
-replica_exchanges = [True, False]
+replica_exchanges = [True]
 
 lam_dirs = {}
 for re in replica_exchanges:
@@ -62,38 +62,32 @@ for re in replica_exchanges:
 
 for idx, prompt in enumerate(prompts):
 
-	for i, lam_value in enumerate(LAM_VALUES):
-		for replica_exchange in replica_exchanges:
-				
-			out_paths = [lam_dirs[replica_exchange][lam_value] / f"{idx:05d}.png"]
-			
-			if all(p.exists() for p in out_paths):
-				print(f"Skipping idx={idx} tsr_lam={lam_value} re={replica_exchange} (already exists)")
-				continue
+	for replica_exchange in replica_exchanges:
 
-			generator = torch.Generator(device="cuda").manual_seed(SEED)
+		generator = torch.Generator(device="cuda").manual_seed(SEED)
 
-			if replica_exchange == True:
-				particles = N_PARTICLES
-			else:
-				particles = 1
+		if replica_exchange == True:
+			particles = N_PARTICLES
+		else:
+			particles = 1
 
-			images = pipe(
-				prompt,
-				negative_prompt="",
-				num_inference_steps=N_INF_STEPS,
-				guidance_scale=GUIDANCE_SCALE,
-				lam_start=lam_value,
-				lam_end=2.0-lam_value,
-				replica_exchange=replica_exchange,
-				n_particles=particles,
-				generator=generator,
-			).images
+		images = pipe(
+			prompt,
+			negative_prompt="",
+			num_inference_steps=N_INF_STEPS,
+			guidance_scale=GUIDANCE_SCALE,
+			lam_start=lam_start,
+			lam_end=lam_end,
+			replica_exchange=replica_exchange,
+			n_particles=particles,
+			generator=generator,
+		).images
 
-			images[0].save(lam_dirs[replica_exchange][lam_value] / f"{idx:05d}.png", icc_profile=None)
+		images[1].save(lam_dirs[replica_exchange][LAM_VALUES[1]] / f"{idx:05d}.png", icc_profile=None)
+		images[2].save(lam_dirs[replica_exchange][LAM_VALUES[2]] / f"{idx:05d}.png", icc_profile=None)
 
-			del images
-			torch.cuda.empty_cache()
+		del images
+		torch.cuda.empty_cache()
 
 print("All lam values complete.")
 
