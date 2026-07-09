@@ -10,7 +10,7 @@ def _score_constant(a_bar, tsr_lam, eps=1e-6):
 def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype, p=2.0):
     t = torch.linspace(0, 1, n_replicas, device=device, dtype=dtype)
     t = t ** p  # larger p -> more points crowd near lam_start
-    lam_ladder = lam_start + (lam_end - lam_start) * t
+    lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
     return lam_ladder
 
 def scale(grad, a_bar, lam_start, lam_end, n_replicas):
@@ -51,7 +51,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         eps_s   = eps_ladder[index * index_s : index * (index_s + 1)]
 
         tsr_diff = _score_constant(a_bar, lam_ladder[index_t]) #-/ _score_constant(a_bar, lam_ladder[index_s])
-        integral = - 4 * (score_s + score_tau) * (x_tau - x_s) * tsr_diff # should be x s - x tau, proved in toy
+        integral = - 0.5 * (score_s + score_tau) * (x_tau - x_s) * tsr_diff # should be x s - x tau, proved in toy
 
         integral_per_sample = integral.flatten(1).sum(dim=1)          # shape: (index,)
         log_acceptance = torch.clamp(integral_per_sample, max=0)      # shape: (index,)
