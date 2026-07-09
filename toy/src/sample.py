@@ -19,9 +19,7 @@ def ddpm_tsr_swapped(model, dataset_shape, lam_ladder, n_replicas=2, replica_swa
 	x_ladder = []
 	x_init = torch.randn(dataset_shape, device=device).sort().values
 	for i, lam in enumerate(lam_ladder):
-		noise = torch.randn_like(x_init).sort().values  # independent but sorted to same range
-		lam_ratio = i / n_replicas
-		x_ladder.append(x_init )  # interpolate between x_init and independent noise
+		x_ladder.append(x_init*np.sqrt(lam))  # interpolate between x_init and independent noise
 	x_ladder = torch.cat(x_ladder, dim=0)
 
 	for t in ts_desc:

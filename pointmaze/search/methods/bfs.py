@@ -87,9 +87,8 @@ class BFSGuidance(BaseGuidance):
         if i == len(ts) - 1:
             log_probs = self.guider.get_guidance(x_prev, return_logp=True, check_grad=False, **kwargs)
             index = torch.argmax(log_probs)
+            print(f"Best Sample: {index} log probability {log_probs[index].item():.3f}")
             x_prev = x_prev[index].unsqueeze(0)
-
-            print(f" Best sample chosen {index}")
             # print(log_probs[index].item())
 
         return x_prev, {}

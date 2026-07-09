@@ -91,7 +91,7 @@ def plot_temperature_triptych(
 			color=PDF_COLOR, linewidth=1.5,
 			label=r"$p_\lambda(x)$",      # math label looks sharp with usetex
 		)
-		ax.set_ylim(0, 1.0)
+		ax.set_ylim(0, 1.5)
 		ax.set_xlim(-x_limit, x_limit)
 
 		ax.set_xlabel(r"$x$")
@@ -133,13 +133,13 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--lam", type=float, default=0.5)
 	parser.add_argument("--n_replicas", type=int, default=3)
-	parser.add_argument("--replica_swaps", action="store_true", default=False)
+	parser.add_argument("--replica_exchange", action="store_true", default=False)
 	args = parser.parse_args()
 
 	_ = plot_temperature_triptych(
 		dataset_name="composed",
 		lam=args.lam,
 		n_replicas=args.n_replicas,
-		replica_swaps=args.replica_swaps,
+		replica_swaps=args.replica_exchange,
 		swap_algorithm={},
 	)

@@ -5,12 +5,6 @@ from diffuser.models.helpers import apply_conditioning
 from search.maze_verifier import MazeVerifier
 from search.utils import rescale_grad
 
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
-from functools import partial
-from replica_exchange.acceptance import swap, scale, _score_constant
-
-
 class BaseGuidance:
 
     def __init__(self, args: Arguments, noise_fn: None=None):
@@ -20,11 +14,8 @@ class BaseGuidance:
         self.generator = torch.manual_seed(self.args.seed)
         self.device = torch.device(self.args.device)
         if noise_fn is None:
-            def noise_fn (x, sigma, alpha_prod_t, **kwargs):
+            def noise_fn (x, sigma, **kwargs):
                 noise =  randn_tensor(x.shape, generator=self.generator, device=self.device, dtype=x.dtype)
-                lam_ladder_inv = torch.linspace(self.args.lam_start, self.args.lam_end, self.args.n_particles, device=x.device, dtype=x.dtype)
-                lam_ladder_t = 1/ torch.sqrt(_score_constant(alpha_prod_t, lam_ladder_inv))
-                lam_ladder_t = lam_ladder_t.view(-1, *[1] * (noise.dim() - 1))
                 return sigma * noise + x
             self.noise_fn = noise_fn
         else:
@@ -99,7 +90,7 @@ class BaseGuidance:
         '''
             This function first compute (updated) eps from x_0, and then predicts x_{t-1} using Equation (12) in DDIM paper.
         '''
-
+        
         new_epsilon = (
             (xt - alpha_prod_t ** (0.5) * x0) / (1 - alpha_prod_t) ** (0.5)
         )
@@ -127,14 +118,13 @@ class BaseGuidance:
         ) ** (0.5)
 
         pred_sample_direction = (1 - alpha_prod_t_prev - sigma**2) ** (0.5) * eps
-
         pred_x0_direction = (xt - (1 - alpha_prod_t) ** (0.5) * eps) / (alpha_prod_t ** (0.5))
 
         # Equation (12) in DDIM sampling
         prev_sample = alpha_prod_t_prev ** (0.5) * pred_x0_direction + pred_sample_direction
 
         if eta > 0 and t.item() > 0:
-            prev_sample = self.noise_fn(prev_sample, sigma, alpha_prod_t, **kwargs)
+            prev_sample = self.noise_fn(prev_sample, sigma, **kwargs)
             # variance_noise = randn_tensor(
             #     xt.shape, generator=self.generator, device=self.args.device, dtype=xt.dtype
             # )
@@ -155,7 +145,7 @@ class BaseGuidance:
         
         xt_mean = (alpha_prod_t / alpha_prod_t_prev) ** (0.5) * x_prev
 
-        return self.noise_fn(xt_mean, (1 - alpha_prod_t / alpha_prod_t_prev) ** (0.5),alpha_prod_t, **kwargs)
+        return self.noise_fn(xt_mean, (1 - alpha_prod_t / alpha_prod_t_prev) ** (0.5), **kwargs)
 
         noise = randn_tensor(
             x_prev.shape, generator=self.generator, device=self.args.device, dtype=x_prev.dtype
@@ -174,3 +164,4 @@ class BaseGuidance:
         #     pred_x0 = torch.clamp(pred_x0, -self.args.clip_sample_range, self.args.clip_sample_range)
         
         return eps
+

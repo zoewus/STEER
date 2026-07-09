@@ -12,26 +12,12 @@ from search.utils import rescale_grad
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
 from functools import partial
-from replica_exchange.acceptance import swap, scale, AdaptiveLadder
+from replica_exchange.acceptance import swap, scale
 
 class TFGGuidance(BaseGuidance):
 
     def __init__(self, args, **kwargs):
         super(TFGGuidance, self).__init__(args, **kwargs)
-        self.ladder = None   # lazy-init in guide_step, once we have a tensor to read device/dtype from
-
-    def _maybe_init_ladder(self, x, i):
-        if self.ladder is None or i == 0:
-            self.ladder = AdaptiveLadder(
-                lam_start=self.args.lam_start,
-                lam_end=self.args.lam_end,
-                n_replicas=self.args.n_particles,
-                target_accept=getattr(self.args, "target_accept", 0.3),
-                kappa0=getattr(self.args, "ladder_kappa0", 1.0),
-                decay=getattr(self.args, "ladder_decay", 0.6),
-                device=x.device,
-                dtype=x.dtype,
-            )
 
     @torch.enable_grad()
     def tilde_get_guidance(self, x0, mc_eps, return_logp=False, **kwargs):
@@ -57,10 +43,10 @@ class TFGGuidance(BaseGuidance):
         _grad = rescale_grad(_grad, clip_scale=self.args.clip_scale, **kwargs)
         return _grad
     
-    def get_noise(self, std,alpha_prod_t, shape, eps_bsz=4, **kwargs):
+    def get_noise(self, std, shape, eps_bsz=4, **kwargs):
         # if std == 0.0:
         #     return torch.zeros((1, *shape), device=self.device)
-        return torch.stack([self.noise_fn(torch.zeros(shape, device=self.device), std, alpha_prod_t, **kwargs) for _ in range(eps_bsz)]) 
+        return torch.stack([self.noise_fn(torch.zeros(shape, device=self.device), std, **kwargs) for _ in range(eps_bsz)]) 
     # randn_tensor((4, *shape), device=self.device, generator=self.generator) * std
     
     def get_rho(self, t, alpha_prod_ts, alpha_prod_t_prevs):
@@ -102,7 +88,6 @@ class TFGGuidance(BaseGuidance):
         eta: float,
         **kwargs,
     ) -> torch.Tensor:
-        self._maybe_init_ladder(x, i)
         cond = kwargs.get("cond", None)
 
         t = ts[i]   # convert from int space to tensor space
@@ -117,7 +102,7 @@ class TFGGuidance(BaseGuidance):
         for recur_step in range(self.args.recur_steps):
 
             # sample noise to estimate the \tilde p distribution
-            mc_eps = self.get_noise(std, alpha_prod_t, x.shape, self.args.eps_bsz, **kwargs)
+            mc_eps = self.get_noise(std, x.shape, self.args.eps_bsz, **kwargs)
 
             # Compute guidance on x_t, and obtain Delta_t
             if self.args.rho != 0.0:
@@ -128,11 +113,11 @@ class TFGGuidance(BaseGuidance):
                         (x_g - alpha_prod_t ** (0.5) * unet_output) / (1 - alpha_prod_t) ** (0.5)
                     )
                     x = x_g.clone()
-                    new_epsilon_scaled = scale(new_epsilon, alpha_prod_t, self.ladder.lam_ladder)
+                    new_epsilon = scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
                     
                     # invert x_t = sqrt(a_bar)*x0 + sqrt(1-a_bar)*eps  =>  x0 = (x_t - sqrt(1-a_bar)*eps) / sqrt(a_bar)
                     x0_tempered = (
-                        (x - (1 - alpha_prod_t) ** (0.5) * new_epsilon_scaled) / alpha_prod_t ** (0.5)
+                        (x - (1 - alpha_prod_t) ** (0.5) * new_epsilon) / alpha_prod_t ** (0.5)
                     )
                     x0 = self._predict_x0(x_g, x0_tempered, alpha_prod_t, **kwargs)
                     x0 = apply_conditioning(x0, cond, 2) ## debug
@@ -161,13 +146,10 @@ class TFGGuidance(BaseGuidance):
                 x, x0, alpha_prod_t, alpha_prod_t_prev, eta, t, **kwargs)
             if t > 0 or recur_step < self.args.recur_steps - 1:
                 x_prev += Delta_t / alpha_t ** 0.5 + Delta_0 * alpha_prod_t_prev ** 0.5
-            x_prev = apply_conditioning(x_prev, cond, 2)            
+            x_prev = apply_conditioning(x_prev, cond, 2)
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
-            
             x = apply_conditioning(x, cond, 2)
-
-        if self.args.replica_exchange and i < (len(ts) -1 ):
-            x_prev, _, accept_per_pair = swap(x_prev, t, alpha_prod_t, self.ladder.lam_ladder,
-                                            new_epsilon, i=i, flow=None)
-            self.ladder.update(accept_per_pair)
+            
+        if self.args.replica_exchange and i > 5:
+            x_prev , _ = swap(x_prev, t, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, new_epsilon, i=i, flow=None)
         return x_prev, {"x0": x0, "logprobs": logprobs}
