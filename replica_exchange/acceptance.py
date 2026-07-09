@@ -6,11 +6,24 @@ def _score_constant(a_bar, tsr_lam, eps=1e-6):
 
 @torch.no_grad()
 def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype, p=3.0):
-    t = torch.linspace(0, 1, n_replicas, device=device, dtype=dtype)
-    t = t ** p  # larger p -> more points crowd near lam_start
-    # lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
-    lam_ladder = lam_start + (lam_end - lam_start) * t
+    t = torch.linspace(0, 1, n_replicas // 2, device=device, dtype=dtype)
+    t = t ** p  # larger p -> more points crowd near lam=1.0
+
+    lam_upper = 1.0 + (lam_end - 1.0) * t      # 1.0 -> lam_end
+    lam_lower = 1.0 + (lam_start - 1.0) * t    # 1.0 -> lam_start
+
+    lam_ladder = torch.cat([lam_lower.flip(0), lam_upper])
     return lam_ladder
+    # t = torch.linspace(0, 1, n_replicas//2, device=device, dtype=dtype)
+    # t = t ** p  # larger p -> more points crowd near lam_start
+    # # lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
+    # lam_ladder = 1.0 + (lam_end - 1.0) * t
+    
+    # t = torch.linspace(0, 1, n_replicas//2, device=device, dtype=dtype)
+    # t = t ** p  # larger p -> more points crowd near lam_start
+    # # lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
+    # lam_ladder = 1.0 + (lam_start - 1.0) * t
+    # return lam_ladder
 
 def scale(grad, a_bar, lam_start, lam_end, n_replicas):
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=grad.device, dtype=grad.dtype)
@@ -43,9 +56,13 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         x_tau, x_s = x_ladder[sl], x_ladder[ss]
         score_tau, score_s = score_ladder[sl], score_ladder[ss]
         eps_tau, eps_s = eps_ladder[sl], eps_ladder[ss]
+        
+        if lam_ladder[index_t] >1:
+            x_diff = x_s - x_tau
+        else:
+            x_diff = x_tau - x_s
 
-        tsr_tau = _score_constant(a_bar, lam_ladder[index_t])
-        integral = 0.5* (score_tau + score_s) * (x_s - x_tau)
+        integral = 0.5* (score_tau + score_s) * x_diff
         acceptance = torch.exp(integral.sum())
         accept = (torch.rand_like(acceptance) < acceptance).float() 
 
