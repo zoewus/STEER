@@ -5,6 +5,11 @@ from diffuser.models.helpers import apply_conditioning
 from search.maze_verifier import MazeVerifier
 from search.utils import rescale_grad
 
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..","..",  "..")))
+from functools import partial
+from replica_exchange.acceptance import swap, scale, _lam_ladder, _score_constant
+
 class BaseGuidance:
 
     def __init__(self, args: Arguments, noise_fn: None=None):
@@ -16,6 +21,10 @@ class BaseGuidance:
         if noise_fn is None:
             def noise_fn (x, sigma, **kwargs):
                 noise =  randn_tensor(x.shape, generator=self.generator, device=self.device, dtype=x.dtype)
+                # lam_ladder = _lam_ladder(self.args.lam_start, self.args.lam_end, self.args.n_particles, device=x.device, dtype=x.dtype)        
+                # lam_ladder_t = _score_constant((1-sigma), lam_ladder)               
+                # lam_ladder_t = lam_ladder_t.view(-1, *[1] * (x.dim() - 1))
+                # noise *= (1/ torch.sqrt(lam_ladder_t))
                 return sigma * noise + x
             self.noise_fn = noise_fn
         else:

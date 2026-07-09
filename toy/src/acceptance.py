@@ -41,14 +41,17 @@ def swap(x_ladder, lam_ladder, t_val, a_bar, compute_eps, chunk_size=50000):
 		x_s_s     = all_x_s[i]
 
 		tsr_diff = _score_constant(a_bar, lam_ladder[index_t]) #- _score_constant(a_bar, lam_ladder[index_s])
-		integral = - 2 * (score_s + score_tau) * (x_tau_s - x_s_s) * tsr_diff
+		integral = -  0.5 * (score_s + score_tau) * (x_tau_s - x_s_s) * tsr_diff
+		integral_2 = - 0.5 * (score_s + score_tau) * (x_tau_s - x_s_s) * _score_constant(a_bar, lam_ladder[index_s])
 
 		acceptance = (torch.rand_like(integral) < torch.exp(integral)).float()
+		acceptance_2 = (torch.rand_like(integral_2) < torch.exp(integral_2)).float()
+
 		x_tau_new = acceptance * x_s_s   + (1 - acceptance) * x_tau_s
-		x_s_new   = acceptance * x_tau_s + (1 - acceptance) * x_s_s
+		x_s_new   = acceptance_2 * x_tau_s + (1 - acceptance_2) * x_s_s
 
 		x_ladder[index*index_t : index*(index_t+1)] = x_tau_new
-		# x_ladder[index*index_s : index*(index_s+1)] = x_s_new
+		x_ladder[index*index_s : index*(index_s+1)] = x_s_new
 
 		print(f"t {t_val} | lam {lam_ladder[index_t]:.2f}↔{lam_ladder[index_s]:.2f} | integral {integral.mean():.3f} | acceptance {acceptance.mean():.3f}")
 

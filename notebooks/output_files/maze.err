@@ -1,6 +1,6 @@
 /n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   data = torch.load(loadpath, map_location='cpu')
-Exception ignored in: <function OffScreenViewer.__del__ at 0x147fa9ba71c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14e9be0db130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -14,12 +14,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14808802cec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x147fb52cfec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ea9c310ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e9c9535ec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x147fb4530d30>
+Exception ignored in: <function GLContext.__del__ at 0x14e9c7db8ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -31,12 +31,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14808802cec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x147fb52cfec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ea9c310ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e9c9535ec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function OffScreenViewer.__del__ at 0x147fa9ba71c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14e9be0db130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -50,12 +50,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14808802cec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x147fa84c5240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ea9c310ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e9bdf391c0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x147fb4530d30>
+Exception ignored in: <function GLContext.__del__ at 0x14e9c7db8ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -67,14 +67,14 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14808802cec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x147fa84c5240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ea9c310ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e9bdf391c0>,
 	),
 	result = 0
 )
 /n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   data = torch.load(loadpath, map_location='cpu')
-Exception ignored in: <function OffScreenViewer.__del__ at 0x150f813631c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x145d17787130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -88,12 +88,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x15105f830ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x150f8ca87ec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145df5c5cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145d22eadec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x150f8ba0cd30>
+Exception ignored in: <function GLContext.__del__ at 0x145d21e38ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -105,12 +105,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x15105f830ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x150f8ca87ec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145df5c5cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145d22eadec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function OffScreenViewer.__del__ at 0x150f813631c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x145d17787130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -124,12 +124,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x15105f830ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x150f789cd240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145df5c5cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145b05bd11c0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x150f8ba0cd30>
+Exception ignored in: <function GLContext.__del__ at 0x145d21e38ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -141,14 +141,14 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x15105f830ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x150f789cd240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145df5c5cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145b05bd11c0>,
 	),
 	result = 0
 )
 /n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   data = torch.load(loadpath, map_location='cpu')
-Exception ignored in: <function OffScreenViewer.__del__ at 0x14ef8bfe71c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14bd83e9f130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -162,12 +162,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14f06a4a4ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ef97707ec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14be62368ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14bd8f5bdec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x14ef96688d30>
+Exception ignored in: <function GLContext.__del__ at 0x14bd8e544ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -179,12 +179,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14f06a4a4ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ef97707ec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14be62368ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14bd8f5bdec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function OffScreenViewer.__del__ at 0x14ef8bfe71c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14bd83e9f130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -198,12 +198,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14f06a4a4ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ef8a8fd240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14be62368ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14bd7de951c0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x14ef96688d30>
+Exception ignored in: <function GLContext.__del__ at 0x14bd8e544ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -215,14 +215,14 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14f06a4a4ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ef8a8fd240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14be62368ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14bd7de951c0>,
 	),
 	result = 0
 )
 /n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   data = torch.load(loadpath, map_location='cpu')
-Exception ignored in: <function OffScreenViewer.__del__ at 0x14ee745df1c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x145a0b2fb130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -236,12 +236,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ef52910ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ee7faffec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145ae9530ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145a16755ec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x14ee7e378d30>
+Exception ignored in: <function GLContext.__del__ at 0x145a14fdcca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -253,12 +253,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ef52910ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ee7faffec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145ae9530ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145a16755ec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function OffScreenViewer.__del__ at 0x14ee745df1c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x145a0b2fb130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -272,12 +272,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ef52910ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ee72ef9240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145ae9530ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145a0b1551c0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x14ee7e378d30>
+Exception ignored in: <function GLContext.__del__ at 0x145a14fdcca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -289,14 +289,14 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ef52910ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14ee72ef9240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x145ae9530ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x145a0b1551c0>,
 	),
 	result = 0
 )
 /n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   data = torch.load(loadpath, map_location='cpu')
-Exception ignored in: <function OffScreenViewer.__del__ at 0x14b92f12f1c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x15142c377130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -310,12 +310,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba0d364ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14b93a58bec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15150a5a8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1514377cdec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x14b938e10d30>
+Exception ignored in: <function GLContext.__del__ at 0x151436050ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -327,12 +327,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba0d364ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14b93a58bec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15150a5a8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1514377cdec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function OffScreenViewer.__del__ at 0x14b92f12f1c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x15142c377130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -346,12 +346,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba0d364ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14b92ef89240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15150a5a8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x15142c1d11c0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x14b938e10d30>
+Exception ignored in: <function GLContext.__del__ at 0x151436050ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -363,14 +363,14 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba0d364ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x14b92ef89240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15150a5a8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x15142c1d11c0>,
 	),
 	result = 0
 )
 /n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   data = torch.load(loadpath, map_location='cpu')
-Exception ignored in: <function OffScreenViewer.__del__ at 0x153e9769f1c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x148936327130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -384,12 +384,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x153f75b34ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x153ea2dbfec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x148a14558ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x148941781ec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x153ea2020d30>
+Exception ignored in: <function GLContext.__del__ at 0x148940004ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -401,12 +401,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x153f75b34ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x153ea2dbfec0>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x148a14558ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x148941781ec0>,
 	),
 	result = 0
 )
-Exception ignored in: <function OffScreenViewer.__del__ at 0x153e9769f1c0>
+Exception ignored in: <function OffScreenViewer.__del__ at 0x148936327130>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
     self.free()
@@ -420,12 +420,12 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x153f75b34ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x153e95fb9240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x148a14558ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14893617d1c0>,
 	),
 	result = 0
 )
-Exception ignored in: <function GLContext.__del__ at 0x153ea2020d30>
+Exception ignored in: <function GLContext.__del__ at 0x148940004ca0>
 Traceback (most recent call last):
   File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
     self.free()
@@ -437,12 +437,607 @@ OpenGL.raw.EGL._errors.EGLError: EGLError(
 	err = EGL_NOT_INITIALIZED,
 	baseOperation = eglDestroyContext,
 	cArguments = (
-		<OpenGL._opaque.EGLDisplay_pointer object at 0x153f75b34ec0>,
-		<OpenGL._opaque.EGLContext_pointer object at 0x153e95fb9240>,
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x148a14558ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14893617d1c0>,
 	),
 	result = 0
 )
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14a926847130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14aa04cccec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14a931f65ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14a9311ccca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14aa04cccec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14a931f65ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14a926847130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14aa04cccec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14a9251611c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14a9311ccca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14aa04cccec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14a9251611c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14b984f67130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba63400ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14b990689ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14b98f860ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba63400ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14b990689ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14b984f67130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba63400ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14b9838811c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14b98f860ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14ba63400ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14b9838811c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x1537e1e5f130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1538c031cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1537ed57dec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x1537ec508ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1538c031cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1537ed57dec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x1537e1e5f130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1538c031cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1537e07791c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x1537ec508ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1538c031cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1537e07791c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x149318aa7130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1493f6f34ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1493241c5ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14932342cca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1493f6f34ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1493241c5ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x149318aa7130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1493f6f34ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1493173c11c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14932342cca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1493f6f34ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1493173c11c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x152300d13130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1523def64ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x15230c171ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x15230a9f0ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1523def64ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x15230c171ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x152300d13130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1523def64ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x152300b711c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x15230a9f0ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x1523def64ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x152300b711c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x151256d93130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x151334fc8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1512621edec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x151260a70ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x151334fc8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1512621edec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x151256d93130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x151334fc8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x151256bed1c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x151260a70ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x151334fc8ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x151256bed1c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x15089e2eb130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15097c51cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1508a9741ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x1508a7fccca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15097c51cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x1508a9741ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x15089e2eb130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15097c51cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x15089e1451c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x1508a7fccca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x15097c51cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x15089e1451c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+Exception ignored in: <function OffScreenViewer.__del__ at 0x153da76ef130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x153e85928ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x153db2b4dec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x153db13d4ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x153e85928ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x153db2b4dec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x153da76ef130>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x153e85928ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x153da75491c0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x153db13d4ca0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x153e85928ec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x153da75491c0>,
+	),
+	result = 0
+)
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
 srun: got SIGCONT
-[2026-07-08T15:28:16.773] error: *** JOB 29413922 ON holygpu8a13301 CANCELLED AT 2026-07-08T15:28:16 DUE to SIGNAL Terminated ***
+[2026-07-09T13:40:42.235] error: *** JOB 29787770 ON holygpu8a17601 CANCELLED AT 2026-07-09T13:40:42 DUE to SIGNAL Terminated ***
 srun: forcing job termination
-[2026-07-08T15:28:16.774] error: *** STEP 29413922.6 ON holygpu8a13301 CANCELLED AT 2026-07-08T15:28:16 DUE to SIGNAL Terminated ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-07-09T13:40:42.249] error: *** STEP 29787770.14 ON holygpu8a17601 CANCELLED AT 2026-07-09T13:40:42 DUE to SIGNAL Terminated ***

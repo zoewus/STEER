@@ -48,7 +48,7 @@ def ddpm_tsr_swapped(model, dataset_shape, lam_ladder, n_replicas=2, replica_swa
 			x_ladder[i * dataset_shape[0] : (i+1) * dataset_shape[0]] = x.clone()
 
 
-		if replica_swaps and t>5:
+		if replica_swaps :
 
 
 			def compute_eps(x_t, t_int):

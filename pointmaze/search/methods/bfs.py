@@ -81,13 +81,15 @@ class BFSGuidance(BaseGuidance):
                 else:
                     cond[k] = [v[i] for i in resampled_indices]
             
-
+        log_probs = self.guider.get_guidance(x_prev, return_logp=True, check_grad=False, **kwargs)
+        print(f" 0  {log_probs[0].item():.3f} | 1  {log_probs[1].item():.3f} | 2  {log_probs[2].item():.3f} | 3  {log_probs[3].item():.3f} | 4  {log_probs[4].item():.3f} | 5  {log_probs[5].item():.3f} | 6  {log_probs[6].item():.3f} | 7  {log_probs[7].item():.3f}")
 
         # return the best sample at last step
         if i == len(ts) - 1:
             log_probs = self.guider.get_guidance(x_prev, return_logp=True, check_grad=False, **kwargs)
             index = torch.argmax(log_probs)
             print(f"Best Sample: {index} log probability {log_probs[index].item():.3f}")
+
             x_prev = x_prev[index].unsqueeze(0)
             # print(log_probs[index].item())
 

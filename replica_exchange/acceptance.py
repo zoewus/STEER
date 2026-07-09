@@ -2,15 +2,14 @@ import torch
 
 @torch.no_grad()
 def _score_constant(a_bar, tsr_lam, eps=1e-6):
-    denom = a_bar * tsr_lam + (1 - a_bar)
-    denom = denom.clamp_min(eps) if torch.is_tensor(denom) else max(denom, eps)
-    return 1 / denom
+    return 1 / (a_bar * tsr_lam + (1 - a_bar))
 
 @torch.no_grad()
-def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype, p=2.0):
+def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype, p=3.0):
     t = torch.linspace(0, 1, n_replicas, device=device, dtype=dtype)
     t = t ** p  # larger p -> more points crowd near lam_start
-    lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
+    # lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
+    lam_ladder = lam_start + (lam_end - lam_start) * t
     return lam_ladder
 
 def scale(grad, a_bar, lam_start, lam_end, n_replicas):
@@ -24,10 +23,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
     x_out = x_ladder.clone()
     eps_out = eps_ladder.clone()
 
-    if i is not None:
-        offset = i % 2
-    else:
-        offset = t_val % 2
+    offset = int(i % 2) if i is not None else int(t_val) % 2
     pairs = [(i_tau, i_tau + 1) for i_tau in range(offset, n_replicas - 1, 2)]
     index = x_ladder.shape[0] // n_replicas
 
@@ -40,31 +36,24 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
     else:
         score_ladder = - eps_ladder / (1 - a_bar) ** 0.5
 
-    for i_pair, (index_t, index_s) in enumerate(pairs):
-        x_tau = x_ladder[index * index_t : index * (index_t + 1)]
-        x_s   = x_ladder[index * index_s : index * (index_s + 1)]
+    for index_t, index_s in pairs:
+        sl = slice(index * index_t, index * (index_t + 1))
+        ss = slice(index * index_s, index * (index_s + 1))
 
-        score_tau = score_ladder[index * index_t : index * (index_t + 1)]
-        score_s   = score_ladder[index * index_s : index * (index_s + 1)]
+        x_tau, x_s = x_ladder[sl], x_ladder[ss]
+        score_tau, score_s = score_ladder[sl], score_ladder[ss]
+        eps_tau, eps_s = eps_ladder[sl], eps_ladder[ss]
 
-        eps_tau = eps_ladder[index * index_t : index * (index_t + 1)]
-        eps_s   = eps_ladder[index * index_s : index * (index_s + 1)]
+        tsr_tau = _score_constant(a_bar, lam_ladder[index_t])
+        integral = 0.5* (score_tau + score_s) * (x_s - x_tau)
+        acceptance = torch.exp(integral.sum())
+        accept = (torch.rand_like(acceptance) < acceptance).float() 
 
-        tsr_diff = _score_constant(a_bar, lam_ladder[index_t]) #-/ _score_constant(a_bar, lam_ladder[index_s])
-        integral = - 0.5 * (score_s + score_tau) * (x_tau - x_s) * tsr_diff # should be x s - x tau, proved in toy
+        print(f"Time {t_val} {lam_ladder[index_t]:.2f} and {lam_ladder[index_s]:.2f} integral {integral.mean().item():.2f} acceptance {accept.mean().item()}")
 
-        integral_per_sample = integral.flatten(1).sum(dim=1)          # shape: (index,)
-        log_acceptance = torch.clamp(integral_per_sample, max=0)      # shape: (index,)
-        u = torch.rand_like(log_acceptance)
-        accept = (torch.log(u) < log_acceptance).float()   
-
-        x_out[index * index_t : index * (index_t + 1)] = accept * x_s   + (1 - accept) * x_tau
-        # x_out[index * index_s : index * (index_s + 1)] = accept * x_tau + (1 - accept) * x_s
-
-        eps_out[index * index_t : index * (index_t + 1)] = accept * eps_s   + (1 - accept) * eps_tau
-        # eps_out[index * index_s : index * (index_s + 1)] = accept * eps_tau + (1 - accept) * eps_s
-
-        print(f"t {t_val} | lam {lam_ladder[index_t]:.2f}↔{lam_ladder[index_s]:.2f} "
-                f"| integral {integral.mean():.3f} | acceptance {accept.mean():.3f}")
+        x_out[sl] = accept * x_s + (1 - accept) * x_tau
+        x_out[ss] = accept * x_tau + (1 - accept) * x_s
+        eps_out[sl] = accept * eps_s + (1 - accept) * eps_tau
+        eps_out[ss] = accept * eps_tau + (1 - accept) * eps_s
 
     return x_out, eps_out

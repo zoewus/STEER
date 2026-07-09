@@ -122,7 +122,7 @@ def plot_temperature_triptych(
 		else:
 			ax.set_title(f"TSR {col_lam}", fontsize=9, pad=4)
 
-	plt.savefig(f"Swap_{replica_swaps}.png")
+	plt.savefig(f"Swap_{replica_swaps}_{col_lam}.png")
 	plt.close()
 
 
