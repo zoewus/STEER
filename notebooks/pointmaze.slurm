@@ -18,21 +18,15 @@ module load python
 conda activate maze
 
 
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.95 --lam_end 1.05 --n_particles 4 --device cuda
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.95 --lam_end 1.05 --replica_exchange --n_particles 4 --device cuda
-
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.85 --lam_end 1.15 --n_particles 4 --device cuda
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.85 --lam_end 1.15 --replica_exchange --n_particles 4 --device cuda
-
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.75 --lam_end 1.25 --n_particles 4 --device cuda
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.75 --lam_end 1.25 --replica_exchange --n_particles 4 --device cuda
-
-
 MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.95 --lam_end 1.05 --n_particles 8 --device cuda
 MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.95 --lam_end 1.05 --replica_exchange --n_particles 8 --device cuda
 
+MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.9 --lam_end 1.05 --n_particles 8 --device cuda
+MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.9 --lam_end 1.05 --replica_exchange --n_particles 8 --device cuda
+
+MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.9 --lam_end 1.1 --n_particles 8 --device cuda
+MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.9 --lam_end 1.1 --replica_exchange --n_particles 8 --device cuda
+
+
 MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.85 --lam_end 1.15 --n_particles 8 --device cuda
 MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.85 --lam_end 1.15 --replica_exchange --n_particles 8 --device cuda
-
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.75 --lam_end 1.25 --n_particles 8 --device cuda
-MUJOCO_GL=egl srun python ~/STEER/pointmaze/run.py --dataset pointmaze-giant-navigate-v0 --lam_start 0.75 --lam_end 1.25 --replica_exchange --n_particles 8 --device cuda
