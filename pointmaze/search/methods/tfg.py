@@ -109,12 +109,12 @@ class TFGGuidance(BaseGuidance):
                 with torch.enable_grad():
                     x_g = x.clone().detach().requires_grad_()
                     unet_output = unet(x_g, cond, batched_t)
-                    new_epsilon = (
+                    epsilon = (
                         (x_g - alpha_prod_t ** (0.5) * unet_output) / (1 - alpha_prod_t) ** (0.5)
                     )
                     x = x_g.clone()
 
-                    new_epsilon = scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
+                    new_epsilon = scale(epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
                     
                     # invert x_t = sqrt(a_bar)*x0 + sqrt(1-a_bar)*eps  =>  x0 = (x_t - sqrt(1-a_bar)*eps) / sqrt(a_bar)
                     x0_tempered = (
@@ -125,7 +125,7 @@ class TFGGuidance(BaseGuidance):
                     logprobs = self.tilde_get_guidance(
                         x0, mc_eps, return_logp=True, **kwargs)
                     Delta_t = grad(logprobs.sum(), x_g)[0]
-                    Delta_t = rescale_grad(Delta_t, clip_scale=self.args.clip_scale, **kwargs)
+                    Delta_t= rescale_grad(Delta_t, clip_scale=self.args.clip_scale, **kwargs)
                     Delta_t = Delta_t * rho
                     
             else:
@@ -152,7 +152,7 @@ class TFGGuidance(BaseGuidance):
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
             x = apply_conditioning(x, cond, 2)
 
-        if self.args.replica_exchange and i < (len(ts)-1):
-            x_prev , _ = swap(x_prev, t, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, new_epsilon, i=i, flow=None)
+        if self.args.replica_exchange :
+            x_prev  = swap(x_prev, ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end, self.args.n_particles, epsilon, i=i, flow=None)
             
         return x_prev, {"x0": x0, "logprobs": logprobs}
