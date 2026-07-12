@@ -6,25 +6,26 @@ def _score_constant(a_bar, tsr_lam, eps=1e-6):
     return 1 / (a_bar * tsr_lam + (1 - a_bar))
 
 @torch.no_grad()
-def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype, bias=3.0):
-    n_lower = n_replicas // 2
-    n_upper = n_replicas - n_lower  # absorbs the odd remainder, if any
+def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype):
+    n_half = n_replicas // 2
 
-    # s in (0, 1], excluding 0 -> lam never lands exactly on 1.0
-    s_lower = torch.linspace(0, 1, n_lower + 1, device=device, dtype=dtype)[1:]
-    s_upper = torch.linspace(0, 1, n_upper + 1, device=device, dtype=dtype)[1:]
+    # s in (0, 1], excluding 0 -> avoids landing exactly on lam=1.0 twice
+    s = torch.linspace(0, 1, n_half + 1, device=device, dtype=dtype)[1:]
 
-    # bias s toward 0 (bias > 1 compresses points near s=0, i.e. near lam=1;
-    # s=1 is a fixed point so the far endpoints lam_start/lam_end are unchanged)
-    s_lower = s_lower ** bias
-    s_upper = s_upper ** bias
+    # geometric interpolation: lam = 1.0 * ratio^s, crowds points near lam=1.0
+    lam_upper = lam_end ** s      # 1.0 -> lam_end
+    lam_lower = lam_start ** s    # 1.0 -> lam_start
 
-    lam_lower = lam_start ** s_lower   # approaches 1.0 -> lam_start
-    lam_upper = lam_end ** s_upper     # approaches 1.0 -> lam_end
-
-    lam_ladder = torch.cat([lam_lower.flip(0), lam_upper])
+    if n_replicas % 2 == 0:
+        lam_ladder = torch.cat([lam_lower.flip(0), lam_upper])
+    else:
+        # odd count: include exact midpoint lam=1.0 once
+        one = torch.ones(1, device=device, dtype=dtype)
+        lam_ladder = torch.cat([lam_lower.flip(0), one, lam_upper])
+    # lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
 
     return lam_ladder
+
 
 def scale(grad, a_bar, lam_start, lam_end, n_replicas):
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=grad.device, dtype=grad.dtype)
@@ -61,12 +62,12 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         score_tau, score_s = score_ladder[sl], score_ladder[ss]
 
         tsr_diff = _score_constant(a_bar,lam_ladder[index_t]) - _score_constant(a_bar,lam_ladder[index_s]) # this is always positive
-        integral = 0.5 * (score_tau - score_s) * (x_tau - x_s) * tsr_diff
+        integral = 0.5* (score_tau - score_s) * (x_tau - x_s) * tsr_diff
         log_ratio = torch.clamp(integral.sum() , max=0.0)
         
         accept = torch.exp(log_ratio)
         accept_bool = (torch.rand_like(accept) < accept).float() 
-        print(f"Time {t_val} {lam_ladder[index_t]:.2f} and {lam_ladder[index_s]:.2f} log_ratio {log_ratio.mean().item():.2f} accept {accept.mean().item():.2f} accept {accept_bool}")
+        print(f"Time {t_val} {lam_ladder[index_t]:.2f} and {lam_ladder[index_s]:.2f} log_ratio {log_ratio.mean().item():.2f} accept {accept.mean().item():.2f}")
 
         x_out[sl] = accept_bool * x_s + (1 - accept_bool) * x_tau
         x_out[ss] = accept_bool * x_tau + (1 - accept_bool) * x_s

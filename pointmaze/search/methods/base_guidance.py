@@ -21,10 +21,10 @@ class BaseGuidance:
         if noise_fn is None:
             def noise_fn (x, sigma, **kwargs):
                 noise =  randn_tensor(x.shape, generator=self.generator, device=self.device, dtype=x.dtype)
-                lam_ladder = _lam_ladder(self.args.lam_start, self.args.lam_end, self.args.n_particles, device=x.device, dtype=x.dtype)        
-                lam_ladder_t = _score_constant((1-sigma), lam_ladder)               
-                lam_ladder_t = lam_ladder_t.view(-1, *[1] * (x.dim() - 1))
-                noise *= (1/ torch.sqrt(lam_ladder_t))
+                # lam_ladder = _lam_ladder(self.args.lam_start, self.args.lam_end, self.args.n_particles, device=x.device, dtype=x.dtype)        
+                # lam_ladder_t = _score_constant((1-sigma), lam_ladder)               
+                # lam_ladder_t = lam_ladder_t.view(-1, *[1] * (x.dim() - 1))
+                # noise *= (1/ torch.sqrt(lam_ladder_t))
                 return sigma * noise + x
             self.noise_fn = noise_fn
         else:
