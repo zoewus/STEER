@@ -1,50 +1,63 @@
 import torch
-import random
 
 @torch.no_grad()
-def _score_constant(a_bar, tsr_lam, eps=1e-6):
+def _score_constant(a_bar, tsr_lam):
     return 1 / (a_bar * tsr_lam + (1 - a_bar))
 
 @torch.no_grad()
 def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype):
-    n_half = n_replicas // 2
-
-    # s in (0, 1], excluding 0 -> avoids landing exactly on lam=1.0 twice
-    s = torch.linspace(0, 1, n_half + 1, device=device, dtype=dtype)[1:]
-
-    # geometric interpolation: lam = 1.0 * ratio^s, crowds points near lam=1.0
-    lam_upper = lam_end ** s      # 1.0 -> lam_end
-    lam_lower = lam_start ** s    # 1.0 -> lam_start
-
-    if n_replicas % 2 == 0:
-        lam_ladder = torch.cat([lam_lower.flip(0), lam_upper])
-    else:
-        # odd count: include exact midpoint lam=1.0 once
-        one = torch.ones(1, device=device, dtype=dtype)
-        lam_ladder = torch.cat([lam_lower.flip(0), one, lam_upper])
-    # lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
-
+    lam_ladder = torch.linspace(
+        lam_start, lam_end, n_replicas,
+        device=device, dtype=dtype,
+    )
     return lam_ladder
 
 
-def scale(grad, a_bar, lam_start, lam_end, n_replicas):
+def init_temp_idx(n_replicas, device):
+    """
+    Call ONCE before sampling starts (e.g. in __init__ or lazily on first
+    guide_step call). temp_idx[slot] = index into lam_ladder that is
+    CURRENTLY assigned to that slot/walker. Starts as identity and gets
+    permuted in place by swap_temperatures() as sampling proceeds.
+    """
+    return torch.arange(n_replicas, device=device)
+
+
+def scale(grad, a_bar, lam_start, lam_end, n_replicas, temp_idx=None):
+    """
+    Same as original `scale`, but if temp_idx is provided, each slot k is
+    tempered by lam_ladder[temp_idx[k]] (its currently-assigned lambda)
+    instead of lam_ladder[k] directly. Pass temp_idx=None to recover the
+    original sample-swap behavior exactly.
+    """
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=grad.device, dtype=grad.dtype)
-    lam_ladder_t = _score_constant(a_bar, lam_ladder)                  # (n_replicas,) vectorized
-    
+
+    lam_per_slot = lam_ladder[temp_idx] if temp_idx is not None else lam_ladder
+
+    lam_ladder_t = _score_constant(a_bar, lam_per_slot)
     lam_ladder_t = lam_ladder_t.view(-1, *[1] * (grad.dim() - 1))
     return grad * lam_ladder_t
 
-def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=None, flow=None):
-    x_out = x_ladder.clone()
+
+def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
+                       eps_ladder, temp_idx, i=None, flow=None):
+    """
+    Same acceptance criterion / math as the original `swap`, but on accept we
+    swap the TEMPERATURE LABELS (temp_idx) instead of moving data between
+    slots. x_ladder is returned unchanged; temp_idx is mutated in place and
+    also returned for convenience/clarity at the call site.
+
+    temp_idx must be created once via init_temp_idx() and threaded through
+    every guide_step call (persisted on self, not recreated each step).
+    """
     step_val = i
-    if i % 2 ==0:
-        offset = (step_val % 4)//2
+    if i % 2 == 0:
+        offset = (step_val % 4) // 2
         pairs = [(i_tau, i_tau + 1) for i_tau in range(offset, n_replicas - 1, 2)]
     else:
         pairs = []
 
     index = x_ladder.shape[0] // n_replicas
-
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=x_ladder.device, dtype=x_ladder.dtype)
 
     if flow:
@@ -52,7 +65,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         x0_hat_ladder = x_ladder - sigma_t * eps_ladder
         score_ladder = (x_ladder - (1 - sigma_t) * x0_hat_ladder) / sigma_t
     else:
-        score_ladder = - eps_ladder / (1 - a_bar) ** 0.5
+        score_ladder = -eps_ladder / (1 - a_bar) ** 0.5
 
     for index_t, index_s in pairs:
         sl = slice(index * index_t, index * (index_t + 1))
@@ -61,15 +74,38 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas, eps_ladder, i=N
         x_tau, x_s = x_ladder[sl], x_ladder[ss]
         score_tau, score_s = score_ladder[sl], score_ladder[ss]
 
-        tsr_diff = _score_constant(a_bar,lam_ladder[index_t]) - _score_constant(a_bar,lam_ladder[index_s]) # this is always positive
-        integral = 0.5* (score_tau - score_s) * (x_tau - x_s) * tsr_diff
-        log_ratio = torch.clamp(integral.sum() , max=0.0)
-        
-        accept = torch.exp(log_ratio)
-        accept_bool = (torch.rand_like(accept) < accept).float() 
-        print(f"Time {t_val} {lam_ladder[index_t]:.2f} and {lam_ladder[index_s]:.2f} log_ratio {log_ratio.mean().item():.2f} accept {accept.mean().item():.2f}")
+        # Look up the lambda CURRENTLY assigned to each slot (not lam_ladder[index_t]
+        # directly) -- this is the key difference from the sample-swap version.
+        lam_t_val = lam_ladder[temp_idx[index_t]]
+        lam_s_val = lam_ladder[temp_idx[index_s]]
 
-        x_out[sl] = accept_bool * x_s + (1 - accept_bool) * x_tau
-        x_out[ss] = accept_bool * x_tau + (1 - accept_bool) * x_s
-        
-    return x_out
+        tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
+        integral = 0.5 * (score_tau - score_s) * (x_tau - x_s) * tsr_diff
+        log_ratio = torch.clamp(integral.mean(), max=0.0)
+
+        accept = torch.exp(log_ratio)
+        accept_bool = (torch.rand_like(accept) < accept).bool()
+
+        print(f"Time {t_val} i {i} lam_t {lam_t_val:.5f} lam_s {lam_s_val:.5f} "
+              f"log_ratio {log_ratio.item():.4f} accept {accept.item():.4f} "
+              f"swapped {accept_bool.item()}")
+
+        if accept_bool:
+            # Swap the TEMPERATURE LABELS, not the data.
+            tmp = temp_idx[index_t].clone()
+            temp_idx[index_t] = temp_idx[index_s]
+            temp_idx[index_s] = tmp
+
+    return x_ladder, temp_idx
+
+
+def get_slot_for_lambda(temp_idx, target_lam_index):
+    """
+    At readout time, find which slot currently holds the walker running at
+    the given lambda-ladder index (e.g. the index closest to lam=1.0 -- the
+    'coldest' / least-tempered replica, which is normally what you want as
+    your final output sample).
+    """
+    match = (temp_idx == target_lam_index).nonzero(as_tuple=True)[0]
+    assert match.numel() == 1, f"expected exactly one slot for lambda index {target_lam_index}, got {match.numel()}"
+    return match.item()

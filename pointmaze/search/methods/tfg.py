@@ -12,12 +12,13 @@ from search.utils import rescale_grad
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
 from functools import partial
-from replica_exchange.acceptance import swap, scale
+from replica_exchange.acceptance import swap, scale, init_temp_idx
 
 class TFGGuidance(BaseGuidance):
 
     def __init__(self, args, **kwargs):
         super(TFGGuidance, self).__init__(args, **kwargs)
+        self.temp_idx = None 
 
     @torch.enable_grad()
     def tilde_get_guidance(self, x0, mc_eps, return_logp=False, **kwargs):
@@ -90,6 +91,10 @@ class TFGGuidance(BaseGuidance):
     ) -> torch.Tensor:
         cond = kwargs.get("cond", None)
 
+        # inside guide_step, before the first use of scale():
+        if self.temp_idx is None:
+            self.temp_idx = init_temp_idx(self.args.n_particles, x.device)
+
         t = ts[i]   # convert from int space to tensor space
         batched_t = t.repeat(x.shape[0])
         alpha_prod_t = alpha_prod_ts[i]
@@ -152,7 +157,9 @@ class TFGGuidance(BaseGuidance):
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
             x = apply_conditioning(x, cond, 2)
 
-        if self.args.replica_exchange :
-            x_prev  = swap(x_prev, ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end, self.args.n_particles, epsilon, i=i, flow=None)
-            
+        if self.args.replica_exchange and i < (len(ts) - 2):
+            x_prev, self.temp_idx = swap(
+                x_prev, ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
+                self.args.n_particles, epsilon, self.temp_idx, i=i, flow=None
+            )
         return x_prev, {"x0": x0, "logprobs": logprobs}
