@@ -40,13 +40,14 @@ class BFSGuidance(BaseGuidance):
         alpha_prod_ts: torch.Tensor,
         alpha_prod_t_prevs: torch.Tensor,
         eta: float,
+        temp_idx: torch.Tensor,
         **kwargs,
     ) -> torch.Tensor:
         
        
 
 
-        x_prev, extra_results_dict = self.local_search.guide_step(
+        x_prev, extra_results_dict, temp_idx = self.local_search.guide_step(
             x,
             i,
             unet, 
@@ -54,6 +55,7 @@ class BFSGuidance(BaseGuidance):
             alpha_prod_ts,
             alpha_prod_t_prevs,
             eta,
+            temp_idx,
             **kwargs,
         )
         x0 = extra_results_dict['x0']
@@ -96,4 +98,4 @@ class BFSGuidance(BaseGuidance):
             x_prev = x_prev[index].unsqueeze(0)
             # print(log_probs[index].item())
 
-        return x_prev, {}
+        return x_prev, {}, temp_idx

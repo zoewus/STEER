@@ -31,7 +31,8 @@ class BaseGuidance:
             self.noise_fn = noise_fn
 
     def reset(self, **kwargs):
-        pass
+        if hasattr(self, "temp_idx"):
+            self.temp_idx = None
     
     def tilde_get_guidance(self, x0, return_logp=False, check_grad=True, **kwargs):
         outs = self.guider.get_guidance(x=x0, return_logp=return_logp, check_grad=check_grad, **kwargs)

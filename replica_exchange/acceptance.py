@@ -80,8 +80,8 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
         lam_s_val = lam_ladder[temp_idx[index_s]]
 
         tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
-        integral = 0.5 * (score_tau - score_s) * (x_tau - x_s) * tsr_diff
-        log_ratio = torch.clamp(integral.mean(), max=0.0)
+        integral = 0.5* (score_tau - score_s) * (x_tau - x_s) * tsr_diff
+        log_ratio = torch.clamp(integral.sum(), max=0.0)
 
         accept = torch.exp(log_ratio)
         accept_bool = (torch.rand_like(accept) < accept).bool()
