@@ -2,6 +2,7 @@ from search.configs import Arguments
 from search.script_utils import get_pipe, get_args
 
 def main(dataset: str="pointmaze-giant-navigate-v0", method: str='dfs', device: str="cuda:7", replica_exchange: bool=False, lam_start: float=0.55, lam_end: float=1.45, n_particles: int=4):
+
     args = Arguments()
     args.device = device
     args.dataset = dataset

@@ -6,10 +6,7 @@ def _score_constant(a_bar, tsr_lam):
 
 @torch.no_grad()
 def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype):
-    lam_ladder = torch.linspace(
-        lam_start, lam_end, n_replicas,
-        device=device, dtype=dtype,
-    )
+    lam_ladder = torch.round(torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype), decimals=5)
     return lam_ladder
 
 
@@ -51,21 +48,19 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
     every guide_step call (persisted on self, not recreated each step).
     """
     step_val = i
+    pairs = []
+
     if i % 2 == 0:
         offset = (step_val % 4) // 2
-        pairs = [(i_tau, i_tau + 1) for i_tau in range(offset, n_replicas - 1, 2)]
-    else:
-        pairs = []
+        for i_tau in range(offset, n_replicas - 1, 2):
+            index_t = get_slot_for_lambda(temp_idx, i_tau)
+            index_s = get_slot_for_lambda(temp_idx, i_tau+1)
+            pairs.append((index_t, index_s))
 
     index = x_ladder.shape[0] // n_replicas
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=x_ladder.device, dtype=x_ladder.dtype)
 
-    if flow:
-        sigma_t = 1 - a_bar
-        x0_hat_ladder = x_ladder - sigma_t * eps_ladder
-        score_ladder = (x_ladder - (1 - sigma_t) * x0_hat_ladder) / sigma_t
-    else:
-        score_ladder = -eps_ladder / (1 - a_bar) ** 0.5
+    score_ladder = -eps_ladder / (1 - a_bar) ** 0.5
 
     for index_t, index_s in pairs:
         sl = slice(index * index_t, index * (index_t + 1))
@@ -74,17 +69,16 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
         x_tau, x_s = x_ladder[sl], x_ladder[ss]
         score_tau, score_s = score_ladder[sl], score_ladder[ss]
 
-        # Look up the lambda CURRENTLY assigned to each slot (not lam_ladder[index_t]
-        # directly) -- this is the key difference from the sample-swap version.
         lam_t_val = lam_ladder[temp_idx[index_t]]
         lam_s_val = lam_ladder[temp_idx[index_s]]
 
-        tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
-        integral = 0.5* (score_tau - score_s) * (x_tau - x_s) * tsr_diff
-        log_ratio = torch.clamp(integral.sum(), max=0.0)
+
+        tsr_diff = (1/lam_t_val) - (1/lam_s_val)
+        integral = - (score_tau + score_s) * (x_tau - x_s) #* tsr_diff
+        log_ratio = torch.clamp(integral.mean(), max=0.0)
 
         accept = torch.exp(log_ratio)
-        accept_bool = (torch.rand_like(accept) < accept).bool()
+        accept_bool = (torch.rand(accept.shape, dtype=accept.dtype, device=accept.device) < accept).bool()
 
         print(f"Time {t_val} i {i} lam_t {lam_t_val:.5f} lam_s {lam_s_val:.5f} "
               f"log_ratio {log_ratio.item():.4f} accept {accept.item():.4f} "
@@ -96,7 +90,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
             temp_idx[index_t] = temp_idx[index_s]
             temp_idx[index_s] = tmp
 
-    return x_ladder, temp_idx
+    return temp_idx
 
 
 def get_slot_for_lambda(temp_idx, target_lam_index):

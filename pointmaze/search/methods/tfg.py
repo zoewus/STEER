@@ -115,7 +115,7 @@ class TFGGuidance(BaseGuidance):
                     )
                     x = x_g.clone()
 
-                    new_epsilon = scale(epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles)
+                    new_epsilon = scale(epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
                     
                     # invert x_t = sqrt(a_bar)*x0 + sqrt(1-a_bar)*eps  =>  x0 = (x_t - sqrt(1-a_bar)*eps) / sqrt(a_bar)
                     x0_tempered = (
@@ -154,8 +154,8 @@ class TFGGuidance(BaseGuidance):
             x = apply_conditioning(x, cond, 2)
 
         if self.args.replica_exchange and i < (len(ts) - 2):
-            x_prev, temp_idx = swap(
-                x_prev, ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
-                self.args.n_particles, epsilon, temp_idx, i=i, flow=None
+            temp_idx = swap(
+                x_prev.detach().clone(), ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
+                self.args.n_particles, epsilon.detach().clone(), temp_idx, i=i, flow=None
             )
         return x_prev, {"x0": x0, "logprobs": logprobs}, temp_idx

@@ -53,9 +53,9 @@ class SearchPolicy(BasePolicy):
                 self.alpha_prod_ts,
                 self.alpha_prod_t_prevs,
                 self.eta,
-                temp_idx=temp_idx,
+                temp_idx,
                 cond=cond,
-                post_process=self.unnormalize
+                post_process=self.unnormalize,
             )
 
             i = extras.get("i_next", i + 1)
