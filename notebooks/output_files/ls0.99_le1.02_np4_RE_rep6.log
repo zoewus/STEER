@@ -1073,3 +1073,395 @@ Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped
 Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0012 accept 0.9988 swapped_frac 0.9996
 Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 0.9992
 Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9988
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0008 accept 0.9992 swapped_frac 1.0000
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9975
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0012 accept 0.9988 swapped_frac 0.9992
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0032 accept 0.9968 swapped_frac 0.9971
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0013 accept 0.9987 swapped_frac 0.9992
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0040 accept 0.9960 swapped_frac 0.9946
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9992
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0050 accept 0.9950 swapped_frac 0.9938
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9979
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0079 accept 0.9922 swapped_frac 0.9942
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0029 accept 0.9971 swapped_frac 0.9963
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0099 accept 0.9905 swapped_frac 0.9879
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0032 accept 0.9969 swapped_frac 0.9967
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0081 accept 0.9920 swapped_frac 0.9917
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0042 accept 0.9959 swapped_frac 0.9958
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0104 accept 0.9901 swapped_frac 0.9925
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0051 accept 0.9950 swapped_frac 0.9950
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0212 accept 0.9821 swapped_frac 0.9800
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0098 accept 0.9907 swapped_frac 0.9900
+Best Sample: 2 log probability -0.488
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/31/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/31/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0007 accept 0.9993 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9988
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0009 accept 0.9991 swapped_frac 0.9988
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 0.9988
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0017 accept 0.9983 swapped_frac 0.9971
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0007 accept 0.9993 swapped_frac 1.0000
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0024 accept 0.9976 swapped_frac 0.9988
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9988
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0032 accept 0.9968 swapped_frac 0.9958
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0013 accept 0.9987 swapped_frac 0.9979
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0038 accept 0.9963 swapped_frac 0.9946
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0015 accept 0.9985 swapped_frac 0.9983
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0053 accept 0.9948 swapped_frac 0.9958
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0018 accept 0.9982 swapped_frac 0.9988
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0060 accept 0.9941 swapped_frac 0.9933
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9979
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0085 accept 0.9917 swapped_frac 0.9892
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0022 accept 0.9978 swapped_frac 0.9992
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0097 accept 0.9905 swapped_frac 0.9913
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0022 accept 0.9978 swapped_frac 0.9967
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0137 accept 0.9868 swapped_frac 0.9858
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0022 accept 0.9978 swapped_frac 0.9988
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0213 accept 0.9800 swapped_frac 0.9792
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0021 accept 0.9979 swapped_frac 0.9983
+Best Sample: 2 log probability -0.002
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/32/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/32/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9992
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0006 accept 0.9994 swapped_frac 0.9996
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9983
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 1.0000
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0016 accept 0.9984 swapped_frac 0.9979
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0008 accept 0.9992 swapped_frac 1.0000
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9975
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0012 accept 0.9988 swapped_frac 0.9988
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0028 accept 0.9972 swapped_frac 0.9988
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0016 accept 0.9984 swapped_frac 0.9983
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0032 accept 0.9968 swapped_frac 0.9963
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0022 accept 0.9978 swapped_frac 0.9979
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0041 accept 0.9959 swapped_frac 0.9979
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0028 accept 0.9973 swapped_frac 0.9971
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0043 accept 0.9958 swapped_frac 0.9975
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0028 accept 0.9972 swapped_frac 0.9988
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0052 accept 0.9948 swapped_frac 0.9963
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0044 accept 0.9957 swapped_frac 0.9946
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0059 accept 0.9942 swapped_frac 0.9938
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0039 accept 0.9961 swapped_frac 0.9963
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0074 accept 0.9928 swapped_frac 0.9938
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0065 accept 0.9937 swapped_frac 0.9921
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0121 accept 0.9885 swapped_frac 0.9888
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0119 accept 0.9891 swapped_frac 0.9913
+Best Sample: 1 log probability -0.033
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/33/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/33/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9996
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 0.9996
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0006 accept 0.9994 swapped_frac 0.9996
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9996
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 0.9992
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0016 accept 0.9984 swapped_frac 0.9971
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0008 accept 0.9992 swapped_frac 0.9975
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0024 accept 0.9976 swapped_frac 0.9958
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0010 accept 0.9990 swapped_frac 1.0000
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0028 accept 0.9972 swapped_frac 0.9971
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0014 accept 0.9986 swapped_frac 0.9983
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0037 accept 0.9963 swapped_frac 0.9967
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0017 accept 0.9983 swapped_frac 0.9992
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0047 accept 0.9954 swapped_frac 0.9979
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0023 accept 0.9977 swapped_frac 0.9958
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0052 accept 0.9949 swapped_frac 0.9958
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0025 accept 0.9976 swapped_frac 0.9983
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0069 accept 0.9932 swapped_frac 0.9913
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0038 accept 0.9962 swapped_frac 0.9967
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0084 accept 0.9919 swapped_frac 0.9904
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0060 accept 0.9941 swapped_frac 0.9938
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0118 accept 0.9886 swapped_frac 0.9888
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0057 accept 0.9944 swapped_frac 0.9958
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0176 accept 0.9837 swapped_frac 0.9850
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0100 accept 0.9904 swapped_frac 0.9929
+Best Sample: 3 log probability -12.563
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/34/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/34/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0007 accept 0.9993 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0011 accept 0.9989 swapped_frac 0.9992
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 0.9992
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0017 accept 0.9984 swapped_frac 0.9988
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0009 accept 0.9991 swapped_frac 0.9979
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0022 accept 0.9978 swapped_frac 0.9996
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9992
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0033 accept 0.9967 swapped_frac 0.9975
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0019 accept 0.9982 swapped_frac 0.9983
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0037 accept 0.9963 swapped_frac 0.9946
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0018 accept 0.9982 swapped_frac 0.9971
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0053 accept 0.9948 swapped_frac 0.9958
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0023 accept 0.9977 swapped_frac 0.9988
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0059 accept 0.9942 swapped_frac 0.9950
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0026 accept 0.9974 swapped_frac 0.9933
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0078 accept 0.9923 swapped_frac 0.9929
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0034 accept 0.9966 swapped_frac 0.9958
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0091 accept 0.9913 swapped_frac 0.9942
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0034 accept 0.9966 swapped_frac 0.9958
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0104 accept 0.9901 swapped_frac 0.9900
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0047 accept 0.9954 swapped_frac 0.9954
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0204 accept 0.9810 swapped_frac 0.9854
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0083 accept 0.9921 swapped_frac 0.9908
+Best Sample: 3 log probability -12.626
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/35/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/35/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9992
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0006 accept 0.9994 swapped_frac 0.9992
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9996
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9988
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 0.9996
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0014 accept 0.9986 swapped_frac 0.9992
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0008 accept 0.9992 swapped_frac 0.9988
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0021 accept 0.9979 swapped_frac 0.9992
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0010 accept 0.9990 swapped_frac 1.0000
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0026 accept 0.9975 swapped_frac 0.9983
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0015 accept 0.9985 swapped_frac 0.9992
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0033 accept 0.9968 swapped_frac 0.9975
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0018 accept 0.9982 swapped_frac 0.9971
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0038 accept 0.9962 swapped_frac 0.9963
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0025 accept 0.9975 swapped_frac 0.9958
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0041 accept 0.9959 swapped_frac 0.9958
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0027 accept 0.9973 swapped_frac 0.9963
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0043 accept 0.9958 swapped_frac 0.9963
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0036 accept 0.9964 swapped_frac 0.9958
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0049 accept 0.9952 swapped_frac 0.9942
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0040 accept 0.9961 swapped_frac 0.9950
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0042 accept 0.9959 swapped_frac 0.9954
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0065 accept 0.9936 swapped_frac 0.9938
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0048 accept 0.9953 swapped_frac 0.9958
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0092 accept 0.9911 swapped_frac 0.9892
+Best Sample: 0 log probability -0.127
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/36/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/36/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0007 accept 0.9993 swapped_frac 0.9992
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0010 accept 0.9990 swapped_frac 1.0000
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 1.0000
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0016 accept 0.9984 swapped_frac 0.9988
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0007 accept 0.9993 swapped_frac 0.9983
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0021 accept 0.9979 swapped_frac 0.9975
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0011 accept 0.9989 swapped_frac 1.0000
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0027 accept 0.9973 swapped_frac 0.9967
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0013 accept 0.9987 swapped_frac 0.9992
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0039 accept 0.9961 swapped_frac 0.9963
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0017 accept 0.9983 swapped_frac 0.9983
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0041 accept 0.9959 swapped_frac 0.9938
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0018 accept 0.9982 swapped_frac 0.9979
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0067 accept 0.9934 swapped_frac 0.9942
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0027 accept 0.9974 swapped_frac 0.9958
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0064 accept 0.9937 swapped_frac 0.9917
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0021 accept 0.9979 swapped_frac 0.9975
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0145 accept 0.9865 swapped_frac 0.9825
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0033 accept 0.9967 swapped_frac 0.9958
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0113 accept 0.9892 swapped_frac 0.9900
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0031 accept 0.9969 swapped_frac 0.9967
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0237 accept 0.9785 swapped_frac 0.9725
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0046 accept 0.9955 swapped_frac 0.9942
+Best Sample: 0 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/37/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/37/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 0.9992
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0006 accept 0.9994 swapped_frac 0.9992
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9996
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9983
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0005 accept 0.9995 swapped_frac 1.0000
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0015 accept 0.9986 swapped_frac 0.9967
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0007 accept 0.9993 swapped_frac 0.9996
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0020 accept 0.9980 swapped_frac 0.9971
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0011 accept 0.9989 swapped_frac 0.9996
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0026 accept 0.9974 swapped_frac 0.9988
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0014 accept 0.9986 swapped_frac 0.9975
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0032 accept 0.9968 swapped_frac 0.9971
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0021 accept 0.9979 swapped_frac 0.9992
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0037 accept 0.9964 swapped_frac 0.9975
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0020 accept 0.9981 swapped_frac 0.9975
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0041 accept 0.9960 swapped_frac 0.9958
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0032 accept 0.9968 swapped_frac 0.9958
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0044 accept 0.9956 swapped_frac 0.9954
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0031 accept 0.9969 swapped_frac 0.9967
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0047 accept 0.9954 swapped_frac 0.9950
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0043 accept 0.9958 swapped_frac 0.9942
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0041 accept 0.9959 swapped_frac 0.9954
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0043 accept 0.9957 swapped_frac 0.9954
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0048 accept 0.9953 swapped_frac 0.9963
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0107 accept 0.9899 swapped_frac 0.9904
+Best Sample: 0 log probability -0.006
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/38/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/38/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0004 accept 0.9996 swapped_frac 0.9996
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0001 accept 0.9999 swapped_frac 0.9996
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0008 accept 0.9992 swapped_frac 0.9992
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9996
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0009 accept 0.9991 swapped_frac 0.9988
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0007 accept 0.9993 swapped_frac 0.9988
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0016 accept 0.9984 swapped_frac 0.9988
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0008 accept 0.9992 swapped_frac 0.9996
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0024 accept 0.9976 swapped_frac 0.9983
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0016 accept 0.9984 swapped_frac 0.9971
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0025 accept 0.9975 swapped_frac 0.9983
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0014 accept 0.9986 swapped_frac 0.9992
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0038 accept 0.9962 swapped_frac 0.9954
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0031 accept 0.9970 swapped_frac 0.9971
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0039 accept 0.9961 swapped_frac 0.9954
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0021 accept 0.9979 swapped_frac 0.9988
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0051 accept 0.9950 swapped_frac 0.9929
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0044 accept 0.9957 swapped_frac 0.9971
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0055 accept 0.9946 swapped_frac 0.9963
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0032 accept 0.9969 swapped_frac 0.9975
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0075 accept 0.9926 swapped_frac 0.9933
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0055 accept 0.9946 swapped_frac 0.9954
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0091 accept 0.9912 swapped_frac 0.9913
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0056 accept 0.9945 swapped_frac 0.9933
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0199 accept 0.9818 swapped_frac 0.9842
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0089 accept 0.9914 swapped_frac 0.9892
+Best Sample: 3 log probability -10.913
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/39/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/39/rollout.png
+Time 255 i 0 lam_t 0.99000 lam_s 1.01010 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 255 i 0 lam_t 0.99500 lam_s 1.00503 log_ratio 0.0000 accept 1.0000 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0001 accept 0.9999 swapped_frac 1.0000
+Time 238 i 1 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0000 accept 1.0000 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0003 accept 0.9997 swapped_frac 1.0000
+Time 221 i 2 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0002 accept 0.9998 swapped_frac 1.0000
+Time 204 i 3 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0006 accept 0.9994 swapped_frac 0.9988
+Time 204 i 3 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0003 accept 0.9997 swapped_frac 0.9992
+Time 187 i 4 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0012 accept 0.9988 swapped_frac 0.9983
+Time 187 i 4 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0006 accept 0.9994 swapped_frac 0.9996
+Time 170 i 5 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0018 accept 0.9982 swapped_frac 0.9992
+Time 170 i 5 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0008 accept 0.9992 swapped_frac 0.9992
+Time 153 i 6 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0033 accept 0.9968 swapped_frac 0.9979
+Time 153 i 6 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0010 accept 0.9990 swapped_frac 0.9992
+Time 136 i 7 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0030 accept 0.9970 swapped_frac 0.9971
+Time 136 i 7 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0013 accept 0.9987 swapped_frac 0.9992
+Time 119 i 8 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0043 accept 0.9958 swapped_frac 0.9942
+Time 119 i 8 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0017 accept 0.9983 swapped_frac 0.9983
+Time 102 i 9 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0041 accept 0.9960 swapped_frac 0.9963
+Time 102 i 9 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0021 accept 0.9980 swapped_frac 0.9979
+Time 85 i 10 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0062 accept 0.9939 swapped_frac 0.9954
+Time 85 i 10 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0023 accept 0.9977 swapped_frac 0.9983
+Time 68 i 11 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0054 accept 0.9947 swapped_frac 0.9963
+Time 68 i 11 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0026 accept 0.9974 swapped_frac 0.9979
+Time 51 i 12 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0083 accept 0.9919 swapped_frac 0.9871
+Time 51 i 12 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0034 accept 0.9966 swapped_frac 0.9979
+Time 34 i 13 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0098 accept 0.9906 swapped_frac 0.9892
+Time 34 i 13 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0036 accept 0.9964 swapped_frac 0.9967
+Time 17 i 14 lam_t 0.99000 lam_s 1.01010 log_ratio -0.0183 accept 0.9830 swapped_frac 0.9829
+Time 17 i 14 lam_t 0.99500 lam_s 1.00503 log_ratio -0.0065 accept 0.9938 swapped_frac 0.9942
+Best Sample: 2 log probability -0.272
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/40/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-14 22:49:02/40/rollout.png
+Success Rate: 40.0, Average Compute: 128.0
+Exception ignored in: <function OffScreenViewer.__del__ at 0x149db6873250>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x149e94aace40>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x149dc1ccfd40>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x149dc0558dc0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x149e94aace40>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x149dc1ccfd40>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x149db6873250>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x149e94aace40>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x149db66cd440>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x149dc0558dc0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x149e94aace40>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x149db66cd440>,
+	),
+	result = 0
+)
