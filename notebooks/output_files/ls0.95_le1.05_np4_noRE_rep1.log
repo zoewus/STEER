@@ -1,3 +1,0 @@
-srun: got SIGCONT
-srun: forcing job termination
-[2026-07-13T23:04:46.711] error: *** STEP 30719816.0 ON holygpu8a17501 CANCELLED AT 2026-07-13T23:04:46 DUE to SIGNAL Terminated ***

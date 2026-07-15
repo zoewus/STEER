@@ -38,8 +38,7 @@ class SearchPolicy(BasePolicy):
 
         x = randn_tensor((self.per_sample_batch_size, self.diffusion.horizon,self.diffusion.transition_dim), generator=self.generator, device=self.device)
         x = apply_conditioning(x, cond, self.diffusion.action_dim)
-        temp_idx = init_temp_idx(self.args.n_particles, x.device)
-
+        temp_idx = init_temp_idx(self.args.n_particles, x.shape[1:], x.device)
         guidance.reset()
         i = 0
         total_compute = 0

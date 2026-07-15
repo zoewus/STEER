@@ -19,25 +19,24 @@ conda activate maze
 
 mkdir -p output_files
 
-N_REPEATS=10
+N_REPEATS=5
 
 # Each entry: lam_start lam_end n_particles
 CONFIGS=(
+    "0.98 1.02 4"
     "0.95 1.05 4"
-    "0.95 1.1  4"
-    "0.95 1.15 4"
-    "0.9  1.05 4"
+    "0.9 1.1 4"
+    "0.98 1.02 8"
     "0.95 1.05 8"
-    "0.95 1.1  8"
-    "0.95 1.15 8"
-    "0.9  1.05 8"
+    "0.9 1.1 8"
+
 )
 
 for cfg in "${CONFIGS[@]}"; do
     read -r lam_start lam_end n_particles <<< "$cfg"
     tag="ls${lam_start}_le${lam_end}_np${n_particles}"
 
-    for mode in noRE RE; do
+    for mode in RE; do
         if [ "$mode" == "RE" ]; then
             re_flag="--replica_exchange"
         else
