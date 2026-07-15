@@ -83,8 +83,10 @@ for idx, prompt in enumerate(prompts):
 			generator=generator,
 		).images
 
+		images[0].save(lam_dirs[replica_exchange][LAM_VALUES[0]] / f"{idx:05d}.png", icc_profile=None)
 		images[1].save(lam_dirs[replica_exchange][LAM_VALUES[1]] / f"{idx:05d}.png", icc_profile=None)
 		images[2].save(lam_dirs[replica_exchange][LAM_VALUES[2]] / f"{idx:05d}.png", icc_profile=None)
+		images[3].save(lam_dirs[replica_exchange][LAM_VALUES[3]] / f"{idx:05d}.png", icc_profile=None)
 
 		del images
 		torch.cuda.empty_cache()
