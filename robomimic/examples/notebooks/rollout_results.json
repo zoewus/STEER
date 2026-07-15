@@ -1,0 +1,27 @@
+[
+  {
+    "Return": 1.0,
+    "Horizon": 59,
+    "Success_Rate": 1.0
+  },
+  {
+    "Return": 1.0,
+    "Horizon": 38,
+    "Success_Rate": 1.0
+  },
+  {
+    "Return": 1.0,
+    "Horizon": 38,
+    "Success_Rate": 1.0
+  },
+  {
+    "Return": 1.0,
+    "Horizon": 42,
+    "Success_Rate": 1.0
+  },
+  {
+    "Return": 1.0,
+    "Horizon": 41,
+    "Success_Rate": 1.0
+  }
+]
