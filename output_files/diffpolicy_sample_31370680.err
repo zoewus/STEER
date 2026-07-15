@@ -1,0 +1,4 @@
+srun: got SIGCONT
+[2026-07-15T11:51:35.898] error: *** JOB 31370680 ON holygpu8a19301 CANCELLED AT 2026-07-15T11:51:35 DUE to SIGNAL Terminated ***
+srun: forcing job termination
+[2026-07-15T11:51:35.899] error: *** STEP 31370680.0 ON holygpu8a19301 CANCELLED AT 2026-07-15T11:51:35 DUE to SIGNAL Terminated ***

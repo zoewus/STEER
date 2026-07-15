@@ -6,7 +6,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-node=1
-#SBATCH --time=0-10:00:00
+#SBATCH --time=0-00:20:00
 #SBATCH --mem=16G
 #SBATCH --output=output_files/diffusers.out
 #SBATCH --error=output_files/diffusers.err
@@ -15,10 +15,10 @@
 
 module purge
 module load python
-source activate /n/netscratch/kempner_undergrads/Everyone/zwu/environments/stable_diff
+source activate diffusers
 
 srun python ~/STEER/diffusers/exchange_scripts/generate_samples.py \
     --lam-start 0.85 --lam-end 1.15 --n-particles 4 \
     --tsr-path "images/tsr" \
-    --steer-path "images/steer_flow" \
-    --index_until 1000
+    --steer-path "images/steer" \
+    --index_until 100

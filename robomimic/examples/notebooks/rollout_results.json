@@ -1,27 +1,27 @@
 [
   {
     "Return": 1.0,
-    "Horizon": 59,
+    "Horizon": 137,
     "Success_Rate": 1.0
   },
   {
     "Return": 1.0,
-    "Horizon": 38,
+    "Horizon": 244,
     "Success_Rate": 1.0
   },
   {
     "Return": 1.0,
-    "Horizon": 38,
+    "Horizon": 195,
     "Success_Rate": 1.0
   },
   {
     "Return": 1.0,
-    "Horizon": 42,
+    "Horizon": 164,
     "Success_Rate": 1.0
   },
   {
-    "Return": 1.0,
-    "Horizon": 41,
-    "Success_Rate": 1.0
+    "Return": 0.0,
+    "Horizon": 400,
+    "Success_Rate": 0.0
   }
 ]

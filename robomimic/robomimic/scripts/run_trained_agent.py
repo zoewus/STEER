@@ -98,6 +98,8 @@ def rollout(policy, env, horizon, render=False, video_writer=None, video_skip=5,
 
     policy.start_episode()
     obs = env.reset()
+    for k, v in obs.items():
+        print(f"DEBUG obs[{k}] shape: {v.shape}")
     state_dict = env.get_state()
 
     # hack that is necessary for robosuite tasks for deterministic action playback

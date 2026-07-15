@@ -59,7 +59,7 @@ def plot_temperature_triptych(
 	lam_list = np.round(np.linspace(lam, 2.0 - lam, n_replicas), decimals=2)
 
 	samples_ladder = ddpm_tsr_swapped(
-		model, dataset_shape, lam_list, n_replicas,
+		model, dataset_shape, lam, 1/lam, n_replicas,
 		replica_swaps=replica_swaps,
 		swap_algorithm=swap_algorithm,
 	)

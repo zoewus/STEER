@@ -1,5 +1,4 @@
 import torch
-import numpy as np
 
 @torch.no_grad()
 def _score_constant(a_bar, tsr_lam):
@@ -7,129 +6,90 @@ def _score_constant(a_bar, tsr_lam):
 
 @torch.no_grad()
 def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype):
-    """
-    Build a lambda ladder centered on 1.0 (in log-space), spanning
-    [lam_start, 1/lam_start]. Still 1-D, shape (n_replicas,) — this is just
-    the fixed set of rung values, shared by every element of the event grid.
-    """
-    # if lam_start == 1.0:
-    #     return torch.ones(n_replicas, device=device, dtype=dtype)
-
-    # lam_end = 1.0 / lam_start
-    # lo, hi = min(lam_start, lam_end), max(lam_start, lam_end)
-
-    # lam_ladder = torch.tensor(
-    #     np.geomspace(lo, hi, n_replicas), device=device, dtype=dtype
-    # )
-    n_pairs = (n_replicas + 1) // 2
-    linspace = torch.linspace(lam_start, 1.0, n_pairs+1, device=device, dtype=dtype)[:-1]
-    lam_ladder = torch.stack([linspace, 1.0 / linspace], dim=1).flatten()[:n_replicas]
+    lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
     return lam_ladder
 
-
-def init_temp_idx(n_replicas, event_shape, device):
-    """
-    Call ONCE before sampling starts. temp_idx now has shape
-    (n_replicas, *event_shape) — e.g. (n_replicas, 600, 4), matching x.
-
-    temp_idx[k, i, j] = the lambda-ladder rung CURRENTLY assigned to slot k,
-    for grid position (i, j). Every position (i, j) runs its own independent
-    permutation of the n_replicas rungs across slots. Starts as identity
-    (broadcast across the event grid) and gets permuted in place per-position
-    by swap().
-    """
-    base = torch.arange(n_replicas, device=device).view(n_replicas, *[1] * len(event_shape))
-    return base.expand(n_replicas, *event_shape).clone()
-
+def init_temp_idx(n_replicas, device):
+    return torch.arange(n_replicas, device=device)
 
 def scale(grad, a_bar, lam_start, lam_end, n_replicas, temp_idx=None):
-    """
-    Same as before. If temp_idx has shape (n_replicas, *event_shape) matching
-    grad, lam_ladder[temp_idx] already broadcasts elementwise against grad —
-    no reshape needed. Pass temp_idx=None to recover the original
-    one-lambda-per-slot behavior (broadcast over the event dims).
-    """
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=grad.device, dtype=grad.dtype)
 
-    if temp_idx is not None:
-        lam_per_elem = lam_ladder[temp_idx]  # shape == temp_idx.shape == grad.shape
-    else:
-        lam_per_elem = lam_ladder.view(-1, *[1] * (grad.dim() - 1))
+    lam_per_slot = lam_ladder[temp_idx] if temp_idx is not None else lam_ladder
 
-    tsr_t = _score_constant(a_bar, lam_per_elem)
-    return grad * tsr_t
+    lam_ladder_t = _score_constant(a_bar, lam_per_slot)
+    lam_ladder_t = lam_ladder_t.view(-1, *[1] * (grad.dim() - 1))
+    return grad * lam_ladder_t
+
+
+def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
+                       eps_ladder, temp_idx, i=None, flow=None):
+    """
+    Same acceptance criterion / math as the original `swap`, but on accept we
+    swap the TEMPERATURE LABELS (temp_idx) instead of moving data between
+    slots. x_ladder is returned unchanged; temp_idx is mutated in place and
+    also returned for convenience/clarity at the call site.
+
+    temp_idx must be created once via init_temp_idx() and threaded through
+    every guide_step call (persisted on self, not recreated each step).
+    """
+    if i is not None:
+        step_val = i
+    else:
+        step_val = t_val
+    offset = step_val % 2  # 0 or 1
+    pairs = []
+    for i_tau in range(offset, n_replicas - 1, 2):
+        index_t = get_slot_for_lambda(temp_idx, i_tau)
+        index_s = get_slot_for_lambda(temp_idx, i_tau + 1)
+        pairs.append((index_t, index_s))
+
+    index = x_ladder.shape[0] // n_replicas
+    lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=x_ladder.device, dtype=x_ladder.dtype)
+
+    score_ladder = -eps_ladder / (1 - a_bar) ** 0.5
+
+    for index_t, index_s in pairs:
+        sl = slice(index * index_t, index * (index_t + 1))
+        ss = slice(index * index_s, index * (index_s + 1))
+
+        x_tau, x_s = x_ladder[sl], x_ladder[ss]
+        score_tau, score_s = score_ladder[sl], score_ladder[ss]
+
+        lam_t_val = lam_ladder[temp_idx[index_t]]
+        lam_s_val = lam_ladder[temp_idx[index_s]]
+
+        tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
+        integral = -0.5* (score_tau + score_s) * (x_tau - x_s) * tsr_diff
+        log_ratio = torch.clamp(integral.sum() , max=0.0)
+        accept = torch.exp(log_ratio)
+        accept_bool = (torch.rand(accept.shape, dtype=accept.dtype, device=accept.device) < accept).bool()
+
+        print(
+            f"i={i} pair=({index_t},{index_s}) "
+            f"lam_t={lam_t_val.item():.5f} lam_s={lam_s_val.item():.5f} "
+            f"tsr_diff={tsr_diff.item():.6f} "
+            f"integral_mean={integral.mean().item():.6f} integral_std={integral.std().item():.6f} "
+            f"log_ratio={log_ratio.item():.4f} accept={accept.item():.4f} "
+            f"swapped={bool(accept_bool.item())}"
+        )
+
+        if accept_bool:
+            # Swap the TEMPERATURE LABELS, not the data.
+            tmp = temp_idx[index_t].clone()
+            temp_idx[index_t] = temp_idx[index_s]
+            temp_idx[index_s] = tmp
+
+    return temp_idx
 
 
 def get_slot_for_lambda(temp_idx, target_lam_index):
     """
-    Elementwise version: for each event-grid position, find which slot
-    currently holds the walker running at `target_lam_index`.
-
-    Returns a tensor of shape event_shape (temp_idx.shape[1:]), dtype long,
-    giving the slot index per position.
+    At readout time, find which slot currently holds the walker running at
+    the given lambda-ladder index (e.g. the index closest to lam=1.0 -- the
+    'coldest' / least-tempered replica, which is normally what you want as
+    your final output sample).
     """
-    match = (temp_idx == target_lam_index)  # (n_replicas, *event_shape)
-    counts = match.sum(dim=0)
-    assert torch.all(counts == 1), (
-        f"expected exactly one slot per position for lambda index {target_lam_index}, "
-        f"got counts ranging {counts.min().item()}-{counts.max().item()}"
-    )
-    return match.long().argmax(dim=0)  # (*event_shape,)
-
-
-def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
-         eps_ladder, temp_idx, i=None, flow=None):
-    """
-    Elementwise replica-exchange. temp_idx has shape (n_replicas, *event_shape)
-    matching x_ladder, so every grid position (e.g. each of the 600*4
-    positions) does its own independent accept/reject and its own swap of
-    rung labels. x_ladder is returned unchanged; temp_idx is mutated in place.
-    """
-
-    device = x_ladder.device
-    event_shape = temp_idx.shape[1:]
-    idx_grid = torch.meshgrid(
-        *[torch.arange(s, device=device) for s in event_shape], indexing='ij'
-    )  # tuple of index tensors, each shape event_shape
-
-    lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=device, dtype=x_ladder.dtype)
-    score_ladder = -eps_ladder / (1 - a_bar) ** 0.5  # same shape as x_ladder
-    
-    offset = 0
-    spacing = 2
-    for i_tau in range(offset, n_replicas-1, spacing):
-        index_t = get_slot_for_lambda(temp_idx, i_tau)              # (*event_shape,)
-        index_s = get_slot_for_lambda(temp_idx, i_tau + 1)    # (*event_shape,)
-        
-        x_tau = x_ladder[(index_t, *idx_grid)]
-        x_s = x_ladder[(index_s, *idx_grid)]
-        score_tau = score_ladder[(index_t, *idx_grid)]
-        score_s = score_ladder[(index_s, *idx_grid)]
-
-        # These are scalars: temp_idx[index_t] == i_tau and temp_idx[index_s] == i_tau+1
-        # by construction, so no need to re-index lam_ladder per position.
-        lam_t_val = lam_ladder[i_tau]
-        lam_s_val = lam_ladder[i_tau + 1]
-
-        tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
-        integral = -0.5 * (score_tau + score_s) * (x_tau - x_s) * tsr_diff
-        log_ratio = torch.clamp(integral, max=0.0)
-
-        accept = torch.exp(log_ratio)
-        accept_bool = torch.rand(accept.shape, dtype=accept.dtype, device=device) < accept
-
-        print(f"Time {t_val} i {i} lam_t {lam_t_val:.5f} lam_s {lam_s_val:.5f} "
-              f"log_ratio {log_ratio.mean().item():.4f} accept {accept.mean().item():.4f} "
-              f"swapped_frac {accept_bool.float().mean().item():.4f}")
-
-        # Swap rung labels wherever accepted, independently per grid position.
-        val_t = temp_idx[(index_t, *idx_grid)]  # == i_tau everywhere
-        val_s = temp_idx[(index_s, *idx_grid)]  # == i_tau + 1 everywhere
-
-        new_val_t = torch.where(accept_bool, val_s, val_t)
-        new_val_s = torch.where(accept_bool, val_t, val_s)
-
-        temp_idx[(index_t, *idx_grid)] = new_val_t
-        temp_idx[(index_s, *idx_grid)] = new_val_s
-
-    return temp_idx
+    match = (temp_idx == target_lam_index).nonzero(as_tuple=True)[0]
+    assert match.numel() == 1, f"expected exactly one slot for lambda index {target_lam_index}, got {match.numel()}"
+    return match.item()

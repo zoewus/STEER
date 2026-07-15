@@ -73,7 +73,8 @@ class DiffusionPolicyUNet(PolicyAlgo):
         obs_encoder = replace_bn_with_gn(obs_encoder)
         
         obs_dim = obs_encoder.output_shape()[0]
-
+        print("obs_shapes:", self.obs_shapes)
+        print("per-timestep obs_dim:", obs_dim, "x observation_horizon:", self.algo_config.horizon.observation_horizon, "=", obs_dim * self.algo_config.horizon.observation_horizon)
         # create network object
         noise_pred_net = DPNets.ConditionalUnet1D(
             input_dim=self.ac_dim,
@@ -273,48 +274,34 @@ class DiffusionPolicyUNet(PolicyAlgo):
         action_queue = deque(maxlen=Ta)
         self.obs_queue = obs_queue
         self.action_queue = action_queue
-    
+        
     def get_action(self, obs_dict, goal_dict=None):
         """
         Get policy action outputs.
-
-        Args:
-            obs_dict (dict): current observation [1, Do]
-            goal_dict (dict): (optional) goal
-
-        Returns:
-            action (torch.Tensor): action tensor [1, Da]
         """
-        # obs_dict: key: [1,D]
         To = self.algo_config.horizon.observation_horizon
         Ta = self.algo_config.horizon.action_horizon
 
-        # TODO: obs_queue already handled by frame_stack
-        # make sure we have at least To observations in obs_queue
-        # if not enough, repeat
-        # if already full, append one to the obs_queue
-        # n_repeats = max(To - len(self.obs_queue), 1)
-        # self.obs_queue.extend([obs_dict] * n_repeats)
-        
+        # push current obs into history queue; pad with repeats until we have To frames
+        self.obs_queue.append(obs_dict)
+        while len(self.obs_queue) < To:
+            self.obs_queue.append(obs_dict)
+
         if len(self.action_queue) == 0:
             # no actions left, run inference
-            # turn obs_queue into dict of tensors (concat at T dim)
-            # import pdb; pdb.set_trace()
-            # obs_dict_list = TensorUtils.list_of_flat_dict_to_dict_of_list(list(self.obs_queue))
-            # obs_dict_tensor = dict((k, torch.cat(v, dim=0).unsqueeze(0)) for k,v in obs_dict_list.items())
-            
+            # turn obs_queue into dict of tensors stacked along time dim
+            obs_dict_list = TensorUtils.list_of_flat_dict_to_dict_of_list(list(self.obs_queue))
+            stacked_obs_dict = {k: torch.stack(v, dim=1) for k, v in obs_dict_list.items()}
+
             # run inference
             # [1,T,Da]
-            action_sequence = self._get_action_trajectory(obs_dict=obs_dict)
-            
+            action_sequence = self._get_action_trajectory(obs_dict=stacked_obs_dict)
+
             # put actions into the queue
             self.action_queue.extend(action_sequence[0])
-        
+
         # has action, execute from left to right
-        # [Da]
         action = self.action_queue.popleft()
-        
-        # [1,Da]
         action = action.unsqueeze(0)
         return action
         
@@ -356,14 +343,20 @@ class DiffusionPolicyUNet(PolicyAlgo):
             (B, Tp, action_dim), device=self.device)
         naction = noisy_action
         
-        # replica exchange state
+        # replica exchange / tempering config values.
+        # NOTE: set unconditionally (not just when replica_exchange.enabled is True), since
+        # @tempering is a separate, lighter-weight sampling-time technique that reuses these
+        # same lam_start/lam_end/n_replicas values and can be used on its own even when full
+        # replica-exchange swapping is disabled or was never used during training.
+        self._replica_exchange_n_replicas = self.algo_config.replica_exchange.n_replicas
+        self._replica_exchange_lam_start = self.algo_config.replica_exchange.lam_start
+        self._replica_exchange_lam_end = self.algo_config.replica_exchange.lam_end
+
+        # replica exchange state (only used if full replica exchange swapping is enabled)
         temp_idx = None
         if self.algo_config.replica_exchange.enabled:
             if B != 1:
                 raise ValueError("Replica exchange currently only supports batch size 1 for diffusion policy inference.")
-            self._replica_exchange_n_replicas = self.algo_config.replica_exchange.n_replicas
-            self._replica_exchange_lam_start = self.algo_config.replica_exchange.lam_start
-            self._replica_exchange_lam_end = self.algo_config.replica_exchange.lam_end
             temp_idx = init_temp_idx(
                 self._replica_exchange_n_replicas,
                 (Tp, action_dim),
@@ -380,8 +373,7 @@ class DiffusionPolicyUNet(PolicyAlgo):
                 timestep=k,
                 global_cond=obs_cond
             )
-
-            if self.algo_config.replica_exchange.enabled:
+            if self.algo_config.replica_exchange.tempering:
                 noise_pred = scale(
                     noise_pred,
                     self.noise_scheduler.alphas_cumprod[k],
@@ -390,6 +382,8 @@ class DiffusionPolicyUNet(PolicyAlgo):
                     self._replica_exchange_n_replicas,
                     temp_idx=None,
                 )
+            if self.algo_config.replica_exchange.enabled:
+
                 x_ladder = naction.repeat(self._replica_exchange_n_replicas, 1, 1)
                 eps_ladder = noise_pred.repeat(self._replica_exchange_n_replicas, 1, 1)
                 temp_idx = swap(

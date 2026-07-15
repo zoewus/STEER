@@ -29,10 +29,9 @@ steer_path = os.path.expanduser("~/STEER")
 if steer_path not in sys.path:
     sys.path.append(steer_path)
 
-from replica_exchange.acceptance import init_temp_idx, swap, scale
+from replica_exchange.acceptance import init_temp_idx, swap, scale, get_slot_for_lambda
 from functools import partial
 
-# from ...replica_exchange.acceptance import _score_constant, swap
 from ...image_processor import VaeImageProcessor
 from ...loaders import FromSingleFileMixin, SD3LoraLoaderMixin
 from ...models.autoencoders import AutoencoderKL
@@ -839,6 +838,8 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 			prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
 			pooled_prompt_embeds = torch.cat([negative_pooled_prompt_embeds, pooled_prompt_embeds], dim=0)
 
+		prompt_embeds = prompt_embeds.repeat_interleave(n_particles, dim=0)
+		pooled_prompt_embeds = pooled_prompt_embeds.repeat_interleave(n_particles, dim=0)
 		# 4. Prepare timesteps
 		timesteps, num_inference_steps = retrieve_timesteps(self.scheduler, num_inference_steps, device, timesteps)
 		num_warmup_steps = max(len(timesteps) - num_inference_steps * self.scheduler.order, 0)
@@ -856,11 +857,14 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 			generator,
 			latents,
 		)
-		if replica_exchange:
-			latents = latents.repeat_interleave(n_particles, dim=0)
+		# after prepare_latents, and after encode_prompt/CFG-concat:
+		latents = latents.repeat_interleave(n_particles, dim=0)   # do this once, not per-step
+		noise = torch.randn_like(latents, device = latents.device, dtype =latents.dtype) * 0.01
+		latents += noise
 		
 		# 6. Denoising loop
-		temp_idx = None
+		temp_idx = init_temp_idx(n_particles, device=latents.device)
+		
 		with self.progress_bar(total=num_inference_steps) as progress_bar:
 			for i, t in enumerate(timesteps):
 				if self.interrupt:
@@ -874,28 +878,38 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 				sigma_t = self.scheduler.sigmas[i].to(device=latents.device, dtype=latents.dtype)
 				a_bar = 1 - sigma_t
 
+				# Compute the per-replica noise prediction first.
+				latent_model_input = torch.cat([latents] * 2) if self.do_classifier_free_guidance else latents
+				timestep = t.expand(latent_model_input.shape[0])
+				noise_pred = self.transformer(
+					hidden_states=latent_model_input, timestep=timestep,
+					encoder_hidden_states=prompt_embeds, pooled_projections=pooled_prompt_embeds,
+					joint_attention_kwargs=self.joint_attention_kwargs, return_dict=False,
+				)[0]
+
+				if self.do_classifier_free_guidance:
+					noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
+					noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
+
+				# --- convert velocity -> epsilon ---
+				# x_t = (1-t)*x0 + t*eps, v = eps - x0  =>  eps = x_t + (1-t)*v = x_t + a_bar * v
+				eps_pred = latents + a_bar * noise_pred
+
+				# # Scale the predicted noise (epsilon) with the current ladder values.
+				eps_pred_scaled = scale(eps_pred, a_bar, lam_start, lam_end, n_particles, temp_idx=temp_idx)
+
+				# --- convert epsilon back -> velocity ---
+				# v = (eps - x_t) / t = (eps - x_t) / sigma_t
+				a_bar_safe = a_bar.clamp(min=1e-6)
+				noise_pred = (eps_pred_scaled - latents) / a_bar_safe
+
+				# Flatten replicas into an event ladder so the swap logic can track per-event temperature indices.
+				event_dim = latents.numel() // n_particles  # collapse everything except the particle dim
+				x_ladder = latents.reshape(n_particles, event_dim)
+				eps_ladder = eps_pred.reshape(n_particles, event_dim)
+
 				if replica_exchange:
-					# Compute the per-replica noise prediction first.
-					latent_model_input = torch.cat([latents] * 2) if self.do_classifier_free_guidance else latents
-					timestep = t.expand(latent_model_input.shape[0])
-					noise_pred = self.transformer(
-						hidden_states=latent_model_input, timestep=timestep,
-						encoder_hidden_states=prompt_embeds, pooled_projections=pooled_prompt_embeds,
-						joint_attention_kwargs=self.joint_attention_kwargs, return_dict=False,
-					)[0]
-					if self.do_classifier_free_guidance:
-						noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
-						noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
 
-					# Scale the predicted noise with the current ladder values.
-					noise_pred = scale(noise_pred, a_bar, lam_start, lam_end, n_particles, temp_idx=None)
-
-					# Flatten replicas into an event ladder so the swap logic can track per-event temperature indices.
-					event_dim = latents.shape[0] // n_particles
-					x_ladder = latents.reshape(n_particles, event_dim)
-					eps_ladder = noise_pred.reshape(n_particles, event_dim)
-					if temp_idx is None:
-						temp_idx = init_temp_idx(n_particles, (event_dim,), device=latents.device)
 					temp_idx = swap(
 						x_ladder,
 						t,
@@ -905,23 +919,9 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 						n_particles,
 						eps_ladder,
 						temp_idx,
-						i=i,
-						flow=False,
+						i=i
 					)
-				else:
-					latent_model_input = torch.cat([latents] * 2) if self.do_classifier_free_guidance else latents
-					timestep = t.expand(latent_model_input.shape[0])
-					noise_pred = self.transformer(
-						hidden_states=latent_model_input, timestep=timestep,
-						encoder_hidden_states=prompt_embeds, pooled_projections=pooled_prompt_embeds,
-						joint_attention_kwargs=self.joint_attention_kwargs, return_dict=False,
-					)[0]
-					if self.do_classifier_free_guidance:
-						noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
-						noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
 
-				if not replica_exchange:
-					noise_pred = scale(noise_pred, a_bar, lam_start, lam_end, n_particles, temp_idx=None)
 				latents_dtype = latents.dtype
 				latents = self.scheduler.step(noise_pred, t, latents, return_dict=False)[0]
 				
@@ -949,7 +949,12 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 
 				if XLA_AVAILABLE:
 					xm.mark_step()
-
+		# Reorder latents so they're indexed by lambda-ladder position (0 = lam_start ... n_particles-1 = lam_end),
+		# rather than by whatever physical slot they ended up occupying after swaps.
+		if replica_exchange:
+			order = [get_slot_for_lambda(temp_idx, lam_idx) for lam_idx in range(n_particles)]
+			order = torch.tensor(order, device=latents.device, dtype=torch.long)
+			latents = latents.index_select(0, order)
 		if output_type == "latent":
 			image = latents
 		else:

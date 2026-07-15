@@ -27,7 +27,7 @@
         "keep_all_videos": false,
         "video_skip": 5,
         "rollout": {
-            "enabled": true,
+            "enabled": false,
             "n": 50,
             "horizon": 400,
             "rate": 50,
@@ -39,7 +39,7 @@
     },
     "train": {
         "data": null,
-        "output_dir": "../diffusion_policy_trained_models",
+        "output_dir": "/n/netscratch/kempner_undergrads/Everyone/zwu/diffusion_policy_trained_models",
         "normalize_weights_by_ds_size": false,
         "num_data_workers": 0,
         "hdf5_cache_mode": "all",
@@ -48,7 +48,7 @@
         "hdf5_normalize_obs": false,
         "hdf5_filter_key": null,
         "hdf5_validation_filter_key": null,
-        "seq_length": 1,
+        "seq_length": 16,
         "pad_seq_length": true,
         "frame_stack": 1,
         "pad_frame_stack": true,
@@ -127,6 +127,12 @@
             "set_alpha_to_one": true,
             "steps_offset": 0,
             "prediction_type": "epsilon"
+        },
+        "replica_exchange": {
+            "enabled": true,
+            "n_replicas": 2,
+            "lam_start": 0.98,
+            "lam_end": 2.0
         }
     },
     "observation": {

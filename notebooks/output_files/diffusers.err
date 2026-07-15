@@ -1,34 +1,29 @@
-Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]Loading pipeline components...:  11%|█         | 1/9 [00:00<00:02,  3.06it/s]Loading pipeline components...:  22%|██▏       | 2/9 [00:00<00:01,  4.66it/s]
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]
 Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
-Loading weights:  32%|███▏      | 64/197 [00:00<00:00, 548.86it/s][A
-Loading weights:  63%|██████▎   | 124/197 [00:00<00:00, 564.14it/s][A
-Loading weights:  96%|█████████▌| 189/197 [00:00<00:00, 601.19it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 613.05it/s]
-Loading pipeline components...:  33%|███▎      | 3/9 [00:00<00:01,  3.13it/s]Loading pipeline components...:  44%|████▍     | 4/9 [00:01<00:01,  3.94it/s]
+Loading weights:  43%|████▎     | 84/197 [00:00<00:00, 813.84it/s][A
+Loading weights:  84%|████████▍ | 166/197 [00:00<00:00, 644.61it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 719.41it/s]
+Loading pipeline components...:  11%|█         | 1/9 [00:00<00:03,  2.17it/s]Loading pipeline components...:  22%|██▏       | 2/9 [00:11<00:45,  6.53s/it]
 Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
-Loading weights:   8%|▊         | 18/219 [00:00<00:02, 84.06it/s][A
-Loading weights:  25%|██▍       | 54/219 [00:00<00:01, 130.40it/s][A
-Loading weights:  37%|███▋      | 81/219 [00:00<00:00, 168.14it/s][A
-Loading weights:  46%|████▌     | 101/219 [00:00<00:00, 148.43it/s][A
-Loading weights:  58%|█████▊    | 126/219 [00:00<00:00, 149.43it/s][A
-Loading weights:  66%|██████▌   | 144/219 [00:00<00:00, 151.22it/s][A
-Loading weights:  74%|███████▍  | 162/219 [00:01<00:00, 150.61it/s][A
-Loading weights:  82%|████████▏ | 180/219 [00:01<00:00, 136.44it/s][A
-Loading weights:  95%|█████████▍| 207/219 [00:01<00:00, 148.26it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 149.23it/s]
-Loading pipeline components...:  56%|█████▌    | 5/9 [00:02<00:03,  1.26it/s]Loading pipeline components...:  67%|██████▋   | 6/9 [00:04<00:02,  1.05it/s]Loading pipeline components...:  78%|███████▊  | 7/9 [00:04<00:01,  1.48it/s]
+Loading weights:   4%|▍         | 9/219 [00:00<00:04, 43.50it/s][A
+Loading weights:  12%|█▏        | 27/219 [00:00<00:01, 97.53it/s][A
+Loading weights:  21%|██        | 45/219 [00:00<00:01, 100.60it/s][A
+Loading weights:  33%|███▎      | 72/219 [00:00<00:01, 140.64it/s][A
+Loading weights:  40%|████      | 88/219 [00:00<00:00, 140.13it/s][A
+Loading weights:  49%|████▉     | 108/219 [00:00<00:00, 151.66it/s][A
+Loading weights:  58%|█████▊    | 126/219 [00:01<00:00, 132.57it/s][A
+Loading weights:  74%|███████▍  | 162/219 [00:01<00:00, 148.06it/s][A
+Loading weights:  90%|█████████ | 198/219 [00:01<00:00, 159.12it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 151.09it/s]
+Loading pipeline components...:  44%|████▍     | 4/9 [00:12<00:14,  2.97s/it]Loading pipeline components...:  56%|█████▌    | 5/9 [00:13<00:08,  2.12s/it]Loading pipeline components...:  67%|██████▋   | 6/9 [00:13<00:04,  1.54s/it]
 Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
-Loading weights:  22%|██▏       | 113/517 [00:00<00:00, 1114.97it/s][A
-Loading weights:  44%|████▎     | 225/517 [00:00<00:00, 946.53it/s] [A
-Loading weights:  62%|██████▏   | 322/517 [00:00<00:00, 921.45it/s][A
-Loading weights:  80%|████████  | 415/517 [00:00<00:00, 869.56it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 930.33it/s]
-Loading pipeline components...:  89%|████████▉ | 8/9 [00:04<00:00,  1.47it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:04<00:00,  1.83it/s]
-Traceback (most recent call last):
-  File "/n/home00/zoewu/STEER/diffusers/exchange_scripts/generate_samples.py", line 74, in <module>
-    images = pipe(
-  File "/n/netscratch/kempner_undergrads/Everyone/zwu/environments/stable_diff/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/n/home00/zoewu/STEER/diffusers/src/diffusers/pipelines/stable_diffusion_3/pipeline_stable_diffusion_3.py", line 882, in __call__
-    latents, noise_pred = swap(latents, t, a_bar,  lam_start, lam_end, n_particles, compute_eps_fn, i, flow=True)
-  File "/n/home00/zoewu/STEER/replica_exchange/acceptance.py", line 22, in swap
-    eps_out = eps_ladder.clone()
-AttributeError: 'functools.partial' object has no attribute 'clone'
-srun: error: holygpu8a11501: task 0: Exited with exit code 1
+Loading weights:  36%|███▌      | 187/517 [00:00<00:00, 1783.50it/s][A
+Loading weights:  71%|███████   | 366/517 [00:00<00:00, 1379.15it/s][A
+Loading weights:  99%|█████████▊| 510/517 [00:00<00:00, 1262.55it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 1341.44it/s]
+Loading pipeline components...:  78%|███████▊  | 7/9 [00:13<00:02,  1.25s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:14<00:00,  1.43it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:14<00:00,  1.57s/it]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']

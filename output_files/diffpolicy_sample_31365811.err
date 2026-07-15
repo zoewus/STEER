@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "/n/home00/zoewu/STEER/robomimic/robomimic/scripts/run_trained_agent.py", line 373, in <module>
+    run_trained_agent(args)
+  File "/n/home00/zoewu/STEER/robomimic/robomimic/scripts/run_trained_agent.py", line 195, in run_trained_agent
+    policy, ckpt_dict = FileUtils.policy_from_checkpoint(ckpt_path=ckpt_path, device=device, verbose=True)
+  File "/n/home00/zoewu/STEER/robomimic/robomimic/utils/file_utils.py", line 395, in policy_from_checkpoint
+    ckpt_dict = maybe_dict_from_checkpoint(ckpt_path=ckpt_path, ckpt_dict=ckpt_dict)
+  File "/n/home00/zoewu/STEER/robomimic/robomimic/utils/file_utils.py", line 222, in maybe_dict_from_checkpoint
+    ckpt_dict = load_dict_from_checkpoint(ckpt_path)
+  File "/n/home00/zoewu/STEER/robomimic/robomimic/utils/file_utils.py", line 202, in load_dict_from_checkpoint
+    ckpt_dict = torch.load(ckpt_path, weights_only=False)
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/serialization.py", line 1530, in load
+    return _load(
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/serialization.py", line 2119, in _load
+    result = unpickler.load()
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/serialization.py", line 2083, in persistent_load
+    typed_storage = load_tensor(
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/serialization.py", line 2049, in load_tensor
+    wrap_storage = restore_location(storage, location)
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/serialization.py", line 698, in default_restore_location
+    result = fn(storage, location)
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/serialization.py", line 637, in _deserialize
+    return obj.to(device=device)
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/storage.py", line 291, in to
+    return _to(self, device, non_blocking)
+  File "/n/home00/zoewu/.conda/envs/robomimic_venv/lib/python3.9/site-packages/torch/_utils.py", line 101, in _to
+    untyped_storage = torch.UntypedStorage(self.size(), device=device)
+torch.AcceleratorError: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+srun: error: holygpu8a19102: task 0: Exited with exit code 1

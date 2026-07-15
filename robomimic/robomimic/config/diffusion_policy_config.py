@@ -53,6 +53,7 @@ class DiffusionPolicyConfig(BaseConfig):
         self.algo.ddpm.prediction_type = 'epsilon'
 
         # Replica exchange parameters
+        self.algo.replica_exchange.tempering = True
         self.algo.replica_exchange.enabled = True
         self.algo.replica_exchange.n_replicas = 2
         self.algo.replica_exchange.lam_start = 0.98

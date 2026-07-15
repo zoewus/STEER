@@ -5,10 +5,6 @@ from diffuser.models.helpers import apply_conditioning
 from search.maze_verifier import MazeVerifier
 from search.utils import rescale_grad
 
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..","..",  "..")))
-from functools import partial
-from replica_exchange.acceptance import swap, scale, _lam_ladder, _score_constant
 
 class BaseGuidance:
 

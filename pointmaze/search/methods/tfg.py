@@ -153,7 +153,7 @@ class TFGGuidance(BaseGuidance):
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
             x = apply_conditioning(x, cond, 2)
 
-        if self.args.replica_exchange and i < (len(ts) - 1):
+        if self.args.replica_exchange and i < (len(ts) - 2):
             temp_idx = swap(
                 x_prev.detach().clone(), ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
                 self.args.n_particles, epsilon.detach().clone(), temp_idx, i=i, flow=None

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=maze
 #SBATCH --account=kempner_undergrads
-#SBATCH --partition=kempner_h100
+#SBATCH --partition=kempner
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=2
@@ -23,9 +23,6 @@ N_REPEATS=10
 
 # Each entry: lam_start lam_end n_particles
 CONFIGS=(
-    "0.99 1.02 4"
-    "0.98 1.05 4"
-    "0.95 1.1 4"
     "0.99 1.02 8"
     "0.98 1.05 8"
     "0.95 1.1 8"

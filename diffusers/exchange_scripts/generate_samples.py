@@ -66,11 +66,6 @@ for idx, prompt in enumerate(prompts):
 
 		generator = torch.Generator(device="cuda").manual_seed(SEED)
 
-		if replica_exchange == True:
-			particles = N_PARTICLES
-		else:
-			particles = 1
-
 		images = pipe(
 			prompt,
 			negative_prompt="",
@@ -79,28 +74,14 @@ for idx, prompt in enumerate(prompts):
 			lam_start=lam_start,
 			lam_end=lam_end,
 			replica_exchange=replica_exchange,
-			n_particles=particles,
+			n_particles=N_PARTICLES,
 			generator=generator,
 		).images
 
-		images[0].save(lam_dirs[replica_exchange][LAM_VALUES[0]] / f"{idx:05d}.png", icc_profile=None)
-		images[1].save(lam_dirs[replica_exchange][LAM_VALUES[1]] / f"{idx:05d}.png", icc_profile=None)
-		images[2].save(lam_dirs[replica_exchange][LAM_VALUES[2]] / f"{idx:05d}.png", icc_profile=None)
-		images[3].save(lam_dirs[replica_exchange][LAM_VALUES[3]] / f"{idx:05d}.png", icc_profile=None)
+		for lam_val, img in zip(LAM_VALUES, images):
+			img.save(lam_dirs[replica_exchange][lam_val] / f"{idx:05d}.png", icc_profile=None)
 
 		del images
 		torch.cuda.empty_cache()
 
 print("All lam values complete.")
-
-os.environ["HF_TOKEN"] = "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"
-tsr_results = compute_sweep(
-    replica_exchanges=[True, False],
-    device="cuda",
-    target_indices=None,
-    index_until=INDEX_UNTIL,
-    tsr_dir=TSR_DIR,
-    pt_tsr_dir=STEER_DIR,        # fix kwarg name
-    lam_values_ptsr=LAM_VALUES,
-    lam_values_tsr=LAM_VALUES,
-)
