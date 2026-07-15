@@ -285,3 +285,14 @@ Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.98 to 1.02 wit
 Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.98 to 1.02 with 8 | Method: bon | Compute: 256.0 | Success Rate: 60.0
 Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.98 to 1.02 with 8 | Method: bon | Compute: 256.0 | Success Rate: 87.5
 Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.98 to 1.02 with 8 | Method: bon | Compute: 256.0 | Success Rate: 75.0
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.98 to 1.02 with 8 | Method: bon | Compute: 256.0 | Success Rate: 75.0
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.98 to 1.02 with 8 | Method: bon | Compute: 256.0 | Success Rate: 80.0
+
+
+
+
+
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.99 to 1.02 with 4 | Method: bon | Compute: 128.0 | Success Rate: 52.5
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.99 to 1.02 with 4 | Method: bon | Compute: 128.0 | Success Rate: 62.5
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.99 to 1.02 with 4 | Method: bon | Compute: 128.0 | Success Rate: 55.00000000000001
+Maze: pointmaze-giant-navigate-v0 | Replica Exchange True | Lam 0.99 to 1.02 with 4 | Method: bon | Compute: 128.0 | Success Rate: 55.00000000000001

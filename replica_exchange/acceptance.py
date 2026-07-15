@@ -21,11 +21,9 @@ def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype):
     # lam_ladder = torch.tensor(
     #     np.geomspace(lo, hi, n_replicas), device=device, dtype=dtype
     # )
-    n_pairs = (n_replicas + 1) // 2  # handles odd n_replicas by dropping the leftover 1/λ
-    step = 0.01
-
-    lam_values = lam_start + step * torch.arange(n_pairs, device=device, dtype=dtype)
-    lam_ladder = torch.stack([lam_values, 1.0 / lam_values], dim=1).flatten()[:n_replicas]
+    n_pairs = (n_replicas + 1) // 2
+    linspace = torch.linspace(lam_start, 1.0, n_pairs+1, device=device, dtype=dtype)[:-1]
+    lam_ladder = torch.stack([linspace, 1.0 / linspace], dim=1).flatten()[:n_replicas]
     return lam_ladder
 
 
@@ -80,7 +78,7 @@ def get_slot_for_lambda(temp_idx, target_lam_index):
 
 
 def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
-         eps_ladder, unet, cond, temp_idx, i=None, flow=None):
+         eps_ladder, temp_idx, i=None, flow=None):
     """
     Elementwise replica-exchange. temp_idx has shape (n_replicas, *event_shape)
     matching x_ladder, so every grid position (e.g. each of the 600*4
@@ -99,11 +97,9 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
     
     offset = 0
     spacing = 2
-    for i_tau in range(offset, n_replicas, spacing):
-        if i_tau + spacing >= n_replicas:
-            continue
+    for i_tau in range(offset, n_replicas-1, spacing):
         index_t = get_slot_for_lambda(temp_idx, i_tau)              # (*event_shape,)
-        index_s = get_slot_for_lambda(temp_idx, i_tau + spacing)    # (*event_shape,)
+        index_s = get_slot_for_lambda(temp_idx, i_tau + 1)    # (*event_shape,)
         
         x_tau = x_ladder[(index_t, *idx_grid)]
         x_s = x_ladder[(index_s, *idx_grid)]

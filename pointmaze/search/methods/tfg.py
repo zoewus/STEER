@@ -156,6 +156,6 @@ class TFGGuidance(BaseGuidance):
         if self.args.replica_exchange and i < (len(ts) - 1):
             temp_idx = swap(
                 x_prev.detach().clone(), ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
-                self.args.n_particles, epsilon.detach().clone(), unet,cond, temp_idx, i=i, flow=None
+                self.args.n_particles, epsilon.detach().clone(), temp_idx, i=i, flow=None
             )
         return x_prev, {"x0": x0, "logprobs": logprobs}, temp_idx

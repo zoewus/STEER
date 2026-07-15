@@ -19,16 +19,16 @@ conda activate maze
 
 mkdir -p output_files
 
-N_REPEATS=5
+N_REPEATS=10
 
 # Each entry: lam_start lam_end n_particles
 CONFIGS=(
-    "0.98 1.02 4"
-    "0.95 1.05 4"
-    "0.9 1.1 4"
-    "0.98 1.02 8"
-    "0.95 1.05 8"
-    "0.9 1.1 8"
+    "0.99 1.02 4"
+    "0.98 1.05 4"
+    "0.95 1.1 4"
+    "0.99 1.02 8"
+    "0.98 1.05 8"
+    "0.95 1.1 8"
 
 )
 
