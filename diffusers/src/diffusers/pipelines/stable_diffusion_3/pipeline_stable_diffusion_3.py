@@ -27,9 +27,9 @@ import sys, os
 
 steer_path = os.path.expanduser("~/STEER")
 if steer_path not in sys.path:
-    sys.path.append(steer_path)
+	sys.path.append(steer_path)
 
-from replica_exchange.acceptance import init_temp_idx, swap, scale, get_slot_for_lambda
+from replica_exchange.acceptance import init_temp_idx, swap, scale, get_slot_for_lambda, _lam_ladder
 from functools import partial
 
 from ...image_processor import VaeImageProcessor
@@ -74,34 +74,34 @@ EXAMPLE_DOC_STRING = """
 """
 
 def _compute_eps(x, t, *, pipe, prompt_embeds, pooled_prompt_embeds, n_particles):
-    """Runs the transformer once. Returns the raw CFG-combined v-prediction,
-    reusable both as the main-loop noise_pred and (via sigma_t transform) for
-    the swap's eps computation."""
-    n = x.shape[0]
+	"""Runs the transformer once. Returns the raw CFG-combined v-prediction,
+	reusable both as the main-loop noise_pred and (via sigma_t transform) for
+	the swap's eps computation."""
+	n = x.shape[0]
 
-    if pipe.do_classifier_free_guidance:
-        lmi = torch.cat([x] * 2)
-        pe = prompt_embeds.repeat_interleave(n, dim=0)
-        ppe = pooled_prompt_embeds.repeat_interleave(n, dim=0)
-    else:
-        lmi = x
-        pe = prompt_embeds.repeat_interleave(n, dim=0)
-        ppe = pooled_prompt_embeds.repeat_interleave(n, dim=0)
+	if pipe.do_classifier_free_guidance:
+		lmi = torch.cat([x] * 2)
+		pe = prompt_embeds.repeat_interleave(n, dim=0)
+		ppe = pooled_prompt_embeds.repeat_interleave(n, dim=0)
+	else:
+		lmi = x
+		pe = prompt_embeds.repeat_interleave(n, dim=0)
+		ppe = pooled_prompt_embeds.repeat_interleave(n, dim=0)
 
-    v = pipe.transformer(
-        hidden_states=lmi,
-        timestep=t.expand(lmi.shape[0]),
-        encoder_hidden_states=pe,
-        pooled_projections=ppe,
-        joint_attention_kwargs=pipe.joint_attention_kwargs,
-        return_dict=False,
-    )[0]
+	v = pipe.transformer(
+		hidden_states=lmi,
+		timestep=t.expand(lmi.shape[0]),
+		encoder_hidden_states=pe,
+		pooled_projections=ppe,
+		joint_attention_kwargs=pipe.joint_attention_kwargs,
+		return_dict=False,
+	)[0]
 
-    if pipe.do_classifier_free_guidance:
-        v_uncond, v_cond = v.chunk(2)
-        v = v_uncond + pipe.guidance_scale * (v_cond - v_uncond)
+	if pipe.do_classifier_free_guidance:
+		v_uncond, v_cond = v.chunk(2)
+		v = v_uncond + pipe.guidance_scale * (v_cond - v_uncond)
 
-    return v
+	return v
 
 # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.retrieve_timesteps
 def retrieve_timesteps(
@@ -857,10 +857,16 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 			generator,
 			latents,
 		)
-		# after prepare_latents, and after encode_prompt/CFG-concat:
-		latents = latents.repeat_interleave(n_particles, dim=0)   # do this once, not per-step
-		noise = torch.randn_like(latents, device = latents.device, dtype =latents.dtype) * 0.01
-		latents += noise
+		latents = latents.repeat_interleave(n_particles, dim=0)
+		noise = torch.randn(
+			latents.shape,
+			device=latents.device,
+			dtype=latents.dtype,
+			generator=generator,
+		)
+		lam_ladder_t = _lam_ladder(lam_start, lam_end, n_particles, latents.device, latents.dtype)
+		lam_ladder_t = lam_ladder_t.view(-1, *[1] * (latents.dim() - 1))
+		latents *= noise * torch.sqrt(lam_ladder_t)
 		
 		# 6. Denoising loop
 		temp_idx = init_temp_idx(n_particles, device=latents.device)

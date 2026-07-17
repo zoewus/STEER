@@ -13,7 +13,7 @@ parser.add_argument("--lam-start", type=float, default=1.0)
 parser.add_argument("--lam-end", type=float, default=1.0)
 parser.add_argument("--n-particles", type=int, default=4)
 parser.add_argument("--tsr-path", type=Path, default="/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/images/tsr")
-parser.add_argument("--steer-path", type=Path, default="/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/images/steer_sym__001_04")
+parser.add_argument("--steer-path", type=Path, default="/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/images/steer")
 parser.add_argument("--index_until", type=int, default=5)
 args = parser.parse_args()
 
@@ -64,22 +64,23 @@ for idx, prompt in enumerate(prompts):
 
 	for replica_exchange in replica_exchanges:
 
-		generator = torch.Generator(device="cuda").manual_seed(SEED)
+		for lam in LAM_VALUES:
 
-		images = pipe(
-			prompt,
-			negative_prompt="",
-			num_inference_steps=N_INF_STEPS,
-			guidance_scale=GUIDANCE_SCALE,
-			lam_start=lam_start,
-			lam_end=lam_end,
-			replica_exchange=replica_exchange,
-			n_particles=N_PARTICLES,
-			generator=generator,
-		).images
+			generator = torch.Generator(device="cuda").manual_seed(SEED)
 
-		for lam_val, img in zip(LAM_VALUES, images):
-			img.save(lam_dirs[replica_exchange][lam_val] / f"{idx:05d}.png", icc_profile=None)
+			images = pipe(
+				prompt,
+				negative_prompt="",
+				num_inference_steps=N_INF_STEPS,
+				guidance_scale=GUIDANCE_SCALE,
+				lam_start=lam,
+				lam_end=lam+0.2,
+				replica_exchange=replica_exchange,
+				n_particles=N_PARTICLES,
+				generator=generator,
+			).images
+
+			images[0].save(lam_dirs[replica_exchange][lam] / f"{idx:05d}.png", icc_profile=None)
 
 		del images
 		torch.cuda.empty_cache()

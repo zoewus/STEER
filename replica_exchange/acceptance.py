@@ -1,12 +1,31 @@
 import torch
+import math
 
 @torch.no_grad()
 def _score_constant(a_bar, tsr_lam):
     return 1 / (a_bar * tsr_lam + (1 - a_bar))
 
 @torch.no_grad()
-def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype):
-    lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
+def _lam_ladder(lam_start, lam_end, n_replicas, device, dtype, spacing="geometric"):
+    if spacing == "linear":
+        lam_ladder = torch.linspace(lam_start, lam_end, n_replicas, device=device, dtype=dtype)
+
+    elif spacing == "geometric":
+        # cluster points closer to lam_end (e.g. 1.0)
+        # gap = lam_end - lam, shrinks geometrically from (lam_end - lam_start) down to ~0
+        gap_start = lam_end - lam_start
+        gap_end = gap_start * 1e-3  # smallest gap fraction; tune as needed
+        gaps = torch.logspace(
+            math.log10(gap_start), math.log10(gap_end), n_replicas,
+            device=device, dtype=dtype
+        )
+        lam_ladder = lam_end - gaps
+        lam_ladder[0] = lam_start   # ensure exact endpoints
+        lam_ladder[-1] = lam_end
+
+    else:
+        raise ValueError(f"unknown spacing: {spacing}")
+
     return lam_ladder
 
 def init_temp_idx(n_replicas, device):
@@ -37,6 +56,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
         step_val = i
     else:
         step_val = t_val
+        
     offset = step_val % 2  # 0 or 1
     pairs = []
     for i_tau in range(offset, n_replicas - 1, 2):
@@ -47,7 +67,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
     index = x_ladder.shape[0] // n_replicas
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=x_ladder.device, dtype=x_ladder.dtype)
 
-    score_ladder = -eps_ladder / (1 - a_bar) ** 0.5
+    score_ladder = - eps_ladder / (1 - a_bar) ** 0.5
 
     for index_t, index_s in pairs:
         sl = slice(index * index_t, index * (index_t + 1))
@@ -59,8 +79,8 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
         lam_t_val = lam_ladder[temp_idx[index_t]]
         lam_s_val = lam_ladder[temp_idx[index_s]]
 
-        tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
-        integral = -0.5* (score_tau + score_s) * (x_tau - x_s) * tsr_diff
+        tsr_diff = _score_constant(a_bar, lam_t_val)# - _score_constant(a_bar, lam_s_val)
+        integral = - (score_tau + score_s) * (x_tau - x_s) * tsr_diff
         log_ratio = torch.clamp(integral.sum() , max=0.0)
         accept = torch.exp(log_ratio)
         accept_bool = (torch.rand(accept.shape, dtype=accept.dtype, device=accept.device) < accept).bool()

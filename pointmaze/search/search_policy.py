@@ -8,7 +8,7 @@ from diffuser.models.helpers import apply_conditioning
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),  "..", "..")))
 from functools import partial
-from replica_exchange.acceptance import swap, scale, init_temp_idx
+from replica_exchange.acceptance import swap, scale, init_temp_idx, _lam_ladder
 
 class SearchPolicy(BasePolicy):
     def __init__(self, args:Arguments, **kwargs):
@@ -37,8 +37,18 @@ class SearchPolicy(BasePolicy):
     def sample(self, cond, guidance:BaseGuidance, **kwargs):
 
         x = randn_tensor((self.per_sample_batch_size, self.diffusion.horizon,self.diffusion.transition_dim), generator=self.generator, device=self.device)
+        noise = torch.randn(
+            x.shape,
+            device=x.device,
+            dtype=x.dtype,
+        )
+        lam_ladder_t = _lam_ladder(self.args.lam_start, self.args.lam_end, self.args.n_particles, x.device, x.dtype)
+        lam_ladder_t = lam_ladder_t.view(-1, *[1] * (x.dim() - 1))
+        x *=  torch.sqrt(lam_ladder_t)
+
         x = apply_conditioning(x, cond, self.diffusion.action_dim)
-        temp_idx = init_temp_idx(self.args.n_particles, x.device)
+
+        temp_idx = init_temp_idx(self.args.n_particles,  x.device)
 
         guidance.reset()
         i = 0
