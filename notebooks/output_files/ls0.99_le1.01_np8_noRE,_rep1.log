@@ -1,0 +1,4 @@
+srun: got SIGCONT
+srun: forcing job termination
+[2026-07-20T14:54:46.162] error: *** STEP 33630445.0 ON holygpu8a19501 CANCELLED AT 2026-07-20T14:54:46 DUE to SIGNAL Terminated ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.

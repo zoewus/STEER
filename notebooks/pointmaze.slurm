@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=maze
 #SBATCH --account=kempner_undergrads
-#SBATCH --partition=kempner_h100
+#SBATCH --partition=kempner
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=2
 #SBATCH --gpus-per-node=1
-#SBATCH --time=0-04:00:00
+#SBATCH --time=0-02:00:00
 #SBATCH --mem=10G
 #SBATCH --output=output_files/maze_%A_%a.out
 #SBATCH --error=output_files/maze_%A_%a.err
@@ -19,21 +19,21 @@ conda activate maze
 
 mkdir -p output_files
 
-N_REPEATS=10
+N_REPEATS=5
 
 # Each entry: lam_start lam_end n_particles
 CONFIGS=(
-    "1.00 1.00 4"
-    "0.99 1.01 4"
-    "1.00 1.00 8"
-    "0.99 1.01 8"
+    "0.9 1.1 8"
+    "0.9 1.1 4"
+    "0.95 1.05 8"
+    "0.95 1.05 4"
 )
 
 for cfg in "${CONFIGS[@]}"; do
     read -r lam_start lam_end n_particles <<< "$cfg"
     tag="ls${lam_start}_le${lam_end}_np${n_particles}"
 
-    for mode in noRE, RE; do
+    for mode in RE; do
         if [ "$mode" == "RE" ]; then
             re_flag="--replica_exchange"
         else

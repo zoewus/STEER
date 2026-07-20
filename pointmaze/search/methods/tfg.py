@@ -114,24 +114,22 @@ class TFGGuidance(BaseGuidance):
                         (x_g - alpha_prod_t ** (0.5) * unet_output) / (1 - alpha_prod_t) ** (0.5)
                     )
                     x = x_g.clone()
-                    if self.args.replica_exchange and i < (len(ts) - 1):
-                        temp_idx = swap(
-                            x.detach().clone(), ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
-                            self.args.n_particles, epsilon.detach().clone(), temp_idx, i=i, flow=None
-                        )
-                    new_epsilon = scale(epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
-                    
+                    if self.args.lam_start!=1.0 or self.args.lam_end!=1.0:
+                        new_epsilon = epsilon #* scale(epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
+                    else:
+                        new_epsilon = epsilon
                     # invert x_t = sqrt(a_bar)*x0 + sqrt(1-a_bar)*eps  =>  x0 = (x_t - sqrt(1-a_bar)*eps) / sqrt(a_bar)
                     x0_tempered = (
                         (x - (1 - alpha_prod_t) ** (0.5) * new_epsilon) / alpha_prod_t ** (0.5)
                     )
                     x0 = self._predict_x0(x_g, x0_tempered, alpha_prod_t, **kwargs)
+                    x0 *= scale(epsilon, 1, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
                     x0 = apply_conditioning(x0, cond, 2) ## debug
                     logprobs = self.tilde_get_guidance(
                         x0, mc_eps, return_logp=True, **kwargs)
                     Delta_t = grad(logprobs.sum(), x_g)[0]
                     Delta_t= rescale_grad(Delta_t, clip_scale=self.args.clip_scale, **kwargs)
-                    Delta_t = Delta_t * rho
+                    Delta_t = Delta_t * rho 
                     
             else:
                 Delta_t = torch.zeros_like(x)
@@ -143,18 +141,29 @@ class TFGGuidance(BaseGuidance):
             for _ in range(self.args.iter_steps):
                 if self.args.mu != 0.0:
                     new_x0 += mu * self.tilde_get_guidance(
-                        new_x0.detach().requires_grad_(), mc_eps, **kwargs)
+                        new_x0.detach().requires_grad_(), mc_eps, **kwargs) 
             Delta_0 = new_x0 - x0
             
             # predict x_{t-1} using S(zt, hat_epsilon, t), this is also DDIM sampling
             alpha_t = alpha_prod_t / alpha_prod_t_prev
             x_prev = self._predict_x_prev_from_zero(
-                x, x0, alpha_prod_t, alpha_prod_t_prev, eta, t, **kwargs)
+                x, x0, alpha_prod_t, alpha_prod_t_prev, eta, t, temp_idx, **kwargs)
             if t > 0 or recur_step < self.args.recur_steps - 1:
                 x_prev += Delta_t / alpha_t ** 0.5 + Delta_0 * alpha_prod_t_prev ** 0.5
             x_prev = apply_conditioning(x_prev, cond, 2)
 
             x = self._predict_xt(x_prev, alpha_prod_t, alpha_prod_t_prev, **kwargs).detach().requires_grad_(False)
             x = apply_conditioning(x, cond, 2)
+            
+        if self.args.replica_exchange and i < (len(ts) - 1):
 
+            x_g = x_prev.clone().detach().requires_grad_()
+            unet_output = unet(x_g, cond, batched_t)
+            epsilon = (
+                    (x_g - alpha_prod_t ** (0.5) * unet_output) / (1 - alpha_prod_t) ** (0.5)
+                )
+            temp_idx = swap(
+                x_prev.detach().clone(), ts[i], alpha_prod_ts[i], self.args.lam_start, self.args.lam_end,
+                self.args.n_particles, epsilon.detach().clone(), temp_idx, i=i, flow=None
+            )
         return x_prev, {"x0": x0, "logprobs": logprobs}, temp_idx

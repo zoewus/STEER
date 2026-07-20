@@ -1,0 +1,267 @@
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+[ utils/setup ] Reading config: config.pointmaze:pointmaze_giant_navigate_v0
+[ utils/setup ] Using overrides | config: config.pointmaze | dataset: pointmaze_giant_navigate_v0
+[ utils/setup ] Lazy fstring | diffusion_loadpath : f:diffusion/H{horizon}_T{n_diffusion_steps} --> diffusion/H400_T256
+[ utils/setup ] Setting exp_name to: plans/release_H400_T256_LimitsNormalizer_b1_condFalse
+[ utils/setup ] Saved args to logs/pointmaze-giant-navigate-v0/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/0/args.json
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/dataset_config.pkl
+
+[utils/config ] Config: <class 'diffuser.datasets.sequence.GoalDataset'>
+    env: pointmaze-giant-navigate-v0
+    horizon: 400
+    max_path_length: 40000
+    normalizer: LimitsNormalizer
+    preprocess_fns: []
+    termination_penalty: None
+    use_padding: False
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/render_config.pkl
+
+[utils/config ] Config: <class 'diffuser.utils.rendering.PointMazeRenderer'>
+    env: pointmaze-giant-navigate-v0
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/model_config.pkl
+
+[utils/config ] Config: <class 'diffuser.models.temporal.TemporalUnet'>
+    cond_dim: 2
+    dim_mults: (1, 4, 8)
+    horizon: 424
+    transition_dim: 4
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/diffusion_config.pkl
+
+[utils/config ] Config: <class 'diffuser.models.diffusion.GaussianDiffusion'>
+    action_dim: 2
+    action_weight: 1
+    clip_denoised: True
+    horizon: 400
+    loss_discount: 1
+    loss_type: l2
+    loss_weights: None
+    n_timesteps: 256
+    observation_dim: 2
+    predict_epsilon: False
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/trainer_config.pkl
+
+[utils/config ] Config: <class 'diffuser.utils.training.Trainer'>
+    bucket: None
+    ema_decay: 0.995
+    gradient_accumulate_every: 2
+    label_freq: 40000
+    n_reference: 50
+    n_samples: 10
+    results_folder: logs/pointmaze-giant-navigate-v0/diffusion/H400_T256
+    sample_freq: 1000
+    save_freq: 1000
+    save_parallel: False
+    train_batch_size: 32
+    train_lr: 0.0002
+
+[ datasets/buffer ] Finalized replay buffer | 1500 episodes
+[ datasets/buffer ] Fields:
+    observations: (1500, 40000, 2)
+    actions: (1500, 40000, 2)
+    terminals: (1500, 40000, 1)
+    next_observations: (1500, 40000, 2)
+    normed_observations: (1500, 40000, 2)
+    normed_actions: (1500, 40000, 2)
+[ models/temporal ] Channel dimensions: [(4, 32), (32, 128), (128, 256)]
+[(4, 32), (32, 128), (128, 256)]
+
+[ utils/serialization ] Loading model epoch: 1200000
+
+Best Sample: 0 log probability -12.295
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/1/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/1/rollout.png
+Best Sample: 7 log probability -0.003
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/2/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/2/rollout.png
+Best Sample: 4 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/3/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/3/rollout.png
+Best Sample: 5 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/4/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/4/rollout.png
+Best Sample: 1 log probability -0.005
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/5/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/5/rollout.png
+Best Sample: 5 log probability -10.386
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/6/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/6/rollout.png
+Best Sample: 2 log probability -0.354
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/7/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/7/rollout.png
+Best Sample: 7 log probability -0.005
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/8/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/8/rollout.png
+Best Sample: 5 log probability -0.001
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/9/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/9/rollout.png
+Best Sample: 3 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/10/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/10/rollout.png
+Best Sample: 0 log probability -0.326
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/11/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/11/rollout.png
+Best Sample: 3 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/12/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/12/rollout.png
+Best Sample: 5 log probability -0.022
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/13/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/13/rollout.png
+Best Sample: 2 log probability -2.015
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/14/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/14/rollout.png
+Best Sample: 1 log probability -3.370
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/15/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/15/rollout.png
+Best Sample: 1 log probability -0.022
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/16/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/16/rollout.png
+Best Sample: 5 log probability -5.770
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/17/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/17/rollout.png
+Best Sample: 2 log probability -0.670
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/18/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/18/rollout.png
+Best Sample: 0 log probability -0.479
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/19/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/19/rollout.png
+Best Sample: 3 log probability -0.153
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/20/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/20/rollout.png
+Best Sample: 2 log probability -0.212
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/21/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/21/rollout.png
+Best Sample: 4 log probability -0.216
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/22/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/22/rollout.png
+Best Sample: 1 log probability -2.686
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/23/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/23/rollout.png
+Best Sample: 6 log probability -0.038
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/24/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/24/rollout.png
+Best Sample: 3 log probability -0.001
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/25/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/25/rollout.png
+Best Sample: 0 log probability -0.505
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/26/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/26/rollout.png
+Best Sample: 4 log probability -4.904
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/27/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/27/rollout.png
+Best Sample: 3 log probability -1.408
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/28/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/28/rollout.png
+Best Sample: 4 log probability -0.045
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/29/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/29/rollout.png
+Best Sample: 6 log probability -0.089
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/30/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/30/rollout.png
+Best Sample: 5 log probability -0.126
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/31/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/31/rollout.png
+Best Sample: 2 log probability -0.274
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/32/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/32/rollout.png
+Best Sample: 6 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/33/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/33/rollout.png
+Best Sample: 3 log probability -1.620
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/34/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/34/rollout.png
+Best Sample: 4 log probability -0.010
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/35/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/35/rollout.png
+Best Sample: 1 log probability -0.517
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/36/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/36/rollout.png
+Best Sample: 6 log probability -0.370
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/37/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/37/rollout.png
+Best Sample: 6 log probability -8.426
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/38/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/38/rollout.png
+Best Sample: 5 log probability -0.416
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/39/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/39/rollout.png
+Best Sample: 2 log probability -0.366
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/40/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-19 15:53:28/40/rollout.png
+Success Rate: 62.5, Average Compute: 256.0
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14e450ccf370>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14e52ef1cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e45c123ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14e45a9a8ee0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14e52ef1cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e45c123ec0>,
+	),
+	result = 0
+)
+Exception ignored in: <function OffScreenViewer.__del__ at 0x14e450ccf370>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 204, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/gymnasium/envs/mujoco/mujoco_rendering.py", line 201, in free
+    self.opengl_context.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14e52ef1cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e450b29440>,
+	),
+	result = 0
+)
+Exception ignored in: <function GLContext.__del__ at 0x14e45a9a8ee0>
+Traceback (most recent call last):
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 138, in __del__
+    self.free()
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/mujoco/egl/__init__.py", line 133, in free
+    EGL.eglDestroyContext(EGL_DISPLAY, self._context)
+  File "/n/home00/zoewu/.conda/envs/maze/lib/python3.10/site-packages/OpenGL/error.py", line 230, in glCheckError
+    raise self._errorClass(
+OpenGL.raw.EGL._errors.EGLError: EGLError(
+	err = EGL_NOT_INITIALIZED,
+	baseOperation = eglDestroyContext,
+	cArguments = (
+		<OpenGL._opaque.EGLDisplay_pointer object at 0x14e52ef1cec0>,
+		<OpenGL._opaque.EGLContext_pointer object at 0x14e450b29440>,
+	),
+	result = 0
+)

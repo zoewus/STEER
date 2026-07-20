@@ -3,22 +3,44 @@ Cannot initialize model with low cpu memory usage because `accelerate` was not f
 pip install accelerate
 ```
 .
-Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]Loading pipeline components...:  22%|██▏       | 2/9 [00:00<00:00, 18.06it/s]
-Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
-Loading weights:   4%|▍         | 9/219 [00:00<00:05, 38.86it/s][A
-Loading weights:  21%|██        | 45/219 [00:00<00:01, 101.64it/s][A
-Loading weights:  37%|███▋      | 81/219 [00:00<00:01, 133.90it/s][A
-Loading weights:  53%|█████▎    | 117/219 [00:00<00:00, 170.96it/s][A
-Loading weights:  62%|██████▏   | 136/219 [00:00<00:00, 158.81it/s][A
-Loading weights:  74%|███████▍  | 162/219 [00:01<00:00, 157.76it/s][A
-Loading weights:  90%|█████████ | 198/219 [00:01<00:00, 173.99it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 163.25it/s]
-
+Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]Loading pipeline components...:  11%|█         | 1/9 [00:00<00:02,  3.55it/s]
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
+Loading weights:  13%|█▎        | 67/517 [00:00<00:00, 556.09it/s][A
+Loading weights:  24%|██▍       | 123/517 [00:00<00:00, 425.65it/s][A
+Loading weights:  32%|███▏      | 167/517 [00:00<00:01, 348.59it/s][A
+Loading weights:  39%|███▉      | 204/517 [00:00<00:00, 354.83it/s][A
+Loading weights:  50%|████▉     | 257/517 [00:00<00:00, 406.22it/s][A
+Loading weights:  58%|█████▊    | 300/517 [00:00<00:00, 394.00it/s][A
+Loading weights:  66%|██████▌   | 341/517 [00:00<00:00, 358.72it/s][A
+Loading weights:  73%|███████▎  | 378/517 [00:01<00:00, 338.80it/s][A
+Loading weights:  80%|███████▉  | 413/517 [00:01<00:00, 307.74it/s][A
+Loading weights:  86%|████████▌ | 445/517 [00:01<00:00, 258.40it/s][A
+Loading weights:  94%|█████████▍| 487/517 [00:01<00:00, 292.08it/s][ALoading weights: 100%|██████████| 517/517 [00:01<00:00, 348.03it/s]
+Loading pipeline components...:  22%|██▏       | 2/9 [00:02<00:08,  1.16s/it]Loading pipeline components...:  33%|███▎      | 3/9 [00:32<01:26, 14.35s/it]Loading pipeline components...:  44%|████▍     | 4/9 [00:32<00:43,  8.74s/it]Loading pipeline components...:  56%|█████▌    | 5/9 [00:32<00:23,  5.82s/it]
 Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
-Loading weights:  43%|████▎     | 84/197 [00:00<00:00, 811.85it/s][A
-Loading weights:  86%|████████▋ | 170/197 [00:00<00:00, 819.39it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 885.83it/s]
-Loading pipeline components...:  44%|████▍     | 4/9 [00:01<00:02,  1.86it/s]Loading pipeline components...:  56%|█████▌    | 5/9 [00:02<00:01,  2.11it/s]
-Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 9425.28it/s]
-Loading pipeline components...:  67%|██████▋   | 6/9 [00:03<00:01,  1.62it/s]Loading pipeline components...:  78%|███████▊  | 7/9 [00:03<00:00,  2.16it/s]Loading pipeline components...:  89%|████████▉ | 8/9 [00:03<00:00,  2.72it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:12<00:00,  3.07s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:12<00:00,  1.42s/it]
+Loading weights:  47%|████▋     | 92/197 [00:00<00:00, 897.31it/s][A
+Loading weights:  92%|█████████▏| 182/197 [00:00<00:00, 816.23it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 824.27it/s]
+Loading pipeline components...:  67%|██████▋   | 6/9 [00:33<00:11,  3.96s/it]Loading pipeline components...:  78%|███████▊  | 7/9 [00:33<00:05,  2.72s/it]
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
+Loading weights:   4%|▍         | 9/219 [00:00<00:22,  9.39it/s][A
+Loading weights:   8%|▊         | 18/219 [00:01<00:11, 17.05it/s][A
+Loading weights:  12%|█▏        | 27/219 [00:01<00:07, 25.90it/s][A
+Loading weights:  21%|██        | 45/219 [00:02<00:08, 21.68it/s][A
+Loading weights:  25%|██▍       | 54/219 [00:02<00:06, 24.46it/s][A
+Loading weights:  29%|██▉       | 63/219 [00:02<00:06, 23.54it/s][A
+Loading weights:  33%|███▎      | 72/219 [00:03<00:05, 27.45it/s][A
+Loading weights:  37%|███▋      | 81/219 [00:04<00:08, 16.21it/s][A
+Loading weights:  45%|████▌     | 99/219 [00:04<00:04, 24.50it/s][A
+Loading weights:  53%|█████▎    | 117/219 [00:04<00:02, 34.85it/s][A
+Loading weights:  62%|██████▏   | 135/219 [00:05<00:02, 38.89it/s][A
+Loading weights:  70%|██████▉   | 153/219 [00:05<00:01, 52.93it/s][A
+Loading weights:  78%|███████▊  | 171/219 [00:05<00:00, 51.05it/s][A
+Loading weights:  95%|█████████▍| 207/219 [00:05<00:00, 72.42it/s][ALoading weights: 100%|██████████| 219/219 [00:05<00:00, 37.57it/s]
+Loading pipeline components...:  89%|████████▉ | 8/9 [00:39<00:03,  3.86s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:39<00:00,  2.69s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:39<00:00,  4.42s/it]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
@@ -27,6 +49,14 @@ The following part of your input was truncated because CLIP can only handle sequ
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
@@ -35,6 +65,14 @@ The following part of your input was truncated because CLIP can only handle sequ
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
@@ -43,6 +81,14 @@ The following part of your input was truncated because CLIP can only handle sequ
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
@@ -51,7 +97,59 @@ The following part of your input was truncated because CLIP can only handle sequ
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
 The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+[2026-07-17T22:04:45.084] error: *** JOB 32287370 ON holygpu8a11202 CANCELLED AT 2026-07-17T22:04:45 DUE TO TIME LIMIT ***
+[2026-07-17T22:04:45.094] error: *** STEP 32287370.0 ON holygpu8a11202 CANCELLED AT 2026-07-17T22:04:45 DUE TO TIME LIMIT ***
+srun: got SIGCONT
+srun: forcing job termination

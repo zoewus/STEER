@@ -5,6 +5,11 @@ from diffuser.models.helpers import apply_conditioning
 from search.maze_verifier import MazeVerifier
 from search.utils import rescale_grad
 
+#acceptance
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
+from functools import partial
+from replica_exchange.acceptance import swap, scale
 
 class BaseGuidance:
 
@@ -90,6 +95,7 @@ class BaseGuidance:
         alpha_prod_t_prev: torch.Tensor,
         eta: float,
         t: torch.LongTensor,
+        temp_idx: torch.Tensor,
         **kwargs,
     ) -> torch.Tensor:
         
@@ -100,6 +106,8 @@ class BaseGuidance:
         new_epsilon = (
             (xt - alpha_prod_t ** (0.5) * x0) / (1 - alpha_prod_t) ** (0.5)
         )
+
+        new_epsilon*= scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
 
         return self._predict_x_prev_from_eps(xt, new_epsilon, alpha_prod_t, alpha_prod_t_prev, eta, t, **kwargs)
 

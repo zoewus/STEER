@@ -1,0 +1,871 @@
+/n/home00/zoewu/STEER/pointmaze/diffuser/utils/training.py:161: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(loadpath, map_location='cpu')
+[ utils/setup ] Reading config: config.pointmaze:pointmaze_giant_navigate_v0
+[ utils/setup ] Using overrides | config: config.pointmaze | dataset: pointmaze_giant_navigate_v0
+[ utils/setup ] Lazy fstring | diffusion_loadpath : f:diffusion/H{horizon}_T{n_diffusion_steps} --> diffusion/H400_T256
+[ utils/setup ] Setting exp_name to: plans/release_H400_T256_LimitsNormalizer_b1_condFalse
+[ utils/setup ] Saved args to logs/pointmaze-giant-navigate-v0/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/0/args.json
+[ utils/setup ] WARNING: did not save git diff
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/dataset_config.pkl
+
+[utils/config ] Config: <class 'diffuser.datasets.sequence.GoalDataset'>
+    env: pointmaze-giant-navigate-v0
+    horizon: 400
+    max_path_length: 40000
+    normalizer: LimitsNormalizer
+    preprocess_fns: []
+    termination_penalty: None
+    use_padding: False
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/render_config.pkl
+
+[utils/config ] Config: <class 'diffuser.utils.rendering.PointMazeRenderer'>
+    env: pointmaze-giant-navigate-v0
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/model_config.pkl
+
+[utils/config ] Config: <class 'diffuser.models.temporal.TemporalUnet'>
+    cond_dim: 2
+    dim_mults: (1, 4, 8)
+    horizon: 424
+    transition_dim: 4
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/diffusion_config.pkl
+
+[utils/config ] Config: <class 'diffuser.models.diffusion.GaussianDiffusion'>
+    action_dim: 2
+    action_weight: 1
+    clip_denoised: True
+    horizon: 400
+    loss_discount: 1
+    loss_type: l2
+    loss_weights: None
+    n_timesteps: 256
+    observation_dim: 2
+    predict_epsilon: False
+
+[ utils/serialization ] Loaded config from logs/pointmaze-giant-navigate-v0/diffusion/H400_T256/trainer_config.pkl
+
+[utils/config ] Config: <class 'diffuser.utils.training.Trainer'>
+    bucket: None
+    ema_decay: 0.995
+    gradient_accumulate_every: 2
+    label_freq: 40000
+    n_reference: 50
+    n_samples: 10
+    results_folder: logs/pointmaze-giant-navigate-v0/diffusion/H400_T256
+    sample_freq: 1000
+    save_freq: 1000
+    save_parallel: False
+    train_batch_size: 32
+    train_lr: 0.0002
+
+[ datasets/buffer ] Finalized replay buffer | 1500 episodes
+[ datasets/buffer ] Fields:
+    observations: (1500, 40000, 2)
+    actions: (1500, 40000, 2)
+    terminals: (1500, 40000, 1)
+    next_observations: (1500, 40000, 2)
+    normed_observations: (1500, 40000, 2)
+    normed_actions: (1500, 40000, 2)
+[ models/temporal ] Channel dimensions: [(4, 32), (32, 128), (128, 256)]
+[(4, 32), (32, 128), (128, 256)]
+
+[ utils/serialization ] Loading model epoch: 1200000
+
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000001 integral_std=0.000091 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000097 log_ratio=-0.0025 accept=0.9975 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000424 integral_std=0.004686 log_ratio=-1.0169 accept=0.3617 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000002 integral_std=0.000043 log_ratio=-0.0044 accept=0.9956 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000114 integral_std=0.003968 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000000 integral_std=0.000047 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000046 integral_std=0.000976 log_ratio=-0.1099 accept=0.8959 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000006 integral_std=0.000908 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000164 integral_std=0.015478 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000018 integral_std=0.000194 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000172 integral_std=0.014633 log_ratio=-0.4138 accept=0.6611 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000013 integral_std=0.000173 log_ratio=-0.0324 accept=0.9682 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000184 integral_std=0.002400 log_ratio=-0.4418 accept=0.6429 swapped=False
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000096 integral_std=0.002268 log_ratio=-0.2311 accept=0.7937 swapped=True
+i=6 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001876 integral_std=0.032341 log_ratio=-4.5018 accept=0.0111 swapped=False
+i=6 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000009 integral_std=0.000368 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001643 integral_std=0.032317 log_ratio=-3.9422 accept=0.0194 swapped=False
+i=6 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000002 integral_std=0.000371 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000252 integral_std=0.004778 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000107 integral_std=0.004511 log_ratio=-0.2558 accept=0.7743 swapped=True
+i=8 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.003004 integral_std=0.056787 log_ratio=-7.2095 accept=0.0007 swapped=False
+i=8 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000011 integral_std=0.000610 log_ratio=-0.0259 accept=0.9744 swapped=True
+i=8 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001241 integral_std=0.055753 log_ratio=-2.9775 accept=0.0509 swapped=False
+i=8 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000005 integral_std=0.000663 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000192 integral_std=0.006886 log_ratio=-0.4617 accept=0.6302 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000219 integral_std=0.006715 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.000422 integral_std=0.086754 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000017 integral_std=0.001061 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.002114 integral_std=0.082389 log_ratio=-5.0742 accept=0.0063 swapped=False
+i=10 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000002 integral_std=0.001029 log_ratio=-0.0044 accept=0.9956 swapped=True
+i=11 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000060 integral_std=0.008510 log_ratio=-0.1450 accept=0.8650 swapped=True
+i=11 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000038 integral_std=0.008583 log_ratio=-0.0906 accept=0.9134 swapped=True
+i=12 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.004136 integral_std=0.140538 log_ratio=-9.9276 accept=0.0000 swapped=False
+i=12 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000206 integral_std=0.002690 log_ratio=-0.4945 accept=0.6099 swapped=True
+i=12 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.002250 integral_std=0.134928 log_ratio=-5.4010 accept=0.0045 swapped=False
+i=12 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000152 integral_std=0.001862 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.000137 integral_std=0.013596 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.000407 integral_std=0.013274 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.025500 integral_std=0.439927 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000446 integral_std=0.006303 log_ratio=-1.0697 accept=0.3431 swapped=False
+i=14 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.001218 integral_std=0.333978 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.001614 integral_std=0.014704 log_ratio=-3.8739 accept=0.0208 swapped=False
+Best Sample: 1 log probability -5.845
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/1/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/1/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000001 integral_std=0.000096 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000000 integral_std=0.000101 log_ratio=-0.0004 accept=0.9996 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000398 integral_std=0.004233 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000001 integral_std=0.000045 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000654 integral_std=0.004864 log_ratio=-1.5698 accept=0.2081 swapped=False
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000002 integral_std=0.000043 log_ratio=-0.0049 accept=0.9951 swapped=True
+i=3 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000082 integral_std=0.001049 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000021 integral_std=0.000856 log_ratio=-0.0514 accept=0.9499 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000158 integral_std=0.015498 log_ratio=-0.3803 accept=0.6837 swapped=False
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000003 integral_std=0.000169 log_ratio=-0.0073 accept=0.9927 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000461 integral_std=0.015646 log_ratio=-1.1072 accept=0.3305 swapped=False
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000006 integral_std=0.000158 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000091 integral_std=0.002305 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000006 integral_std=0.002342 log_ratio=-0.0136 accept=0.9865 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000107 integral_std=0.033431 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000018 integral_std=0.000388 log_ratio=-0.0440 accept=0.9569 swapped=False
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000383 integral_std=0.032653 log_ratio=-0.9202 accept=0.3985 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000015 integral_std=0.000350 log_ratio=-0.0363 accept=0.9643 swapped=True
+i=7 pair=(1,3) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000119 integral_std=0.004312 log_ratio=-0.2858 accept=0.7514 swapped=True
+i=7 pair=(3,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000100 integral_std=0.004037 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.000631 integral_std=0.057603 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000032 integral_std=0.000605 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.000060 integral_std=0.061473 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000049 integral_std=0.000639 log_ratio=-0.1187 accept=0.8881 swapped=True
+i=9 pair=(1,3) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000296 integral_std=0.006523 log_ratio=-0.7096 accept=0.4919 swapped=True
+i=9 pair=(3,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000743 integral_std=0.007577 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.005228 integral_std=0.095994 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000127 integral_std=0.001099 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.025493 integral_std=0.142861 log_ratio=-61.1821 accept=0.0000 swapped=False
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000067 integral_std=0.000998 log_ratio=-0.1620 accept=0.8505 swapped=True
+i=11 pair=(0,3) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.002169 integral_std=0.017423 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(3,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.001118 integral_std=0.013388 log_ratio=-2.6827 accept=0.0684 swapped=False
+i=12 pair=(1,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.013509 integral_std=0.150452 log_ratio=-32.4228 accept=0.0000 swapped=False
+i=12 pair=(0,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000230 integral_std=0.002026 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.010081 integral_std=0.119297 log_ratio=-24.1936 accept=0.0000 swapped=False
+i=12 pair=(2,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000084 integral_std=0.001499 log_ratio=-0.2023 accept=0.8169 swapped=True
+i=13 pair=(3,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.001956 integral_std=0.030225 log_ratio=-4.6941 accept=0.0091 swapped=False
+i=13 pair=(3,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.000984 integral_std=0.024695 log_ratio=-2.3617 accept=0.0943 swapped=False
+i=14 pair=(1,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.033329 integral_std=0.438090 log_ratio=-79.9906 accept=0.0000 swapped=False
+i=14 pair=(0,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000454 integral_std=0.006001 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.008084 integral_std=0.243966 log_ratio=-19.4027 accept=0.0000 swapped=False
+i=14 pair=(2,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000474 integral_std=0.005913 log_ratio=-1.1388 accept=0.3202 swapped=True
+Best Sample: 2 log probability -0.325
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/2/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/2/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000003 integral_std=0.000094 log_ratio=-0.0078 accept=0.9922 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000001 integral_std=0.000098 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000015 integral_std=0.003997 log_ratio=-0.0352 accept=0.9654 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000001 integral_std=0.000042 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000098 integral_std=0.003868 log_ratio=-0.2362 accept=0.7896 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000043 log_ratio=-0.0004 accept=0.9996 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000030 integral_std=0.000846 log_ratio=-0.0713 accept=0.9312 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000014 integral_std=0.000899 log_ratio=-0.0329 accept=0.9677 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000188 integral_std=0.014468 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000005 integral_std=0.000166 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000165 integral_std=0.014209 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000003 integral_std=0.000168 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000002 integral_std=0.002246 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000010 integral_std=0.002289 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000134 integral_std=0.031201 log_ratio=-0.3209 accept=0.7255 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000001 integral_std=0.000352 log_ratio=-0.0029 accept=0.9971 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000113 integral_std=0.030917 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000000 integral_std=0.000352 log_ratio=-0.0009 accept=0.9991 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000078 integral_std=0.004382 log_ratio=-0.1863 accept=0.8300 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000076 integral_std=0.004202 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000732 integral_std=0.053054 log_ratio=-1.7558 accept=0.1728 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000006 integral_std=0.000633 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001067 integral_std=0.052524 log_ratio=-2.5613 accept=0.0772 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000007 integral_std=0.000627 log_ratio=-0.0164 accept=0.9837 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000207 integral_std=0.006757 log_ratio=-0.4959 accept=0.6090 swapped=True
+i=9 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000058 integral_std=0.006893 log_ratio=-0.1385 accept=0.8707 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.010128 integral_std=0.121115 log_ratio=-24.3060 accept=0.0000 swapped=False
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000059 integral_std=0.000994 log_ratio=-0.1413 accept=0.8683 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.011500 integral_std=0.101092 log_ratio=-27.5995 accept=0.0000 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000038 integral_std=0.000944 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.001085 integral_std=0.010534 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.001256 integral_std=0.009779 log_ratio=-3.0143 accept=0.0491 swapped=False
+i=12 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.010916 integral_std=0.121127 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000030 integral_std=0.001452 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.010079 integral_std=0.111502 log_ratio=-24.1896 accept=0.0000 swapped=False
+i=12 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000228 integral_std=0.002414 log_ratio=-0.5474 accept=0.5785 swapped=True
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.002249 integral_std=0.040001 log_ratio=-5.3977 accept=0.0045 swapped=False
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.001084 integral_std=0.024413 log_ratio=-2.6009 accept=0.0742 swapped=False
+i=14 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.089053 integral_std=0.739364 log_ratio=-213.7282 accept=0.0000 swapped=False
+i=14 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000882 integral_std=0.011403 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.168860 integral_std=1.531439 log_ratio=-405.2650 accept=0.0000 swapped=False
+i=14 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000806 integral_std=0.007677 log_ratio=0.0000 accept=1.0000 swapped=True
+Best Sample: 2 log probability -1.784
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/3/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/3/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000098 log_ratio=-0.0028 accept=0.9972 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000000 integral_std=0.000100 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000111 integral_std=0.003832 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000000 integral_std=0.000043 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000038 integral_std=0.003819 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000000 integral_std=0.000043 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000046 integral_std=0.000925 log_ratio=-0.1103 accept=0.8956 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000040 integral_std=0.000904 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000312 integral_std=0.014985 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000013 integral_std=0.000175 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000479 integral_std=0.014522 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000004 integral_std=0.000175 log_ratio=-0.0101 accept=0.9899 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000082 integral_std=0.002397 log_ratio=-0.1973 accept=0.8209 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000030 integral_std=0.002334 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000954 integral_std=0.031768 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000009 integral_std=0.000362 log_ratio=-0.0207 accept=0.9795 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000827 integral_std=0.032928 log_ratio=-1.9847 accept=0.1374 swapped=False
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000016 integral_std=0.000353 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000275 integral_std=0.004155 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000075 integral_std=0.004111 log_ratio=-0.1809 accept=0.8345 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.002506 integral_std=0.055567 log_ratio=-6.0152 accept=0.0024 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000007 integral_std=0.000611 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001816 integral_std=0.055762 log_ratio=-4.3573 accept=0.0128 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000010 integral_std=0.000608 log_ratio=-0.0236 accept=0.9766 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000309 integral_std=0.007748 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000303 integral_std=0.007553 log_ratio=-0.7281 accept=0.4828 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.009812 integral_std=0.089973 log_ratio=-23.5496 accept=0.0000 swapped=False
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000011 integral_std=0.000994 log_ratio=-0.0265 accept=0.9738 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.007739 integral_std=0.093268 log_ratio=-18.5741 accept=0.0000 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000012 integral_std=0.000988 log_ratio=-0.0292 accept=0.9712 swapped=True
+i=11 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000991 integral_std=0.013341 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000451 integral_std=0.012196 log_ratio=-1.0822 accept=0.3389 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.016564 integral_std=0.155971 log_ratio=-39.7544 accept=0.0000 swapped=False
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000078 integral_std=0.001836 log_ratio=-0.1874 accept=0.8291 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.013998 integral_std=0.189712 log_ratio=-33.5953 accept=0.0000 swapped=False
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000010 integral_std=0.001522 log_ratio=-0.0247 accept=0.9756 swapped=True
+i=13 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.002240 integral_std=0.030283 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.003521 integral_std=0.053611 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.026461 integral_std=0.758963 log_ratio=-63.5064 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000362 integral_std=0.014546 log_ratio=-0.8694 accept=0.4192 swapped=False
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.014503 integral_std=0.483764 log_ratio=-34.8080 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000029 integral_std=0.020649 log_ratio=0.0000 accept=1.0000 swapped=True
+Best Sample: 1 log probability -30.282
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/4/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/4/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000003 integral_std=0.000103 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000100 log_ratio=-0.0033 accept=0.9967 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000014 integral_std=0.003825 log_ratio=-0.0340 accept=0.9665 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000044 log_ratio=-0.0001 accept=0.9999 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000037 integral_std=0.003727 log_ratio=-0.0890 accept=0.9149 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000041 log_ratio=-0.0007 accept=0.9993 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000005 integral_std=0.000873 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000005 integral_std=0.000819 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000011 integral_std=0.014806 log_ratio=-0.0263 accept=0.9741 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000002 integral_std=0.000157 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.004964 integral_std=0.022659 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000006 integral_std=0.000168 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000427 integral_std=0.003170 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000221 integral_std=0.002565 log_ratio=-0.5306 accept=0.5882 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001133 integral_std=0.038962 log_ratio=-2.7183 accept=0.0660 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000002 integral_std=0.000318 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000561 integral_std=0.034662 log_ratio=-1.3463 accept=0.2602 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000001 integral_std=0.000324 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000043 integral_std=0.004204 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000021 integral_std=0.003962 log_ratio=-0.0500 accept=0.9512 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.003962 integral_std=0.059115 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000005 integral_std=0.000525 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.002491 integral_std=0.060225 log_ratio=-5.9775 accept=0.0025 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000009 integral_std=0.000536 log_ratio=-0.0211 accept=0.9791 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000924 integral_std=0.008086 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000718 integral_std=0.007976 log_ratio=-1.7232 accept=0.1785 swapped=False
+i=10 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.003946 integral_std=0.084308 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000079 integral_std=0.001110 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.005729 integral_std=0.076458 log_ratio=-13.7493 accept=0.0000 swapped=False
+i=10 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000092 integral_std=0.001113 log_ratio=-0.2217 accept=0.8012 swapped=False
+i=11 pair=(0,3) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000836 integral_std=0.010092 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(3,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000622 integral_std=0.009418 log_ratio=-1.4933 accept=0.2246 swapped=False
+i=12 pair=(2,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.000450 integral_std=0.079496 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000137 integral_std=0.001960 log_ratio=-0.3287 accept=0.7199 swapped=False
+i=12 pair=(3,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.000488 integral_std=0.078608 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000059 integral_std=0.001543 log_ratio=-0.1417 accept=0.8679 swapped=True
+i=13 pair=(3,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.002020 integral_std=0.023216 log_ratio=-4.8476 accept=0.0078 swapped=False
+i=13 pair=(3,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.001573 integral_std=0.021928 log_ratio=-3.7753 accept=0.0229 swapped=False
+i=14 pair=(2,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.007530 integral_std=0.132777 log_ratio=-18.0731 accept=0.0000 swapped=False
+i=14 pair=(1,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.001383 integral_std=0.009002 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,3) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.002980 integral_std=0.107621 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(0,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000605 integral_std=0.006631 log_ratio=-1.4521 accept=0.2341 swapped=True
+Best Sample: 2 log probability -0.021
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/5/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/5/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000002 integral_std=0.000094 log_ratio=-0.0059 accept=0.9942 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000005 integral_std=0.000097 log_ratio=-0.0127 accept=0.9873 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000141 integral_std=0.003795 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000043 log_ratio=-0.0015 accept=0.9985 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000004 integral_std=0.003607 log_ratio=-0.0086 accept=0.9914 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000043 log_ratio=-0.0001 accept=0.9999 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000000 integral_std=0.000860 log_ratio=-0.0009 accept=0.9991 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000012 integral_std=0.000840 log_ratio=-0.0283 accept=0.9721 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000502 integral_std=0.015340 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000001 integral_std=0.000160 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000246 integral_std=0.014849 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000004 integral_std=0.000165 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000055 integral_std=0.002284 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000043 integral_std=0.002111 log_ratio=-0.1039 accept=0.9013 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000713 integral_std=0.033620 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000007 integral_std=0.000336 log_ratio=-0.0159 accept=0.9842 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001089 integral_std=0.032562 log_ratio=-2.6136 accept=0.0733 swapped=False
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000007 integral_std=0.000341 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000016 integral_std=0.004321 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000017 integral_std=0.004049 log_ratio=-0.0401 accept=0.9607 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000568 integral_std=0.055025 log_ratio=-1.3621 accept=0.2561 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000016 integral_std=0.000562 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000220 integral_std=0.054908 log_ratio=-0.5288 accept=0.5893 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000001 integral_std=0.000554 log_ratio=-0.0025 accept=0.9975 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000237 integral_std=0.006220 log_ratio=-0.5700 accept=0.5655 swapped=True
+i=9 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000336 integral_std=0.006144 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.000430 integral_std=0.080733 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000030 integral_std=0.000793 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.000432 integral_std=0.085315 log_ratio=-1.0363 accept=0.3548 swapped=True
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000084 integral_std=0.000843 log_ratio=-0.2008 accept=0.8180 swapped=True
+i=11 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.001001 integral_std=0.010453 log_ratio=-2.4019 accept=0.0905 swapped=True
+i=11 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000898 integral_std=0.009954 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.003183 integral_std=0.148715 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000077 integral_std=0.001228 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.003274 integral_std=0.146147 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000038 integral_std=0.001190 log_ratio=-0.0901 accept=0.9138 swapped=True
+i=13 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.003992 integral_std=0.031397 log_ratio=-9.5816 accept=0.0001 swapped=False
+i=13 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.000417 integral_std=0.024287 log_ratio=-1.0004 accept=0.3677 swapped=False
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.001323 integral_std=0.509309 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000358 integral_std=0.006080 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.021708 integral_std=0.392302 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000118 integral_std=0.001579 log_ratio=-0.2832 accept=0.7534 swapped=True
+Best Sample: 1 log probability -0.255
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/6/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/6/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000002 integral_std=0.000098 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000001 integral_std=0.000094 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000247 integral_std=0.004176 log_ratio=-0.5922 accept=0.5531 swapped=False
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000044 log_ratio=-0.0001 accept=0.9999 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000180 integral_std=0.003974 log_ratio=-0.4330 accept=0.6486 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000042 log_ratio=-0.0026 accept=0.9974 swapped=True
+i=3 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000036 integral_std=0.000878 log_ratio=-0.0876 accept=0.9162 swapped=True
+i=3 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000001 integral_std=0.000887 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000254 integral_std=0.015699 log_ratio=-0.6107 accept=0.5430 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000008 integral_std=0.000164 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000186 integral_std=0.015262 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000004 integral_std=0.000163 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000066 integral_std=0.002304 log_ratio=-0.1579 accept=0.8539 swapped=True
+i=5 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000029 integral_std=0.002247 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000302 integral_std=0.033775 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000000 integral_std=0.000351 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000094 integral_std=0.033659 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000004 integral_std=0.000353 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000011 integral_std=0.004398 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000010 integral_std=0.004320 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001036 integral_std=0.059311 log_ratio=-2.4853 accept=0.0833 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000008 integral_std=0.000590 log_ratio=-0.0186 accept=0.9816 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.000606 integral_std=0.056986 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000025 integral_std=0.000599 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000019 integral_std=0.006444 log_ratio=-0.0445 accept=0.9565 swapped=True
+i=9 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000037 integral_std=0.006009 log_ratio=-0.0877 accept=0.9160 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.002113 integral_std=0.095149 log_ratio=-5.0715 accept=0.0063 swapped=False
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000045 integral_std=0.000812 log_ratio=-0.1090 accept=0.8967 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.005774 integral_std=0.095278 log_ratio=-13.8580 accept=0.0000 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000045 integral_std=0.000828 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000473 integral_std=0.009789 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000515 integral_std=0.010188 log_ratio=-1.2370 accept=0.2902 swapped=False
+i=12 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.003671 integral_std=0.159448 log_ratio=-8.8093 accept=0.0001 swapped=False
+i=12 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000059 integral_std=0.001613 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.000372 integral_std=0.142022 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000073 integral_std=0.001196 log_ratio=-0.1745 accept=0.8399 swapped=True
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.003790 integral_std=0.028220 log_ratio=-9.0957 accept=0.0001 swapped=False
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.003639 integral_std=0.025532 log_ratio=-8.7327 accept=0.0002 swapped=False
+i=14 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.049493 integral_std=0.485007 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.001227 integral_std=0.007466 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.000358 integral_std=0.371111 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.005288 integral_std=0.034527 log_ratio=-12.6914 accept=0.0000 swapped=False
+Best Sample: 0 log probability -1.807
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/7/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/7/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000102 log_ratio=-0.0025 accept=0.9975 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000092 log_ratio=-0.0035 accept=0.9966 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000040 integral_std=0.003914 log_ratio=-0.0953 accept=0.9091 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000003 integral_std=0.000044 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000118 integral_std=0.003808 log_ratio=-0.2825 accept=0.7539 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000042 log_ratio=-0.0027 accept=0.9973 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000016 integral_std=0.000856 log_ratio=-0.0385 accept=0.9622 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000073 integral_std=0.000914 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000233 integral_std=0.015193 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000010 integral_std=0.000188 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000534 integral_std=0.015009 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000002 integral_std=0.000174 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000077 integral_std=0.002292 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000082 integral_std=0.002429 log_ratio=-0.1965 accept=0.8216 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001332 integral_std=0.031846 log_ratio=-3.1975 accept=0.0409 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000001 integral_std=0.000355 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000326 integral_std=0.030164 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000010 integral_std=0.000356 log_ratio=-0.0243 accept=0.9760 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000119 integral_std=0.004365 log_ratio=-0.2855 accept=0.7516 swapped=False
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000146 integral_std=0.004133 log_ratio=-0.3514 accept=0.7037 swapped=True
+i=8 pair=(1,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000108 integral_std=0.060081 log_ratio=-0.2581 accept=0.7725 swapped=True
+i=8 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000006 integral_std=0.000565 log_ratio=-0.0148 accept=0.9853 swapped=True
+i=8 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.001888 integral_std=0.056942 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000016 integral_std=0.000556 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000248 integral_std=0.006307 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000169 integral_std=0.005956 log_ratio=-0.4047 accept=0.6672 swapped=True
+i=10 pair=(1,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.000053 integral_std=0.080359 log_ratio=-0.1274 accept=0.8803 swapped=True
+i=10 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000014 integral_std=0.000756 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.000753 integral_std=0.076540 log_ratio=-1.8073 accept=0.1641 swapped=False
+i=10 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000016 integral_std=0.000763 log_ratio=-0.0382 accept=0.9625 swapped=True
+i=11 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000136 integral_std=0.007260 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000333 integral_std=0.007015 log_ratio=-0.7988 accept=0.4499 swapped=False
+i=12 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.003717 integral_std=0.126349 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000037 integral_std=0.001130 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.001926 integral_std=0.101319 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000002 integral_std=0.001032 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.000295 integral_std=0.008997 log_ratio=-0.7088 accept=0.4922 swapped=False
+i=13 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.000030 integral_std=0.007831 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.003474 integral_std=0.347448 log_ratio=-8.3370 accept=0.0002 swapped=False
+i=14 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000007 integral_std=0.003196 log_ratio=-0.0161 accept=0.9840 swapped=True
+i=14 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.000490 integral_std=0.289356 log_ratio=-1.1771 accept=0.3082 swapped=True
+i=14 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000064 integral_std=0.002026 log_ratio=-0.1530 accept=0.8582 swapped=True
+Best Sample: 0 log probability -0.562
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/8/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/8/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000000 integral_std=0.000095 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000002 integral_std=0.000097 log_ratio=-0.0038 accept=0.9962 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000022 integral_std=0.003958 log_ratio=-0.0535 accept=0.9479 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000002 integral_std=0.000044 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000068 integral_std=0.003864 log_ratio=-0.1631 accept=0.8495 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000003 integral_std=0.000047 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000007 integral_std=0.000931 log_ratio=-0.0166 accept=0.9835 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000023 integral_std=0.000869 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000384 integral_std=0.014821 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000002 integral_std=0.000167 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000465 integral_std=0.014297 log_ratio=-1.1152 accept=0.3278 swapped=False
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000003 integral_std=0.000163 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000061 integral_std=0.002251 log_ratio=-0.1468 accept=0.8635 swapped=True
+i=5 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000027 integral_std=0.002240 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000711 integral_std=0.029564 log_ratio=-1.7057 accept=0.1817 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000006 integral_std=0.000342 log_ratio=-0.0145 accept=0.9856 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000833 integral_std=0.030882 log_ratio=-2.0003 accept=0.1353 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000020 integral_std=0.000374 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000163 integral_std=0.004138 log_ratio=-0.3911 accept=0.6763 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000040 integral_std=0.004181 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000825 integral_std=0.050005 log_ratio=-1.9806 accept=0.1380 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000017 integral_std=0.000593 log_ratio=-0.0407 accept=0.9601 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000019 integral_std=0.048852 log_ratio=-0.0450 accept=0.9560 swapped=True
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000003 integral_std=0.000610 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000144 integral_std=0.006808 log_ratio=-0.3456 accept=0.7078 swapped=True
+i=9 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000175 integral_std=0.006749 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.000185 integral_std=0.072312 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000006 integral_std=0.000836 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.000443 integral_std=0.065188 log_ratio=-1.0626 accept=0.3456 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000009 integral_std=0.000859 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000299 integral_std=0.010101 log_ratio=-0.7169 accept=0.4883 swapped=True
+i=11 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000094 integral_std=0.009508 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.000717 integral_std=0.088521 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000169 integral_std=0.001842 log_ratio=-0.4058 accept=0.6664 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.000626 integral_std=0.082786 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000134 integral_std=0.001917 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.000630 integral_std=0.016355 log_ratio=-1.5113 accept=0.2206 swapped=False
+i=13 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.004145 integral_std=0.039760 log_ratio=-9.9488 accept=0.0000 swapped=False
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.015737 integral_std=0.216177 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.001207 integral_std=0.012223 log_ratio=-2.8980 accept=0.0551 swapped=False
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.001884 integral_std=0.114030 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000046 integral_std=0.006255 log_ratio=-0.1101 accept=0.8957 swapped=False
+Best Sample: 1 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/9/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/9/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000000 integral_std=0.000095 log_ratio=-0.0008 accept=0.9992 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000004 integral_std=0.000096 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000244 integral_std=0.004042 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000002 integral_std=0.000042 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000091 integral_std=0.004081 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000044 log_ratio=-0.0018 accept=0.9982 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000008 integral_std=0.000888 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000032 integral_std=0.000857 log_ratio=-0.0766 accept=0.9263 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000152 integral_std=0.014796 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000029 integral_std=0.000200 log_ratio=-0.0686 accept=0.9337 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000055 integral_std=0.014551 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000008 integral_std=0.000171 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000026 integral_std=0.002237 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000045 integral_std=0.002214 log_ratio=-0.1092 accept=0.8966 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001234 integral_std=0.030147 log_ratio=-2.9628 accept=0.0517 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000021 integral_std=0.000381 log_ratio=-0.0503 accept=0.9509 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000408 integral_std=0.029901 log_ratio=-0.9788 accept=0.3758 swapped=False
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000002 integral_std=0.000387 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000079 integral_std=0.004269 log_ratio=-0.1884 accept=0.8283 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000032 integral_std=0.004232 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001083 integral_std=0.048363 log_ratio=-2.5991 accept=0.0743 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000013 integral_std=0.000624 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000529 integral_std=0.050416 log_ratio=-1.2692 accept=0.2811 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000020 integral_std=0.000612 log_ratio=-0.0475 accept=0.9536 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000353 integral_std=0.006452 log_ratio=-0.8461 accept=0.4291 swapped=True
+i=9 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000338 integral_std=0.006875 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.001707 integral_std=0.071215 log_ratio=-4.0969 accept=0.0166 swapped=False
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000010 integral_std=0.000948 log_ratio=-0.0251 accept=0.9753 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.002107 integral_std=0.066010 log_ratio=-5.0568 accept=0.0064 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000016 integral_std=0.000967 log_ratio=-0.0384 accept=0.9624 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000788 integral_std=0.009928 log_ratio=-1.8923 accept=0.1507 swapped=False
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000871 integral_std=0.010786 log_ratio=-2.0905 accept=0.1236 swapped=False
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.001841 integral_std=0.079700 log_ratio=-4.4191 accept=0.0120 swapped=False
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000066 integral_std=0.001699 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.004528 integral_std=0.085239 log_ratio=-10.8681 accept=0.0000 swapped=False
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000100 integral_std=0.001761 log_ratio=-0.2391 accept=0.7873 swapped=True
+i=13 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.002269 integral_std=0.020619 log_ratio=-5.4452 accept=0.0043 swapped=False
+i=13 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.001740 integral_std=0.018331 log_ratio=-4.1754 accept=0.0154 swapped=False
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.004663 integral_std=0.101638 log_ratio=-11.1922 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000073 integral_std=0.009441 log_ratio=-0.1749 accept=0.8396 swapped=True
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.025406 integral_std=0.245486 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000175 integral_std=0.003170 log_ratio=-0.4210 accept=0.6564 swapped=True
+Best Sample: 0 log probability 0.000
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/10/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/10/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000097 log_ratio=-0.0016 accept=0.9984 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000093 log_ratio=-0.0022 accept=0.9978 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000011 integral_std=0.003938 log_ratio=-0.0262 accept=0.9742 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000041 log_ratio=-0.0021 accept=0.9979 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000064 integral_std=0.004002 log_ratio=-0.1537 accept=0.8575 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000044 log_ratio=-0.0004 accept=0.9996 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000016 integral_std=0.000881 log_ratio=-0.0394 accept=0.9614 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000225 integral_std=0.001136 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000771 integral_std=0.016481 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000019 integral_std=0.000196 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000637 integral_std=0.014835 log_ratio=-1.5290 accept=0.2168 swapped=False
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000008 integral_std=0.000171 log_ratio=-0.0182 accept=0.9820 swapped=True
+i=5 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000077 integral_std=0.002662 log_ratio=-0.1855 accept=0.8307 swapped=True
+i=5 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000029 integral_std=0.002435 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000742 integral_std=0.031115 log_ratio=-1.7816 accept=0.1684 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000034 integral_std=0.000370 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001066 integral_std=0.030663 log_ratio=-2.5585 accept=0.0774 swapped=False
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000028 integral_std=0.000376 log_ratio=-0.0683 accept=0.9340 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000171 integral_std=0.004690 log_ratio=-0.4109 accept=0.6631 swapped=True
+i=7 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000179 integral_std=0.004611 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001896 integral_std=0.049081 log_ratio=-4.5505 accept=0.0106 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000014 integral_std=0.000594 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001793 integral_std=0.048799 log_ratio=-4.3023 accept=0.0135 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000023 integral_std=0.000624 log_ratio=-0.0553 accept=0.9462 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000581 integral_std=0.007707 log_ratio=-1.3935 accept=0.2482 swapped=False
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000401 integral_std=0.007298 log_ratio=-0.9631 accept=0.3817 swapped=False
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.000356 integral_std=0.063643 log_ratio=-0.8543 accept=0.4256 swapped=False
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000015 integral_std=0.001026 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.001455 integral_std=0.061628 log_ratio=-3.4927 accept=0.0304 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000017 integral_std=0.000857 log_ratio=-0.0416 accept=0.9593 swapped=True
+i=11 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.001239 integral_std=0.012050 log_ratio=-2.9738 accept=0.0511 swapped=False
+i=11 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.001418 integral_std=0.013627 log_ratio=-3.4039 accept=0.0332 swapped=False
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.003293 integral_std=0.083837 log_ratio=-7.9037 accept=0.0004 swapped=False
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000198 integral_std=0.002056 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.004135 integral_std=0.080323 log_ratio=-9.9235 accept=0.0000 swapped=False
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000105 integral_std=0.001319 log_ratio=-0.2528 accept=0.7766 swapped=False
+i=13 pair=(0,3) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.002486 integral_std=0.025670 log_ratio=-5.9675 accept=0.0026 swapped=False
+i=13 pair=(0,3) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.002245 integral_std=0.023463 log_ratio=-5.3875 accept=0.0046 swapped=False
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.007068 integral_std=0.126463 log_ratio=-16.9642 accept=0.0000 swapped=False
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.001116 integral_std=0.011195 log_ratio=-2.6795 accept=0.0686 swapped=False
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.000961 integral_std=0.105526 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000082 integral_std=0.011202 log_ratio=0.0000 accept=1.0000 swapped=True
+Best Sample: 1 log probability -0.108
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/11/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/11/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000003 integral_std=0.000091 log_ratio=-0.0076 accept=0.9924 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000000 integral_std=0.000098 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000416 integral_std=0.004261 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000011 integral_std=0.000056 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000193 integral_std=0.003913 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000003 integral_std=0.000045 log_ratio=-0.0062 accept=0.9938 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000052 integral_std=0.000871 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000006 integral_std=0.000868 log_ratio=-0.0139 accept=0.9862 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000153 integral_std=0.014259 log_ratio=-0.3677 accept=0.6923 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000009 integral_std=0.000174 log_ratio=-0.0212 accept=0.9790 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000796 integral_std=0.014500 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000013 integral_std=0.000175 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000111 integral_std=0.002260 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000078 integral_std=0.002203 log_ratio=-0.1865 accept=0.8298 swapped=False
+i=6 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.001818 integral_std=0.030514 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000014 integral_std=0.000389 log_ratio=-0.0327 accept=0.9679 swapped=True
+i=6 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000666 integral_std=0.030790 log_ratio=-1.5995 accept=0.2020 swapped=True
+i=6 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000003 integral_std=0.000372 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000239 integral_std=0.004100 log_ratio=-0.5735 accept=0.5635 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000041 integral_std=0.004005 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.002747 integral_std=0.054095 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000007 integral_std=0.000658 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(2,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001459 integral_std=0.052225 log_ratio=-3.5012 accept=0.0302 swapped=False
+i=8 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000000 integral_std=0.000683 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(0,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000093 integral_std=0.006354 log_ratio=-0.2229 accept=0.8002 swapped=True
+i=9 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000402 integral_std=0.005976 log_ratio=-0.9640 accept=0.3814 swapped=False
+i=10 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.000698 integral_std=0.074700 log_ratio=-1.6757 accept=0.1872 swapped=False
+i=10 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000056 integral_std=0.001119 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.002909 integral_std=0.082059 log_ratio=-6.9810 accept=0.0009 swapped=False
+i=10 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000057 integral_std=0.001142 log_ratio=-0.1380 accept=0.8711 swapped=True
+i=11 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000472 integral_std=0.010468 log_ratio=-1.1331 accept=0.3220 swapped=False
+i=11 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000470 integral_std=0.010779 log_ratio=-1.1279 accept=0.3237 swapped=False
+i=12 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.010918 integral_std=0.124881 log_ratio=-26.2036 accept=0.0000 swapped=False
+i=12 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000334 integral_std=0.002846 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.008192 integral_std=0.125780 log_ratio=-19.6606 accept=0.0000 swapped=False
+i=12 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000388 integral_std=0.002787 log_ratio=-0.9306 accept=0.3943 swapped=True
+i=13 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.002857 integral_std=0.027759 log_ratio=-6.8571 accept=0.0011 swapped=False
+i=13 pair=(1,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.000406 integral_std=0.021967 log_ratio=-0.9744 accept=0.3774 swapped=False
+i=14 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.060707 integral_std=0.476496 log_ratio=-145.6970 accept=0.0000 swapped=False
+i=14 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000456 integral_std=0.005828 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(2,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.048679 integral_std=0.473511 log_ratio=-116.8287 accept=0.0000 swapped=False
+i=14 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000821 integral_std=0.008971 log_ratio=-1.9699 accept=0.1395 swapped=False
+Best Sample: 2 log probability -0.026
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/12/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/12/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000002 integral_std=0.000093 log_ratio=-0.0045 accept=0.9955 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000002 integral_std=0.000095 log_ratio=-0.0052 accept=0.9948 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000319 integral_std=0.004039 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000003 integral_std=0.000043 log_ratio=-0.0071 accept=0.9930 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000468 integral_std=0.004508 log_ratio=-1.1225 accept=0.3255 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000000 integral_std=0.000043 log_ratio=-0.0009 accept=0.9991 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000005 integral_std=0.000864 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000011 integral_std=0.000787 log_ratio=-0.0266 accept=0.9738 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000302 integral_std=0.015428 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000005 integral_std=0.000168 log_ratio=-0.0129 accept=0.9872 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000212 integral_std=0.015604 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000003 integral_std=0.000173 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000118 integral_std=0.002182 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000161 integral_std=0.002212 log_ratio=-0.3864 accept=0.6795 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000652 integral_std=0.034104 log_ratio=-1.5644 accept=0.2092 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000002 integral_std=0.000354 log_ratio=-0.0054 accept=0.9946 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001335 integral_std=0.033563 log_ratio=-3.2040 accept=0.0406 swapped=False
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000009 integral_std=0.000344 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000119 integral_std=0.004364 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000108 integral_std=0.004137 log_ratio=-0.2598 accept=0.7712 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001672 integral_std=0.056050 log_ratio=-4.0117 accept=0.0181 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000015 integral_std=0.000627 log_ratio=-0.0360 accept=0.9646 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.000522 integral_std=0.055942 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000012 integral_std=0.000624 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000164 integral_std=0.007607 log_ratio=-0.3931 accept=0.6750 swapped=True
+i=9 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000327 integral_std=0.007746 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.001006 integral_std=0.090583 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000008 integral_std=0.001064 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.001213 integral_std=0.100109 log_ratio=-2.9100 accept=0.0545 swapped=False
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000017 integral_std=0.001036 log_ratio=-0.0407 accept=0.9602 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000557 integral_std=0.013064 log_ratio=-1.3367 accept=0.2627 swapped=False
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000130 integral_std=0.010211 log_ratio=-0.3113 accept=0.7325 swapped=True
+i=12 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.006009 integral_std=0.194602 log_ratio=-14.4227 accept=0.0000 swapped=False
+i=12 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000044 integral_std=0.002031 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.012151 integral_std=0.220636 log_ratio=-29.1621 accept=0.0000 swapped=False
+i=12 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000033 integral_std=0.001665 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.004776 integral_std=0.046940 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.007064 integral_std=0.046911 log_ratio=-16.9545 accept=0.0000 swapped=False
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.039685 integral_std=0.608047 log_ratio=-95.2436 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000881 integral_std=0.010649 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.002902 integral_std=0.486864 log_ratio=-6.9651 accept=0.0009 swapped=False
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000262 integral_std=0.006239 log_ratio=-0.6290 accept=0.5331 swapped=True
+Best Sample: 0 log probability -21.536
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/13/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/13/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000000 integral_std=0.000099 log_ratio=-0.0010 accept=0.9990 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000099 log_ratio=-0.0021 accept=0.9979 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000083 integral_std=0.003971 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000041 log_ratio=-0.0023 accept=0.9977 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000191 integral_std=0.003808 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000042 log_ratio=-0.0015 accept=0.9985 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000006 integral_std=0.000900 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000000 integral_std=0.000882 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000107 integral_std=0.015168 log_ratio=-0.2575 accept=0.7730 swapped=False
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000005 integral_std=0.000173 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000263 integral_std=0.014180 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000000 integral_std=0.000171 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000008 integral_std=0.002250 log_ratio=-0.0183 accept=0.9818 swapped=True
+i=5 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000083 integral_std=0.002364 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.000428 integral_std=0.030320 log_ratio=-1.0272 accept=0.3580 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000029 integral_std=0.000391 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000895 integral_std=0.031052 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000016 integral_std=0.000356 log_ratio=-0.0389 accept=0.9618 swapped=True
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000169 integral_std=0.004523 log_ratio=-0.4048 accept=0.6671 swapped=False
+i=7 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000101 integral_std=0.004344 log_ratio=-0.2433 accept=0.7841 swapped=True
+i=8 pair=(1,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.002478 integral_std=0.055835 log_ratio=-5.9475 accept=0.0026 swapped=False
+i=8 pair=(0,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000005 integral_std=0.000549 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(1,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001198 integral_std=0.057686 log_ratio=-2.8740 accept=0.0565 swapped=False
+i=8 pair=(3,0) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000006 integral_std=0.000567 log_ratio=-0.0155 accept=0.9846 swapped=True
+i=9 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000351 integral_std=0.007149 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000192 integral_std=0.007079 log_ratio=-0.4608 accept=0.6308 swapped=False
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.001020 integral_std=0.086833 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000015 integral_std=0.000873 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.001711 integral_std=0.087954 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000006 integral_std=0.000902 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000042 integral_std=0.012172 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000300 integral_std=0.014055 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.010047 integral_std=0.169871 log_ratio=-24.1132 accept=0.0000 swapped=False
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000070 integral_std=0.002049 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.003531 integral_std=0.128926 log_ratio=-8.4734 accept=0.0002 swapped=False
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000063 integral_std=0.002038 log_ratio=-0.1519 accept=0.8591 swapped=True
+i=13 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.001517 integral_std=0.028020 log_ratio=-3.6411 accept=0.0262 swapped=False
+i=13 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.001328 integral_std=0.035969 log_ratio=-3.1879 accept=0.0413 swapped=False
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.069416 integral_std=0.803351 log_ratio=-166.5976 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000846 integral_std=0.012286 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.013751 integral_std=0.371270 log_ratio=-33.0015 accept=0.0000 swapped=False
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.001376 integral_std=0.016539 log_ratio=-3.3025 accept=0.0368 swapped=False
+Best Sample: 2 log probability -6.610
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/14/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/14/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000000 integral_std=0.000097 log_ratio=-0.0004 accept=0.9996 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000004 integral_std=0.000098 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000045 integral_std=0.003941 log_ratio=-0.1084 accept=0.8973 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000045 log_ratio=-0.0031 accept=0.9970 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000071 integral_std=0.003628 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000000 integral_std=0.000043 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000003 integral_std=0.000862 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=-0.000002 integral_std=0.000873 log_ratio=-0.0049 accept=0.9951 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000346 integral_std=0.014753 log_ratio=-0.8314 accept=0.4354 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000002 integral_std=0.000168 log_ratio=-0.0058 accept=0.9943 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000129 integral_std=0.014594 log_ratio=-0.3094 accept=0.7339 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000000 integral_std=0.000157 log_ratio=-0.0007 accept=0.9993 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=-0.000031 integral_std=0.002206 log_ratio=-0.0740 accept=0.9286 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000135 integral_std=0.002202 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000636 integral_std=0.030595 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000002 integral_std=0.000350 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=0.000037 integral_std=0.032094 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000002 integral_std=0.000349 log_ratio=-0.0059 accept=0.9941 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000023 integral_std=0.004246 log_ratio=-0.0555 accept=0.9460 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000027 integral_std=0.004140 log_ratio=-0.0639 accept=0.9381 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.000211 integral_std=0.055343 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000015 integral_std=0.000560 log_ratio=-0.0348 accept=0.9658 swapped=True
+i=8 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=0.000780 integral_std=0.053799 log_ratio=0.0000 accept=1.0000 swapped=True
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000007 integral_std=0.000553 log_ratio=-0.0179 accept=0.9823 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000114 integral_std=0.006310 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=0.000002 integral_std=0.006188 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.002134 integral_std=0.081473 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000026 integral_std=0.000783 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=0.000214 integral_std=0.081262 log_ratio=0.0000 accept=1.0000 swapped=True
+i=10 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000000 integral_std=0.000807 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000045 integral_std=0.009468 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000120 integral_std=0.009389 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=0.001892 integral_std=0.121951 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000047 integral_std=0.001238 log_ratio=-0.1119 accept=0.8941 swapped=True
+i=12 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.001778 integral_std=0.114549 log_ratio=-4.2680 accept=0.0140 swapped=False
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000018 integral_std=0.001158 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(0,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.000097 integral_std=0.008471 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(2,0) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.000162 integral_std=0.007942 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.008289 integral_std=0.280396 log_ratio=-19.8937 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=0.000012 integral_std=0.002339 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=0.002783 integral_std=0.255550 log_ratio=0.0000 accept=1.0000 swapped=True
+i=14 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000026 integral_std=0.002160 log_ratio=-0.0621 accept=0.9398 swapped=True
+Best Sample: 3 log probability -0.025
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/15/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/15/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000001 integral_std=0.000098 log_ratio=-0.0013 accept=0.9987 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000003 integral_std=0.000095 log_ratio=-0.0061 accept=0.9939 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000002 integral_std=0.003871 log_ratio=-0.0050 accept=0.9950 swapped=True
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=0.000000 integral_std=0.000043 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=0.000028 integral_std=0.003779 log_ratio=0.0000 accept=1.0000 swapped=True
+i=2 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000040 log_ratio=-0.0023 accept=0.9977 swapped=True
+i=3 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000007 integral_std=0.000861 log_ratio=0.0000 accept=1.0000 swapped=True
+i=3 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000416 integral_mean=0.000011 integral_std=0.000879 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=-0.000034 integral_std=0.014895 log_ratio=-0.0824 accept=0.9209 swapped=True
+i=4 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=-0.000019 integral_std=0.000185 log_ratio=-0.0466 accept=0.9545 swapped=True
+i=4 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.007228 integral_mean=0.000374 integral_std=0.015103 log_ratio=0.0000 accept=1.0000 swapped=True
+i=4 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000080 integral_mean=0.000005 integral_std=0.000157 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000028 integral_std=0.002212 log_ratio=0.0000 accept=1.0000 swapped=True
+i=5 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001076 integral_mean=0.000041 integral_std=0.002216 log_ratio=0.0000 accept=1.0000 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.002680 integral_std=0.034361 log_ratio=-6.4326 accept=0.0016 swapped=False
+i=6 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=-0.000016 integral_std=0.000360 log_ratio=-0.0388 accept=0.9619 swapped=True
+i=6 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.015004 integral_mean=-0.001039 integral_std=0.031910 log_ratio=-2.4924 accept=0.0827 swapped=False
+i=6 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000164 integral_mean=0.000014 integral_std=0.000373 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=0.000182 integral_std=0.004575 log_ratio=0.0000 accept=1.0000 swapped=True
+i=7 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.001897 integral_mean=-0.000040 integral_std=0.004398 log_ratio=-0.0957 accept=0.9087 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.000877 integral_std=0.054606 log_ratio=-2.1037 accept=0.1220 swapped=False
+i=8 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=-0.000007 integral_std=0.000668 log_ratio=-0.0169 accept=0.9833 swapped=True
+i=8 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.023831 integral_mean=-0.001461 integral_std=0.051567 log_ratio=-3.5068 accept=0.0300 swapped=False
+i=8 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000257 integral_mean=0.000012 integral_std=0.000631 log_ratio=0.0000 accept=1.0000 swapped=True
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000151 integral_std=0.007424 log_ratio=-0.3627 accept=0.6958 swapped=False
+i=9 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.002729 integral_mean=-0.000078 integral_std=0.006732 log_ratio=-0.1876 accept=0.8290 swapped=True
+i=10 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.004741 integral_std=0.088264 log_ratio=-11.3787 accept=0.0000 swapped=False
+i=10 pair=(1,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=-0.000009 integral_std=0.000994 log_ratio=-0.0214 accept=0.9789 swapped=True
+i=10 pair=(0,2) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.032198 integral_mean=-0.004248 integral_std=0.086290 log_ratio=-10.1951 accept=0.0000 swapped=False
+i=10 pair=(3,1) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000344 integral_mean=0.000017 integral_std=0.000922 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=0.000007 integral_std=0.011146 log_ratio=0.0000 accept=1.0000 swapped=True
+i=11 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003437 integral_mean=-0.000214 integral_std=0.011468 log_ratio=-0.5127 accept=0.5989 swapped=False
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.006398 integral_std=0.127301 log_ratio=-15.3560 accept=0.0000 swapped=False
+i=12 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=0.000121 integral_std=0.003016 log_ratio=0.0000 accept=1.0000 swapped=True
+i=12 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.038747 integral_mean=-0.002633 integral_std=0.097678 log_ratio=-6.3183 accept=0.0018 swapped=False
+i=12 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000410 integral_mean=-0.000002 integral_std=0.002105 log_ratio=-0.0056 accept=0.9944 swapped=True
+i=13 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=0.000068 integral_std=0.026227 log_ratio=0.0000 accept=1.0000 swapped=True
+i=13 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.003916 integral_mean=-0.000232 integral_std=0.020675 log_ratio=-0.5565 accept=0.5732 swapped=True
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.023452 integral_std=0.336218 log_ratio=-56.2854 accept=0.0000 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000237 integral_std=0.008784 log_ratio=-0.5678 accept=0.5667 swapped=False
+i=14 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.042457 integral_mean=-0.003718 integral_std=0.183389 log_ratio=-8.9242 accept=0.0001 swapped=False
+i=14 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000448 integral_mean=-0.000219 integral_std=0.014278 log_ratio=-0.5249 accept=0.5916 swapped=True
+Best Sample: 0 log probability -0.237
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/16/0.png
+Saved 1 samples to: logs/pointmaze-giant-navigate-v0/inference/plans/release_H400_T256_LimitsNormalizer_b1_condFalse/2026-07-17 16:55:45/16/rollout.png
+i=0 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(1,0) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=0 pair=(3,2) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000000 integral_mean=0.000000 integral_std=0.000000 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(1,2) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=0.000000 integral_std=0.000096 log_ratio=0.0000 accept=1.0000 swapped=True
+i=1 pair=(2,1) lam_t=1.04500 lam_s=1.04950 tsr_diff=0.000048 integral_mean=-0.000002 integral_std=0.000103 log_ratio=-0.0041 accept=0.9959 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000035 integral_std=0.004025 log_ratio=-0.0835 accept=0.9199 swapped=False
+i=2 pair=(2,3) lam_t=1.04950 lam_s=1.05000 tsr_diff=0.000021 integral_mean=-0.000001 integral_std=0.000044 log_ratio=-0.0019 accept=0.9981 swapped=True
+i=2 pair=(0,1) lam_t=1.00000 lam_s=1.04500 tsr_diff=0.001897 integral_mean=-0.000048 integral_std=0.003752 log_ratio=-0.1149 accept=0.8915 swapped=True
+srun: got SIGCONT
+srun: forcing job termination
+[2026-07-17T16:56:40.757] error: *** STEP 32288009.19 ON holygpu8a11302 CANCELLED AT 2026-07-17T16:56:40 DUE to SIGNAL Terminated ***

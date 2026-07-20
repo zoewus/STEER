@@ -24,7 +24,7 @@ TSR_DIR    = args.tsr_path
 STEER_DIR = args.steer_path
 INDEX_UNTIL = args.index_until
 
-LAM_VALUES = [0.85, 0.95, 1.05, 1.15]
+LAM_VALUES = [0.9, 0.95, 1.05, 1.1]
 
 REAL_DIR    = "/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/images/laion_5k_real"
 PROMPTS_FILE = Path("/n/netscratch/kempner_undergrads/Everyone/zwu/parallel_toy/data_files/laion_5k_prompts.csv")
@@ -51,7 +51,7 @@ torch.cuda.empty_cache()
 prompts = pd.read_csv(PROMPTS_FILE, usecols=["text"], nrows=INDEX_UNTIL)["text"].tolist()
 print(f"Loaded {len(prompts)} prompts")
 
-replica_exchanges = [True]
+replica_exchanges = [True, False]
 
 lam_dirs = {}
 for re in replica_exchanges:
@@ -64,6 +64,11 @@ for idx, prompt in enumerate(prompts):
 
 	for replica_exchange in replica_exchanges:
 
+		if replica_exchange == False:
+			replicas = 1
+		else:
+			replicas = N_PARTICLES
+
 		for lam in LAM_VALUES:
 
 			generator = torch.Generator(device="cuda").manual_seed(SEED)
@@ -74,9 +79,9 @@ for idx, prompt in enumerate(prompts):
 				num_inference_steps=N_INF_STEPS,
 				guidance_scale=GUIDANCE_SCALE,
 				lam_start=lam,
-				lam_end=lam+0.2,
+				lam_end=lam+0.4,
 				replica_exchange=replica_exchange,
-				n_particles=N_PARTICLES,
+				n_particles=replicas,
 				generator=generator,
 			).images
 
