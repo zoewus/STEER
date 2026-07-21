@@ -68,7 +68,7 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
     index = x_ladder.shape[0] // n_replicas
     lam_ladder = _lam_ladder(lam_start, lam_end, n_replicas, device=x_ladder.device, dtype=x_ladder.dtype)
 
-    score_ladder = - eps_ladder / (1 - a_bar) ** 0.5
+    score_ladder = - eps_ladder / (1 - a_bar)
 
     for index_t, index_s in pairs:
         sl = slice(index * index_t, index * (index_t + 1))

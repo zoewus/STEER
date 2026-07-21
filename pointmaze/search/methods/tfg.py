@@ -123,8 +123,9 @@ class TFGGuidance(BaseGuidance):
                         (x - (1 - alpha_prod_t) ** (0.5) * new_epsilon) / alpha_prod_t ** (0.5)
                     )
                     x0 = self._predict_x0(x_g, x0_tempered, alpha_prod_t, **kwargs)
-                    x0 *= scale(epsilon, 1, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
                     x0 = apply_conditioning(x0, cond, 2) ## debug
+                    x0 *= scale(epsilon, 1, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
+
                     logprobs = self.tilde_get_guidance(
                         x0, mc_eps, return_logp=True, **kwargs)
                     Delta_t = grad(logprobs.sum(), x_g)[0]

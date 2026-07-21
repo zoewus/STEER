@@ -6,7 +6,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=2
 #SBATCH --gpus-per-node=1
-#SBATCH --time=0-02:00:00
+#SBATCH --time=0-03:00:00
 #SBATCH --mem=10G
 #SBATCH --output=output_files/maze_%A_%a.out
 #SBATCH --error=output_files/maze_%A_%a.err
@@ -19,7 +19,7 @@ conda activate maze
 
 mkdir -p output_files
 
-N_REPEATS=5
+N_REPEATS=10
 
 # Each entry: lam_start lam_end n_particles
 CONFIGS=(
@@ -27,13 +27,15 @@ CONFIGS=(
     "0.9 1.1 4"
     "0.95 1.05 8"
     "0.95 1.05 4"
+    "0.85 1.15 8"
+    "0.85 1.15 4"
 )
 
 for cfg in "${CONFIGS[@]}"; do
     read -r lam_start lam_end n_particles <<< "$cfg"
     tag="ls${lam_start}_le${lam_end}_np${n_particles}"
 
-    for mode in RE; do
+    for mode in noRE; do
         if [ "$mode" == "RE" ]; then
             re_flag="--replica_exchange"
         else
