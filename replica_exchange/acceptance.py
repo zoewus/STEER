@@ -1,5 +1,6 @@
 import torch
 import math
+import numpy as np
 
 @torch.no_grad()
 def _score_constant(a_bar, tsr_lam):
@@ -81,8 +82,8 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
         lam_s_val = lam_ladder[temp_idx[index_s]]
 
         tsr_diff = _score_constant(a_bar, lam_t_val) - _score_constant(a_bar, lam_s_val)
-        integral = - 0.5 *(score_tau + score_s) * (x_tau - x_s) * tsr_diff
-        log_ratio = torch.clamp(integral.sum() , max=0.0)
+        integral = - 2 * (score_tau + score_s).mul(x_tau - x_s).sum() * tsr_diff / (np.sqrt(x_tau.shape[1]))
+        log_ratio = torch.clamp(integral, max=0.0)
         accept = torch.exp(log_ratio)
         accept_bool = (torch.rand(accept.shape, dtype=accept.dtype, device=accept.device) < accept).bool()
 
@@ -90,7 +91,6 @@ def swap(x_ladder, t_val, a_bar, lam_start, lam_end, n_replicas,
             f"i={i} pair=({index_t},{index_s}) "
             f"lam_t={lam_t_val.item():.5f} lam_s={lam_s_val.item():.5f} "
             f"tsr_diff={tsr_diff.item():.6f} "
-            f"integral_mean={integral.mean().item():.6f} integral_std={integral.std().item():.6f} "
             f"log_ratio={log_ratio.item():.4f} accept={accept.item():.4f} "
             f"swapped={bool(accept_bool.item())}"
         )

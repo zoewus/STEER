@@ -1,36 +1,0 @@
-Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
-```
-pip install accelerate
-```
-.
-Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]
-Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
-Loading weights:  56%|█████▌    | 110/197 [00:00<00:00, 1053.92it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 1113.89it/s]
-Loading pipeline components...:  11%|█         | 1/9 [00:00<00:02,  3.63it/s]
-Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
-Loading weights:  16%|█▌        | 82/517 [00:00<00:00, 676.79it/s][A
-Loading weights:  29%|██▉       | 150/517 [00:00<00:00, 617.25it/s][A
-Loading weights:  41%|████      | 213/517 [00:00<00:00, 610.80it/s][A
-Loading weights:  57%|█████▋    | 295/517 [00:00<00:00, 681.73it/s][A
-Loading weights:  73%|███████▎  | 375/517 [00:00<00:00, 707.78it/s][A
-Loading weights:  88%|████████▊ | 453/517 [00:00<00:00, 722.12it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 716.12it/s]
-Loading pipeline components...:  22%|██▏       | 2/9 [00:01<00:04,  1.45it/s]Loading pipeline components...:  33%|███▎      | 3/9 [00:01<00:03,  1.83it/s]Loading pipeline components...:  67%|██████▋   | 6/9 [00:01<00:00,  4.68it/s]
-Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][ALoading pipeline components...:  67%|██████▋   | 6/9 [00:20<00:00,  4.68it/s]
-Loading weights:   4%|▍         | 9/219 [00:08<03:17,  1.06it/s][A
-Loading weights:   8%|▊         | 18/219 [00:08<01:20,  2.49it/s][A
-Loading weights:  12%|█▏        | 27/219 [00:09<00:45,  4.25it/s][A
-Loading weights:  16%|█▋        | 36/219 [00:09<00:29,  6.28it/s][A
-Loading weights:  18%|█▊        | 39/219 [00:09<00:25,  6.92it/s][A
-Loading weights:  21%|██        | 45/219 [00:17<01:24,  2.06it/s][A
-Loading weights:  25%|██▍       | 54/219 [00:17<00:54,  3.04it/s][A
-Loading weights:  29%|██▉       | 63/219 [00:18<00:35,  4.44it/s][A
-Loading weights:  37%|███▋      | 81/219 [00:26<00:46,  3.00it/s][A
-Loading weights:  41%|████      | 90/219 [00:26<00:32,  4.03it/s][A
-Loading weights:  45%|████▌     | 99/219 [00:27<00:24,  4.88it/s][A
-Loading weights:  86%|████████▋ | 189/219 [00:27<00:01, 23.44it/s][A
-Loading weights:  96%|█████████▋| 211/219 [00:27<00:00, 28.97it/s][ALoading weights: 100%|██████████| 219/219 [00:27<00:00,  8.00it/s]
-Loading pipeline components...:  89%|████████▉ | 8/9 [00:38<00:07,  7.32s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:39<00:00,  5.76s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:39<00:00,  4.34s/it]
-srun: got SIGCONT
-[2026-07-20T15:51:16.612] error: *** JOB 33642332 ON holygpu8a13304 CANCELLED AT 2026-07-20T15:51:16 DUE to SIGNAL Terminated ***
-srun: forcing job termination
-[2026-07-20T15:51:16.612] error: *** STEP 33642332.0 ON holygpu8a13304 CANCELLED AT 2026-07-20T15:51:16 DUE to SIGNAL Terminated ***

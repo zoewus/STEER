@@ -1,0 +1,52 @@
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
+Loading weights:   7%|▋         | 35/517 [00:00<00:01, 349.68it/s][A
+Loading weights:  14%|█▎        | 70/517 [00:00<00:01, 259.67it/s][A
+Loading weights:  19%|█▉        | 98/517 [00:00<00:01, 228.28it/s][A
+Loading weights:  25%|██▍       | 127/517 [00:00<00:01, 231.93it/s][A
+Loading weights:  29%|██▉       | 151/517 [00:00<00:01, 233.76it/s][A
+Loading weights:  34%|███▍      | 175/517 [00:00<00:01, 207.96it/s][A
+Loading weights:  39%|███▉      | 203/517 [00:00<00:01, 224.45it/s][A
+Loading weights:  46%|████▌     | 239/517 [00:01<00:01, 243.58it/s][A
+Loading weights:  54%|█████▍    | 278/517 [00:01<00:00, 274.70it/s][A
+Loading weights:  60%|█████▉    | 310/517 [00:01<00:00, 275.27it/s][A
+Loading weights:  65%|██████▌   | 338/517 [00:01<00:00, 251.58it/s][A
+Loading weights:  70%|███████   | 364/517 [00:01<00:00, 225.18it/s][A
+Loading weights:  80%|████████  | 415/517 [00:01<00:00, 284.15it/s][A
+Loading weights:  86%|████████▌ | 445/517 [00:01<00:00, 272.30it/s][A
+Loading weights:  91%|█████████▏| 473/517 [00:01<00:00, 252.09it/s][A
+Loading weights:  97%|█████████▋| 499/517 [00:02<00:00, 216.31it/s][ALoading weights: 100%|██████████| 517/517 [00:02<00:00, 249.34it/s]
+Loading pipeline components...:  22%|██▏       | 2/9 [00:02<00:08,  1.20s/it]
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
+Loading weights:   4%|▍         | 9/219 [00:00<00:21,  9.73it/s][A
+Loading weights:  16%|█▋        | 36/219 [00:01<00:04, 40.90it/s][A
+Loading weights:  21%|██        | 46/219 [00:01<00:06, 26.95it/s][A
+Loading weights:  29%|██▉       | 63/219 [00:01<00:04, 38.82it/s][A
+Loading weights:  37%|███▋      | 81/219 [00:02<00:04, 34.10it/s][A
+Loading weights:  41%|████      | 90/219 [00:02<00:03, 38.39it/s][A
+Loading weights:  45%|████▌     | 99/219 [00:02<00:02, 44.41it/s][A
+Loading weights:  53%|█████▎    | 117/219 [00:03<00:02, 45.35it/s][A
+Loading weights:  58%|█████▊    | 126/219 [00:03<00:01, 50.05it/s][A
+Loading weights:  66%|██████▌   | 144/219 [00:03<00:01, 59.43it/s][A
+Loading weights:  70%|██████▉   | 153/219 [00:03<00:01, 45.91it/s][A
+Loading weights:  74%|███████▍  | 162/219 [00:03<00:01, 50.88it/s][A
+Loading weights:  82%|████████▏ | 180/219 [00:04<00:00, 53.31it/s][A
+Loading weights:  86%|████████▋ | 189/219 [00:04<00:00, 46.29it/s][A
+Loading weights:  90%|█████████ | 198/219 [00:04<00:00, 52.05it/s][A
+Loading weights:  99%|█████████▊| 216/219 [00:04<00:00, 55.05it/s][ALoading weights: 100%|██████████| 219/219 [00:04<00:00, 44.01it/s]
+Loading pipeline components...:  33%|███▎      | 3/9 [00:07<00:17,  2.85s/it]Loading pipeline components...:  44%|████▍     | 4/9 [00:07<00:09,  1.84s/it]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
+Loading weights:  30%|███       | 60/197 [00:00<00:00, 564.91it/s][A
+Loading weights:  59%|█████▉    | 117/197 [00:00<00:00, 441.56it/s][A
+Loading weights:  86%|████████▌ | 169/197 [00:00<00:00, 443.40it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 492.05it/s]
+Loading pipeline components...:  56%|█████▌    | 5/9 [00:08<00:05,  1.38s/it]Loading pipeline components...:  67%|██████▋   | 6/9 [00:08<00:02,  1.01it/s]Loading pipeline components...:  78%|███████▊  | 7/9 [00:20<00:09,  4.60s/it]Loading pipeline components...:  89%|████████▉ | 8/9 [00:20<00:03,  3.19s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:21<00:00,  2.32s/it]Loading pipeline components...: 100%|██████████| 9/9 [00:21<00:00,  2.35s/it]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
+srun: got SIGCONT
+[2026-07-24T12:45:58.749] error: *** STEP 34838698.0 ON holygpu8a13502 CANCELLED AT 2026-07-24T12:45:58 DUE to SIGNAL Terminated ***
+[2026-07-24T12:45:58.750] error: *** JOB 34838698 ON holygpu8a13502 CANCELLED AT 2026-07-24T12:45:58 DUE to SIGNAL Terminated ***
+srun: forcing job termination

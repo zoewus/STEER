@@ -1,0 +1,6 @@
+usage: generate_samples.py [-h] [--lam LAM]
+                           [--n-particles-list N_PARTICLES_LIST [N_PARTICLES_LIST ...]]
+                           [--tsr-path TSR_PATH] [--steer-path STEER_PATH]
+                           [--index-until INDEX_UNTIL]
+generate_samples.py: error: argument --lam: invalid float value: ''
+srun: error: holygpu8a13502: task 0: Exited with exit code 2

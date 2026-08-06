@@ -863,7 +863,7 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 
 		# 	lam_ladder_t = _lam_ladder(lam_start, lam_end, n_particles, latents.device, latents.dtype)
 		# 	lam_ladder_t = lam_ladder_t.view(-1, *[1] * (latents.dim() - 1))
-		# 	latents *= lam_ladder_t
+		# 	latents *= torch.sqrt(lam_ladder_t)
 		
 		# 6. Denoising loop
 		temp_idx = init_temp_idx(n_particles, device=latents.device)
@@ -892,32 +892,35 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 
 				if self.do_classifier_free_guidance:
 					noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
-					noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
+					if replica_exchange:
+						noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond) * scale(noise_pred_text, a_bar, lam_start, lam_end, n_particles, temp_idx=temp_idx)
+					else:
+						noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
+
+
+				sigma_t_safe = sigma_t.clamp(min=1e-6)
+				a_bar_safe = a_bar.clamp(min=1e-6)
 
 				# --- convert velocity -> epsilon ---
 				eps_pred = latents + a_bar * noise_pred
 
-				sigma_t_safe = sigma_t.clamp(min=1e-6)
-				a_bar_safe = a_bar.clamp(min=1e-6)
+				# if replica_exchange:
+				# 	x0_pred = (latents - sigma_t * eps_pred) / a_bar_safe
+				# 	x0_pred_scaled = x0_pred * scale(eps_pred, 1, lam_start, lam_end, n_particles, temp_idx=temp_idx)
+
+				# eps_pred = (latents - a_bar * x0_pred_scaled) / sigma_t_safe
+
 
 				if replica_exchange:
 					# Flatten replicas into an event ladder so the swap logic can track per-event temperature indices.
 					event_dim = latents.numel() // n_particles
 					x_ladder = latents.reshape(n_particles, event_dim)
 					eps_ladder = eps_pred.reshape(n_particles, event_dim)
-					temp_idx = swap(x_ladder, t, a_bar, lam_start, lam_end, n_particles, eps_ladder/((1-a_bar)**0.5), temp_idx, i=i)
+					temp_idx = swap(x_ladder, t, a_bar, lam_start, lam_end, n_particles, eps_ladder, temp_idx, i=i)
 
-					# --- derive x0_hat from (x_t, eps_pred), keeping x_t fixed ---
-					x0_pred = (latents - sigma_t * eps_pred) / a_bar_safe
-
-					# Plain tempering, no exchange: scale eps_hat directly.
-					if lam_start != 1.0 or lam_end != 1.0:
-						eps_pred_scaled = eps_pred * scale(eps_pred, a_bar, lam_start, lam_end, n_particles, temp_idx=temp_idx)
-					else:
-						eps_pred_scaled = eps_pred
+					eps_pred_scaled = eps_pred * scale(eps_pred, a_bar, lam_start, lam_end, n_particles, temp_idx=temp_idx)
 
 					# --- re-derive eps from the scaled x0, still using the ORIGINAL (unmutated) latents ---
-					# eps_pred_scaled = (latents - a_bar * x0_pred_scaled) / sigma_t_safe
 
 				else:
 					# Plain tempering, no exchange: scale eps_hat directly.
@@ -926,7 +929,6 @@ class StableDiffusion3Pipeline(DiffusionPipeline, SD3LoraLoaderMixin, FromSingle
 					else:
 						eps_pred_scaled = eps_pred
 
-				# --- convert epsilon back -> velocity, exactly as before ---
 				noise_pred = (eps_pred_scaled - latents) / a_bar_safe
 
 				latents_dtype = latents.dtype

@@ -84,75 +84,119 @@ def compute_clip(gen_dir, tsr_lam, prompt_map, clip_model, clip_processor, devic
 		scores.append(score)
 	return np.mean(scores)
 
+# ── Lambda-directory discovery ───────────────────────────────────────────────
+# Inverse of lam_dirname(lam) = f"lam{lam:.3f}".replace(".", "p") in the
+# generation script, so we can recover the float lambda a folder corresponds
+# to without needing the caller to pass in an explicit list of lam values.
+
+def parse_lam_dirname(name):
+	if not name.startswith("lam"):
+		raise ValueError(f"not a lam dir: {name}")
+	return float(name[len("lam"):].replace("p", "."))
+
+
+def discover_lam_dirs(base_dir):
+	"""Return sorted (lam, path) pairs for every lam* subdir found in base_dir."""
+	pairs = []
+	for d in sorted(Path(base_dir).glob("lam*")):
+		if not d.is_dir():
+			continue
+		try:
+			lam = parse_lam_dirname(d.name)
+		except ValueError:
+			continue
+		pairs.append((lam, d))
+	return sorted(pairs, key=lambda p: p[0])
+
+
+def _eval_lam_dirs(lam_dirs, feat_model, mu_real, sigma_real, prompt_map,
+                    clip_model, clip_processor, device, index_until, target_indices, tag):
+	results = {}
+	for lam, samples_dir in lam_dirs:
+		png_files = sorted(samples_dir.glob("*.png"))[:index_until]
+		if not png_files:
+			print(f"[{tag}]  lam={lam:.3f}  SKIPPED (no PNGs in {samples_dir})")
+			continue
+
+		fid_val = compute_fid_score(samples_dir, feat_model, mu_real, sigma_real, device,
+		                             target_indices=target_indices, n=index_until)
+		clip_val = compute_clip(samples_dir, lam, prompt_map, clip_model, clip_processor, device,
+		                         index_until=index_until)
+		results[lam] = (fid_val, clip_val)
+		print(f"[{tag}]  lam={lam:.3f}  FID={fid_val:.4f}  CLIP={clip_val:.4f}")
+
+	return results
+
 
 # ── Sweep ─────────────────────────────────────────────────────────────────────
 def compute_sweep(
-	replica_exchanges,
+	n_particles_list,
 	device,
+	tsr_dir=None,
+	steer_dir=None,
 	target_indices=None,
 	index_until=None,
-	tsr_dir=None,
-	pt_tsr_dir=None,
-	lam_values_ptsr=None,
-	lam_values_tsr=None
 ):
-	if pt_tsr_dir is not None: PT_TSR_DIR = pt_tsr_dir
-	if tsr_dir is not None: TSR_DIR = tsr_dir
-
+	"""
+	Plots one line per entry in n_particles_list (from steer_dir/steer_{n}/lam*/),
+	plus one baseline line from tsr_dir/lam*/ (n_particles-independent).
+	"""
 	prompt_map                 = build_prompt_map(index_until=index_until)
 	clip_model, clip_processor = build_clip_model(device)
 	feat_model                 = build_feat_model(device)
 	mu_real, sigma_real        = compute_real_stats(feat_model, device, n=index_until)
 
-	tsr_results = {alg: {} for alg in replica_exchanges}
+	fig, ax = plt.subplots(figsize=(8, 6))
+	all_lam_counts = 0
 
-	# map each alg to its (samples_dir, lam_values)
-	alg_config = {}
-	for alg in replica_exchanges:
-		if alg == False:
-			alg_config[alg] = (TSR_DIR, lam_values_tsr or [])
-		elif alg == True:
-			alg_config[alg] = (PT_TSR_DIR, lam_values_ptsr or [])
+	# Baseline TSR line (n_particles-free).
+	if tsr_dir is not None:
+		tsr_lam_dirs = discover_lam_dirs(tsr_dir)
+		tsr_results = _eval_lam_dirs(
+			tsr_lam_dirs, feat_model, mu_real, sigma_real, prompt_map,
+			clip_model, clip_processor, device, index_until, target_indices, tag="tsr",
+		)
+		all_lam_counts += len(tsr_results)
+		if tsr_results:
+			lam_vals = sorted(tsr_results.keys(), reverse=True)
+			clip_vals = [tsr_results[lam][1] for lam in lam_vals]
+			fid_vals  = [tsr_results[lam][0] for lam in lam_vals]
+			ax.plot(clip_vals, fid_vals, marker="o", linewidth=2, label="tsr")
+			for lam in lam_vals:
+				f, c = tsr_results[lam]
+				ax.annotate(f"lam={lam:.2f}", (c, f), textcoords="offset points",
+				            xytext=(6, 0), fontsize=8, color="goldenrod")
 
-	for alg in replica_exchanges:
-		samples_base, lam_values = alg_config[alg]
-
-		for tsr_lam in lam_values:
-			lam_str = f"lam{tsr_lam:.3f}".replace(".", "p")
-			samples_dir = samples_base / lam_str
-
-			png_files = sorted(samples_dir.glob("*.png"))[:index_until]
-			if not png_files:
-				print(f"[{alg}]  lam={tsr_lam:.3f}  SKIPPED (no PNGs in {samples_dir})")
+	# One line per n_particles value.
+	if steer_dir is not None:
+		for n_particles in n_particles_list:
+			base_dir = Path(steer_dir) / f"steer_{n_particles}"
+			lam_dirs = discover_lam_dirs(base_dir)
+			results = _eval_lam_dirs(
+				lam_dirs, feat_model, mu_real, sigma_real, prompt_map,
+				clip_model, clip_processor, device, index_until, target_indices,
+				tag=f"steer_{n_particles}",
+			)
+			all_lam_counts += len(results)
+			if not results:
 				continue
 
-			fid_val  = compute_fid_score(samples_dir, feat_model, mu_real, sigma_real, device, target_indices=target_indices, n=index_until)
-			clip_val = compute_clip(samples_dir, tsr_lam, prompt_map, clip_model, clip_processor, device, index_until=index_until)
-			tsr_results[alg][tsr_lam] = (fid_val, clip_val)
-			print(f"[{alg}]  lam={tsr_lam:.3f}  FID={fid_val:.4f}  CLIP={clip_val:.4f}")
+			lam_vals  = sorted(results.keys(), reverse=True)
+			clip_vals = [results[lam][1] for lam in lam_vals]
+			fid_vals  = [results[lam][0] for lam in lam_vals]
 
-	fig, ax = plt.subplots(figsize=(8, 6))
+			ax.plot(clip_vals, fid_vals, marker="o", linewidth=2, label=f"n_particles={n_particles}")
+			for lam in lam_vals:
+				f, c = results[lam]
+				ax.annotate(f"lam={lam:.2f}", (c, f), textcoords="offset points",
+				            xytext=(6, 0), fontsize=8, color="goldenrod")
 
-	for alg in replica_exchanges:
-		lam_vals  = sorted(tsr_results[alg].keys(), reverse=True)
-		if not lam_vals:
-			continue
-		clip_vals = [tsr_results[alg][lam][1] for lam in lam_vals]
-		fid_vals  = [tsr_results[alg][lam][0] for lam in lam_vals]
-
-		ax.plot(clip_vals, fid_vals, marker="o", linewidth=2, label=f"replica_exchange={alg}")
-		for lam in lam_vals:
-			f, c = tsr_results[alg][lam]
-			ax.annotate(f"lam={lam:.2f}", (c, f), textcoords="offset points", xytext=(6, 0), fontsize=8, color="goldenrod")
-
-	all_lam_counts = sum(len(v) for v in tsr_results.values())
 	ax.set_xlabel("CLIP", fontsize=12)
 	ax.set_ylabel("FID", fontsize=12)
 	ax.set_title("FID vs CLIP comparison", fontsize=14)
 	ax.legend(fontsize=9)
 	ax.grid(True, alpha=0.3)
 	plt.tight_layout()
-	plt.savefig(f"figures/fid_vs_clip_until{index_until}_len{all_lam_counts}.png", dpi=150)
+	n_tag = "-".join(str(n) for n in n_particles_list)
+	plt.savefig(f"figures/fid_vs_clip_until{index_until}_n{n_tag}_len{all_lam_counts}.png", dpi=150)
 	plt.show()
-
-	return tsr_results

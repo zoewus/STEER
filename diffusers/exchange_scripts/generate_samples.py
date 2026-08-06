@@ -99,11 +99,15 @@ def free_cuda() -> None:
 # TSR: n_particles-free, one lambda at a time
 # ----------------------------------------------------------------------------
 def run_tsr(pipe, prompts: list[str], lam: float, tsr_dir: Path) -> None:
-    lam_dirs = {lam: tsr_dir / lam_dirname(lam)}
-    for d in lam_dirs.values():
-        d.mkdir(parents=True, exist_ok=True)
+    lam_dir = tsr_dir / lam_dirname(lam)
+    lam_dir.mkdir(parents=True, exist_ok=True)
 
     for idx, prompt in enumerate(prompts):
+        out_path = lam_dir / f"{idx:05d}.png"
+        if out_path.exists():
+            print(f"[tsr] skipping idx={idx} (already exists at {out_path})")
+            continue
+
         generator = torch.Generator(device="cuda").manual_seed(SEED)
 
         image = pipe(
@@ -118,7 +122,7 @@ def run_tsr(pipe, prompts: list[str], lam: float, tsr_dir: Path) -> None:
             generator=generator,
         ).images[0]
 
-        image.save(lam_dirs[lam] / f"{idx:05d}.png", icc_profile=None)
+        image.save(out_path, icc_profile=None)
         del image
 
         free_cuda()
@@ -140,10 +144,15 @@ def run_steer(
     for n_particles in n_particles_list:
         run_dir = steer_dir / f"steer_{n_particles}" / lam_dirname(lam_start)
         run_dir.mkdir(parents=True, exist_ok=True)
- 
+
         for idx, prompt in enumerate(prompts):
+            out_path = run_dir / f"{idx:05d}.png"
+            if out_path.exists():
+                print(f"[steer_{n_particles}] skipping idx={idx} (already exists at {out_path})")
+                continue
+
             generator = torch.Generator(device="cuda").manual_seed(SEED)
- 
+
             images = pipe(
                 prompt,
                 negative_prompt="",
@@ -155,14 +164,13 @@ def run_steer(
                 n_particles=n_particles,
                 generator=generator,
             ).images
- 
-            images[0].save(run_dir / f"{idx:05d}.png", icc_profile=None)
- 
+
+            images[0].save(out_path, icc_profile=None)
+
             del images
             free_cuda()
- 
+
         print(f"Steer generation complete for n_particles={n_particles}.")
- 
  
 # ----------------------------------------------------------------------------
 # Main
@@ -178,8 +186,13 @@ def main() -> None:
     # TSR uses the finest lambda grid across all requested particle counts,
     # since it doesn't depend on n_particles itself.
 
+    if args.lam <1:
+        lam_end =args.lam+0.2
+    else:
+        lam_end = args.lam+0.1
+
     run_tsr(pipe, prompts, args.lam, args.tsr_path)
-    run_steer(pipe, prompts, args.n_particles_list, args.lam, LAM_END, args.steer_path)
+    run_steer(pipe, prompts, args.n_particles_list, args.lam, lam_end, args.steer_path)
 
     print("All runs complete.")
 

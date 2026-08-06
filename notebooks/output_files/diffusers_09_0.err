@@ -1,0 +1,36 @@
+Cannot initialize model with low cpu memory usage because `accelerate` was not found in the environment. Defaulting to `low_cpu_mem_usage=False`. It is strongly recommended to install `accelerate` for faster and less memory-intense model loading. You can do so with: 
+```
+pip install accelerate
+```
+.
+Loading pipeline components...:   0%|          | 0/9 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 517/517 [00:00<00:00, 10383.23it/s]
+Loading pipeline components...:  11%|█         | 1/9 [00:00<00:01,  5.71it/s]Loading pipeline components...:  33%|███▎      | 3/9 [00:09<00:22,  3.68s/it]
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s][A
+Loading weights:  31%|███       | 61/197 [00:00<00:00, 589.57it/s][A
+Loading weights:  63%|██████▎   | 124/197 [00:00<00:00, 610.27it/s][ALoading weights: 100%|██████████| 197/197 [00:00<00:00, 718.56it/s]
+Loading pipeline components...:  56%|█████▌    | 5/9 [00:10<00:07,  1.92s/it]Loading pipeline components...:  67%|██████▋   | 6/9 [00:10<00:04,  1.45s/it]Loading pipeline components...:  78%|███████▊  | 7/9 [00:10<00:02,  1.12s/it]
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
+Loading weights:   8%|▊         | 18/219 [00:00<00:01, 117.16it/s][A
+Loading weights:  21%|██        | 45/219 [00:00<00:00, 185.61it/s][A
+Loading weights:  30%|██▉       | 65/219 [00:00<00:01, 80.65it/s] [A
+Loading weights:  58%|█████▊    | 126/219 [00:00<00:00, 180.86it/s][A
+Loading weights:  72%|███████▏  | 157/219 [00:00<00:00, 197.08it/s][A
+Loading weights:  86%|████████▋ | 189/219 [00:01<00:00, 210.03it/s][ALoading weights: 100%|██████████| 219/219 [00:01<00:00, 194.89it/s]
+Loading pipeline components...: 100%|██████████| 9/9 [00:12<00:00,  1.11it/s]Loading pipeline components...: 100%|██████████| 9/9 [00:12<00:00,  1.35s/it]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['thomas gainsborough ( 1 7 2 7 - 1 7 8 8 ), on display at the """" project blue boy """" exhibit in']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [')']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', downstairs bathroom, organized bathroom, towel storage']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["' add to cart'button at the top - right of the page."]
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['beginning. ;) i wish you the...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['. this post gave him the opportunity to travel around the ionian islands and produced sketches of the islands and surrounding area.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the lower fifth of the cylinder, but not on the bottom. the second cylinder, labeled "" 3 0,""']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['checks on patient james sullivon at the hospita...']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', occha board president ; atty. miriam ocasio, occha vice president and chairwoman of the gala, and sara cuevas, co - chair']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the books by j. r. r. tolkien this volcano is definitely']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', at the cincinnati reds spring training facility in goodyear, arizona.']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['former ghanaian minister of information, fritz baffour and former president, nigerian stock exchange ( nse ), goodie ibru, during the first yearly memorial']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['transceiver']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['pril 2 4, 2 0 2 1 in london, england. sporting stadiums around the uk remain under strict restrictions due to the coronavirus pandemic as government social distancing']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['from the waldie family']
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['camera - pn # 6 3 1 5 7 4 1 - br - image 2 """']

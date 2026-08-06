@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=maze
 #SBATCH --account=kempner_undergrads
-#SBATCH --partition=kempner
+#SBATCH --partition=kempner_h100
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=2
 #SBATCH --gpus-per-node=1
-#SBATCH --time=0-03:00:00
+#SBATCH --time=0-1:00:00
 #SBATCH --mem=10G
 #SBATCH --output=output_files/maze_%A_%a.out
 #SBATCH --error=output_files/maze_%A_%a.err
@@ -19,16 +19,12 @@ conda activate maze
 
 mkdir -p output_files
 
-N_REPEATS=10
+N_REPEATS=5
 
 # Each entry: lam_start lam_end n_particles
 CONFIGS=(
-    "0.9 1.1 8"
-    "0.9 1.1 4"
-    "0.95 1.05 8"
-    "0.95 1.05 4"
-    "0.85 1.15 8"
-    "0.85 1.15 4"
+    "0.9 1.00 4"
+    "0.9 1.00 8"
 )
 
 for cfg in "${CONFIGS[@]}"; do

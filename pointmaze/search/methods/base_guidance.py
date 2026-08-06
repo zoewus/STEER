@@ -107,7 +107,8 @@ class BaseGuidance:
             (xt - alpha_prod_t ** (0.5) * x0) / (1 - alpha_prod_t) ** (0.5)
         )
 
-        # new_epsilon*= scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
+        if self.args.lam_start !=0 and self.args.lam_start !=0 :
+            new_epsilon*= scale(new_epsilon, alpha_prod_t, self.args.lam_start, self.args.lam_end, self.args.n_particles, temp_idx)
 
         return self._predict_x_prev_from_eps(xt, new_epsilon, alpha_prod_t, alpha_prod_t_prev, eta, t, **kwargs)
 
